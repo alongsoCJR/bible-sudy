@@ -1,27 +1,3 @@
-# <span class="bible-title">📖 圣经故事有声平台</span>
-
-<div class="bible-divider">✦ 真理使人自由 ✦</div>
-
-<div class="intro-card">
-  亲爱的弟兄姊妹：
-
-你是否曾翻开圣经，却被繁多的章节、古老的背景拦住脚步？是否想探寻其中的智慧，却不知从何切入？
-
-其实，圣经从不只是一本厚重的典籍，而是由一个个鲜活生命串联起的奇妙故事——有信心的先祖、勇敢的先知、舍己的仆人，还有那位改变世界的救赎主。
-
-这一次，我们不想用复杂的神学理论拉开距离，而是选择以「人」为钥匙，为你打开理解圣经的大门。我们从新旧约中精选了31个核心人物故事：
-
-> 从偷吃禁果的亚当，到救恩的挪亚方舟
->
-> 从呼召亚伯兰离开本族本家，到摩西带领选民穿越红海
->
-> 从大卫用小石子战胜巨人，到以赛亚预言「有一婴孩为我们而生」
->
-> 从耶稣在加利利海边呼召门徒，到保罗跨越山海传讲真理……
-
-每一个故事，都是圣经宏大叙事里的重要篇章。这些故事里，有选民的挣扎与信靠，有危难中的等候与得胜，更有神始终不变的应许与带领。
-
-</div>
 
 ## 圣经故事1-6【创世纪篇】
 <div class="scripture-box">
@@ -30,21 +6,61 @@
 </div>
 
 <div class="video-container serene-bg">
-  <script src="https://fast.wistia.com/playlist.js" async></script>
-  <wistia-playlist
-    channel-id="orr4z1jcvk"
-    playlist-style="advanced"
-    playlist-color="#2D5F91"
-    playlist-font="georgia"
-    player-resize="true">
-  </wistia-playlist>
+  <!-- 微信专用播放器 -->
+  <div class="wx-video-player" data-video-id="orr4z1jcvk">
+    <div class="wx-loading-prompt">
+      <i class="fa fa-spinner fa-pulse"></i>
+      正在加载视频...
+    </div>
+    <button class="wx-play-button" onclick="loadWistiaVideo()">▶ 点击播放</button>
+  </div>
+
+  <!-- 原有Wistia播放器 -->
+  <div class="wistia-player-container" style="display:none;">
+    <script src="https://fast.wistia.com/playlist.js" async></script>
+    <wistia-playlist
+      channel-id="orr4z1jcvk"
+      playlist-style="advanced"
+      playlist-color="#2D5F91"
+      playlist-font="georgia"
+      player-resize="true">
+    </wistia-playlist>
+  </div>
 </div>
 
+<script>
+function loadWistiaVideo() {
+  // 隐藏微信播放按钮
+  document.querySelector('.wx-play-button').style.display = 'none';
+  document.querySelector('.wx-loading-prompt').style.display = 'none';
 
+  // 显示Wistia播放器
+  document.querySelector('.wistia-player-container').style.display = 'block';
 
+  // 重新加载Wistia脚本
+  var script = document.createElement('script');
+  script.src = 'https://fast.wistia.com/playlist.js';
+  document.head.appendChild(script);
+}
 
+// 检测微信浏览器
+function isWeixinBrowser() {
+  var ua = navigator.userAgent.toLowerCase();
+  return ua.indexOf('micromessenger') !== -1;
+}
+
+// 页面加载时检测
+if (isWeixinBrowser()) {
+  document.querySelector('.wistia-player-container').style.display = 'none';
+  document.querySelector('.wx-video-player').style.display = 'block';
+} else {
+  document.querySelector('.wx-video-player').style.display = 'none';
+  document.querySelector('.wistia-player-container').style.display = 'block';
+}
+</script>
 
 ---
+
 <div class="timeline">
   <div class="timeline-item">
     <div class="timeline-marker"></div>

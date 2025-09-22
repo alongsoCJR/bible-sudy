@@ -3,7 +3,7 @@ authors = ["alongsoCjr"]
 language = "zh_CN"
 multilingual = false
 src = "src"
-title = "技术架构学习"
+title = "真理使人自由"
 
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
@@ -11,7 +11,7 @@ command = "mdbook-mermaid"
 [output.html]
 theme = "mytheme"
 default-theme = "rust"
-git-repository-url = "https://github.com/alongsoCJR/tech-learning"
+git-repository-url = "https://github.com/alongsoCJR/bible-study"
 additional-js = ["mermaid.min.js", "mermaid-init.js", "smart-anchor.js"]
 additional-css = ["bible.css"]
 mathjax-support = true
@@ -29,7 +29,7 @@ level = 0
 
 [preprocessor.rss]
 files-glob = "chapter_*/**/*.md"
-url-base = "https://github.com/alongsoCJR/tech-learning/"
+url-base = "https://github.com/alongsoCJR/bible-study/"
 
 # [output.latex]
 # latex    = true  # default = true

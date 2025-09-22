@@ -4,7 +4,7 @@
 
 本博客使用mdbook+github page进行搭建，相关语法可参考 [mdbook官方指南](https://hellowac.github.io/mdbook_doc/zh-cn/index.htmll)
 
-笔记已经推送到 [个人github仓库](https://github.com/alongsoCJR/tech-learning)
+笔记已经推送到 [个人github仓库](https://github.com/alongsoCJR/biblestudy)
 
 
 
