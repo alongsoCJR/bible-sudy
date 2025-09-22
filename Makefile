@@ -1,8 +1,9 @@
 .PHONY: deploy
 
 init:
-	git worktree add -f /tmp/book gh-pages
-	git worktree remove -f /tmp/book
+	if [ -d "/tmp/book" ]; then \
+		rm -rf /tmp/book; \
+	fi
 	git worktree add -f /tmp/book gh-pages
 
 deploy: init
