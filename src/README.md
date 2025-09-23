@@ -1,53 +1,29 @@
-# 简介
+# <span class="bible-title">📖 圣经有声平台</span>
 
-我的技术笔记：Inspired by [**lvt4j**](https://lvt4j.51vip.biz/confluence/#all-updates) and reference from.
+<div class="intro-card">
+  亲爱的弟兄姊妹：
 
-本博客使用mdbook+github page进行搭建，相关语法可参考 [mdbook官方指南](https://hellowac.github.io/mdbook_doc/zh-cn/index.htmll)
+你是否曾翻开圣经，却被繁多的章节、古老的背景拦住脚步？是否想探寻其中的智慧，却不知从何切入？
 
-笔记已经推送到 [个人github仓库](https://github.com/alongsoCJR/biblestudy)
+其实，圣经从不只是一本厚重的典籍，而是由一个个鲜活生命串联起的奇妙故事——有信心的先祖、勇敢的先知、舍己的仆人，还有那位改变世界的救赎主。
 
+这一次，我们不想用复杂的神学理论拉开距离，而是选择以「人」为钥匙，为你打开理解圣经的大门。我们从新旧约中精选了31个核心人物故事：
 
+> 从偷吃禁果的亚当，到救恩的挪亚方舟
+>
+> 从呼召亚伯兰离开本族本家，到摩西带领选民穿越红海
+>
+> 从大卫用小石子战胜巨人，到以赛亚预言「有一婴孩为我们而生」
+>
+> 从耶稣在加利利海边呼召门徒，到保罗跨越山海传讲真理……
 
-## 学习方向
+每一个故事，都是圣经宏大叙事里的重要篇章。这些故事里，有选民的挣扎与信靠，有危难中的等候与得胜，更有神始终不变的应许与带领。
 
-基础学习:  通读官方文档，熟悉API. 
+当我们跟着这些人物的脚步，看他们如何在不同时代回应使命、面对挑战，圣经不再是零散的段落，而是一条清晰的脉络——从创世到救赎，从应许到成就。 或许你是第一次接触圣经，或许你早已熟悉其中的字句，愿这31个小故事，能带你以全新的视角走进这本“智慧之书”。不必担心错过关键信息，不必纠结晦涩的背景，只需静下心来，聆听每一个生命与真理相遇的时刻。相信当故事的碎片逐渐拼凑，你会看见圣经最核心的光芒，也会在这些叙事中，找到属于自己的生命启示。
 
-拔高学习:  源码核心设计，接口，机制，流程，抽象等.
+</div>
 
+# <span class="bible-title">📖 导航图</span>
 
-
-## 技术关键字
-
-Kafka: Streaming Processing Platform
-
-Akka:Reactive Architecture
-
-SMACK: Spark/Mesos/Akka/Cassandra/Kafka
-
-
-
-
-
-## 学习进度
-
-| 技术   | 进度                                                         |
-| ------ | ------------------------------------------------------------ |
-| Akka   | https://doc.akka.io/docs/akka/current/mailboxes.html         |
-| Es     | https://www.elastic.co/guide/cn/elasticsearch/guide/current/full-text-search.html |
-| Kafka  | https://developer.confluent.io/patterns/                     |
-| Spring | https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-autowire |
-| Redis  | https://redis.io/docs/getting-started/                       |
-| Mysql  | 尚未开始                                                     |
-
-
-
-
-
-## 技术栈
-
-| 后端                                                         | 前端                                                         | 程度 |
-| :----------------------------------------------------------- | ------------------------------------------------------------ | ---- |
-| [Spring-Boot](https://projects.spring.io/spring-boot) ，[Spring-Boot-Admin](https://codecentric.github.io/spring-boot-admin/)<br />[Spring-Cloud](https://spring.io/projects/spring-cloud)【[Spring Cloud Consul](https://cloud.spring.io/spring-cloud-consul/reference/html/) ，[Spring Cloud Config](https://cloud.spring.io/spring-cloud-config/reference/html/)，[Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway)，[Spring Cloud OpenFeign](https://spring.io/projects/spring-cloud-openfeign)】<br />[Mybatis](http://www.mybatis.org/mybatis-3/zh/index.html) ，[MyBatisPlus ](https://baomidou.com/guide/)，[Mybatis-spring](http://mybatis.org/spring/) [guava(google的java编码工具包)](https://github.com/google/guava) [lombok(简化java代码)](https://projectlombok.org/) [lvt4j-rbac(可视化rbac模型权限控制服务)](https://github.com/lvq410/LVT4J-RBAC) [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder)，[Gradle](https://gradle.org/) ,[Velocity(Java模板引擎)](http://velocity.apache.org/) | html/js/css jQuery [Bootstrap](http://www.bootcss.com/) [ace(常见的后台系统开发控件集)](http://ace.jeka.by/elements.html) [ace组件代码](https://github.com/bopoda/ace) [jstpl(一个前端模板渲染引擎)](https://github.com/huangbh/jstpl) [lvt4js(js工具总结)](https://lvq410.github.io/LVT4JS/docs/index.html) | 必备 |
-| [Redis](https://redis.io/) [ElasticSearch](https://www.elastic.co/) [kafka](http://kafka.apache.org/) | [jQuery-ui](http://jqueryui.com/) [jQuery-ui-datetimepicker](https://github.com/trentrichardson/jQuery-Timepicker-Addon) [select2](https://select2.github.io/) [uploadify(基于H5的文件上传插件)](http://www.uploadify.com/) [math(js精度处理)](https://mathjs.org/) [jquery.tagsinput-revisited.js](https://github.com/underovsky/jquery-tagsinput-revisited) | 精通 |
-| [atomikos(分布式数据库事务集成管理)](https://www.atomikos.com/) [javamail](https://javaee.github.io/javamail/) [jave(java集成FFmpeg的视频工具)](http://www.sauronsoftware.it/projects/jave) [mapdb(基于磁盘的嵌入式java集合对象存储)](http://www.mapdb.org/) [httpcomponents(http请求工具)](http://hc.apache.org/) [dom4j(java的xml解析)](https://dom4j.github.io/) [poi(java版office文档生成处理)](https://poi.apache.org/) [canal(阿里的数据库监听)](https://github.com/alibaba/canal) [akka(分布式异步编程框架)](https://akka.io/) [hazelcast(分布式内存数据网格)](https://hazelcast.org/imdg/why/) [seata(阿里分布式事务框架)](http://seata.io/en-us/)，[Consul(HashiCorp的网络工具，提供服务发现和服务网格）](https://www.consul.io/)<br />单元测试：[junit4](https://junit.org/junit4/)/[junit5](https://junit.org/junit5/docs/current/user-guide/)，[assertj](https://assertj.github.io/doc/)，[mockito](https://site.mockito.org/) | [highcharts(图形图表)](http://www.hcharts.cn/) [fontawesome(矢量图形字体库)](http://fontawesome.io/) | 了解 |
+- [圣经故事1-6【创世纪篇】](./bible.md)
 

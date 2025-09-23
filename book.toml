@@ -28,7 +28,7 @@ level = 0
 
 
 [preprocessor.rss]
-files-glob = "chapter_*/**/*.md"
+files-glob = "bible/*.md"
 url-base = "https://github.com/alongsoCJR/bible-study/"
 
 # [output.latex]
