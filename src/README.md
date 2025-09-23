@@ -25,5 +25,5 @@
 
 # <span class="bible-title">📖 导航图</span>
 
-- [圣经故事1-6【创世纪篇】](./bible.md)
+- [圣经故事1-6【创世纪篇】](./bible/bible.md)
 
