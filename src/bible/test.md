@@ -1,12 +1,3 @@
-用户2160750600
-上面代码在浏览器里依然打不开​
-Trae AI
-您说得对，问题在于Wistia的音频链接不能直接作为HTML5音频的源文件。Wistia的链接需要特定的嵌入方式。让我为您提供几种解决方案：
-
-方案1：使用Wistia的音频嵌入代码（微信可能仍有限制）
-
-README.md
-Apply
 # <span class="bible-title">📖 圣经有声平台</span>
 
 <div class="intro-card">
@@ -35,57 +26,141 @@ Apply
 # <span class="bible-title">🎧 音频播放器</span>
 
 <div class="audio-list">
+  <!-- 圣经故事之1 亚当 第一个有灵的活人 -->
   <div class="audio-item">
-    <div class="audio-title">📖 路得记</div>
+    <div class="audio-title">📖 圣经故事之1 亚当 - 第一个有灵的活人</div>
     <div class="audio-player">
-      <iframe src="https://fast.wistia.net/embed/iframe/5423g9vqem?seo=true&videoFoam=true" title="路得记音频" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="100%" height="80"></iframe>
-      <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/8apkhza0gq.js" async type="module"></script>
+      <style>wistia-player[media-id='8apkhza0gq']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="8apkhza0gq" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
     </div>
   </div>
 
+  <!-- 圣经故事之2 挪亚方舟的救恩 -->
   <div class="audio-item">
-    <div class="audio-title">📖 创世纪</div>
+    <div class="audio-title">📖 圣经故事之2 挪亚 - 方舟的救恩</div>
     <div class="audio-player">
-      <div style="background:#f0f8ff;padding:15px;text-align:center;border-radius:6px;height:80px;display:flex;align-items:center;justify-content:center;">
-        <p>音频2：创世纪（待添加）</p>
-      </div>
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/fdrgb1xsjg.js" async type="module"></script>
+      <style>wistia-player[media-id='fdrgb1xsjg']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="fdrgb1xsjg" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
     </div>
   </div>
 
+  <!-- 圣经故事之3 亚伯拉罕 信心之父 -->
   <div class="audio-item">
-    <div class="audio-title">📖 出埃及记</div>
+    <div class="audio-title">📖 圣经故事之3 亚伯拉罕 - 信心之父</div>
     <div class="audio-player">
-      <div style="background:#fff0f5;padding:15px;text-align:center;border-radius:6px;height:80px;display:flex;align-items:center;justify-content:center;">
-        <p>音频3：出埃及记（待添加）</p>
-      </div>
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/oh0xy6ef1v.js" async type="module"></script>
+      <style>wistia-player[media-id='oh0xy6ef1v']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="oh0xy6ef1v" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+    </div>
+  </div>
+
+  <!-- 圣经故事之4 以撒，神赐的孩子 -->
+  <div class="audio-item">
+    <div class="audio-title">📖 圣经故事之4 以撒 - 神赐的孩子</div>
+    <div class="audio-player">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/mvr5yng5w7.js" async type="module"></script>
+      <style>wistia-player[media-id='mvr5yng5w7']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="mvr5yng5w7" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+    </div>
+  </div>
+
+  <!-- 圣经故事之5 雅各上 抓住福分 -->
+  <div class="audio-item">
+    <div class="audio-title">📖 圣经故事之5 雅各（上） - 抓住福分</div>
+    <div class="audio-player">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/6bvfvavzke.js" async type="module"></script>
+      <style>wistia-player[media-id='6bvfvavzke']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="6bvfvavzke" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+    </div>
+  </div>
+
+  <!-- 圣经故事之5 雅各下 得胜的以色列 -->
+  <div class="audio-item">
+    <div class="audio-title">📖 圣经故事之5 雅各（下） - 得胜的以色列</div>
+    <div class="audio-player">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/jyjzhzkij3.js" async type="module"></script>
+      <style>wistia-player[media-id='jyjzhzkij3']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="jyjzhzkij3" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+    </div>
+  </div>
+
+  <!-- 圣经故事之6 约瑟跌宕起伏的人生 -->
+  <div class="audio-item">
+    <div class="audio-title">📖 圣经故事之6 约瑟 - 跌宕起伏的人生</div>
+    <div class="audio-player">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/gwqvhqkvlo.js" async type="module"></script>
+      <style>wistia-player[media-id='gwqvhqkvlo']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="gwqvhqkvlo" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+    </div>
+  </div>
+
+  <!-- 圣经故事之7 摩西出埃及记的传奇 -->
+  <div class="audio-item">
+    <div class="audio-title">📖 圣经故事之7 摩西 - 出埃及记的传奇</div>
+    <div class="audio-player">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/5ira7p7esc.js" async type="module"></script>
+      <style>wistia-player[media-id='5ira7p7esc']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="5ira7p7esc" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+    </div>
+  </div>
+
+  <!-- 圣经故事之8 民数记巴兰的故事 -->
+  <div class="audio-item">
+    <div class="audio-title">📖 圣经故事之8 巴兰 - 民数记的故事</div>
+    <div class="audio-player">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/vslnzja432.js" async type="module"></script>
+      <style>wistia-player[media-id='vslnzja432']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="vslnzja432" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+    </div>
+  </div>
+
+  <!-- 圣经故事之9 约书亚信心与勇气 -->
+  <div class="audio-item">
+    <div class="audio-title">📖 圣经故事之9 约书亚 - 信心与勇气</div>
+    <div class="audio-player">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/kn59bj4m5u.js" async type="module"></script>
+      <style>wistia-player[media-id='kn59bj4m5u']:not(:defined) { display: block; filter: blur(5px); }</style>
+      <wistia-player media-id="kn59bj4m5u" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
     </div>
   </div>
 </div>
 
-<!-- 微信专用解决方案 -->
-<div class="wechat-solution">
-  <h3>💡 微信用户解决方案</h3>
-  <p>由于微信浏览器限制，建议使用以下方法：</p>
-
-  <div class="solution-option">
-    <h4>方案A：使用腾讯视频/音频平台</h4>
-    <p>将音频上传到腾讯视频或QQ音乐等平台，然后使用它们的播放器代码。</p>
-  </div>
-
-  <div class="solution-option">
-    <h4>方案B：直接链接到Wistia页面</h4>
-    <p>点击下方链接在新页面中收听：</p>
-    <a href="https://8888.wistia.com/medias/5423g9vqem" target="_blank" class="wechat-link">🎵 收听路得记音频</a>
-  </div>
-
-  <div class="solution-option">
-    <h4>方案C：使用微信公众号音频功能</h4>
-    <p>如果这是微信公众号内容，建议使用微信自带的音频上传功能。</p>
-  </div>
+<!-- 备用方案：直接链接到Wistia页面 -->
+<div class="wechat-fallback">
+  <h3>微信用户专用链接</h3>
+  <p>如果上面的播放器无法使用，请点击以下链接在微信中收听：</p>
+  <ul>
+    <li><a href="https://alongsocjr.wistia.com/medias/8apkhza0gq" target="_blank">圣经故事之1 亚当 - 第一个有灵的活人</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/fdrgb1xsjg" target="_blank">圣经故事之2 挪亚 - 方舟的救恩</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/oh0xy6ef1v" target="_blank">圣经故事之3 亚伯拉罕 - 信心之父</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/mvr5yng5w7" target="_blank">圣经故事之4 以撒 - 神赐的孩子</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/6bvfvavzke" target="_blank">圣经故事之5 雅各（上） - 抓住福分</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/jyjzhzkij3" target="_blank">圣经故事之5 雅各（下） - 得胜的以色列</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/gwqvhqkvlo" target="_blank">圣经故事之6 约瑟 - 跌宕起伏的人生</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/5ira7p7esc" target="_blank">圣经故事之7 摩西 - 出埃及记的传奇</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/vslnzja432" target="_blank">圣经故事之8 巴兰 - 民数记的故事</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/kn59bj4m5u" target="_blank">圣经故事之9 约书亚 - 信心与勇气</a></li>
+  </ul>
 </div>
+
 
 <style>
-.audio-list {
+
+
+
+.audio-list  {
   margin: 25px 0;
 }
 
@@ -104,7 +179,15 @@ Apply
   font-size: 1.1em;
 }
 
-.wechat-solution {
+.audio-player audio {
+  height: 40px;
+  border-radius: 4px;
+}
+
+
+
+
+.wechat-fallback {
   margin: 30px 0;
   padding: 20px;
   background: #e3f2fd;
@@ -112,47 +195,53 @@ Apply
   border-radius: 10px;
 }
 
-.wechat-solution h3 {
+.wechat-fallback h3 {
   color: #1565c0;
   margin-top: 0;
 }
 
-.solution-option {
-  margin: 15px 0;
-  padding: 15px;
-  background: white;
-  border-radius: 6px;
-  border-left: 3px solid #2196f3;
+.wechat-fallback ul {
+  list-style-type: none;
+  padding-left: 0;
 }
 
-.solution-option h4 {
+.wechat-fallback li {
+  margin: 8px 0;
+}
+
+.wechat-fallback a {
   color: #1976d2;
-  margin-top: 0;
-}
-
-.wechat-link {
-  display: inline-block;
-  padding: 10px 15px;
-  background: #4CAF50;
-  color: white;
   text-decoration: none;
-  border-radius: 5px;
-  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.wechat-link:hover {
-  background: #45a049;
+.wechat-fallback a:hover {
+  background-color: #bbdefb;
+  text-decoration: underline;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .audio-item {
+    flex: 0 0 100%;
     padding: 12px;
     margin-bottom: 15px;
   }
   
-  .wechat-solution {
+  .audio-list {
+    gap: 15px;
+  }
+  
+  .wechat-fallback {
     padding: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .audio-item {
+    flex: 0 0 calc(33.333% - 20px);
   }
 }
 </style>
