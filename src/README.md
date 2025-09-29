@@ -23,7 +23,87 @@
 
 </div>
 
+
+
 # <span class="bible-title">📖 导航图</span>
 
-- [圣经故事1-6【创世纪篇】](./bible/bible.md)
+- [圣经故事1-6【创世纪篇】](./bible.md)
 
+
+# <span class="bible-title">🎧 音频播放器</span>
+
+<div class="horizontal-audio-list">
+  <div class="audio-player-item">
+    <div class="audio-title">📖 圣经故事之11-路得记</div>
+    <div class="audio-player-wrapper">
+      <script src="https://fast.wistia.com/embed/medias/5423g9vqem.jsonp" async></script>
+      <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+      <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+        <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+          <div class="wistia_embed wistia_async_5423g9vqem seo=true videoFoam=true" style="height:100%;position:relative;width:100%">
+            <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
+              <img src="https://fast.wistia.com/embed/medias/5423g9vqem/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+[//]: # ()
+[//]: # (  <div class="audio-player-item">)
+
+[//]: # (    <div class="audio-title">📖 创世纪</div>)
+
+[//]: # (    <div class="audio-player-wrapper">)
+
+[//]: # (      <!-- 第二个音频播放器 -->)
+
+[//]: # (      <div style="background:#f0f8ff;padding:15px;text-align:center;border-radius:8px;height:100px;display:flex;align-items:center;justify-content:center;">)
+
+[//]: # (        <p>音频2：创世纪（待添加）</p>)
+
+[//]: # (      </div>)
+
+[//]: # (    </div>)
+
+[//]: # (  </div>)
+
+[//]: # ()
+[//]: # (  <div class="audio-player-item">)
+
+[//]: # (    <div class="audio-title">📖 出埃及记</div>)
+
+[//]: # (    <div class="audio-player-wrapper">)
+
+[//]: # (      <!-- 第三个音频播放器 -->)
+
+[//]: # (      <div style="background:#fff0f5;padding:15px;text-align:center;border-radius:8px;height:100px;display:flex;align-items:center;justify-content:center;">)
+
+[//]: # (        <p>音频3：出埃及记（待添加）</p>)
+
+[//]: # (      </div>)
+
+[//]: # (    </div>)
+
+[//]: # (  </div>)
+
+[//]: # ()
+[//]: # (  <div class="audio-player-item">)
+
+[//]: # (    <div class="audio-title">📖 诗篇</div>)
+
+[//]: # (    <div class="audio-player-wrapper">)
+
+[//]: # (      <!-- 第四个音频播放器 -->)
+
+[//]: # (      <div style="background:#f0fff0;padding:15px;text-align:center;border-radius:8px;height:100px;display:flex;align-items:center;justify-content:center;">)
+
+[//]: # (        <p>音频4：诗篇（待添加）</p>)
+
+[//]: # (      </div>)
+
+[//]: # (    </div>)
+
+[//]: # (  </div>)
+</div>
