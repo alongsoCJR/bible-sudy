@@ -32,23 +32,40 @@
 
 # <span class="bible-title">🎧 音频播放器</span>
 
-<div class="horizontal-audio-list">
-  <div class="audio-player-item">
-    <div class="audio-title">📖 圣经故事之11-路得记</div>
-    <div class="audio-player-wrapper">
-      <script src="https://fast.wistia.com/embed/medias/5423g9vqem.jsonp" async></script>
-      <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
-      <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
-        <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
-          <div class="wistia_embed wistia_async_5423g9vqem seo=true videoFoam=true" style="height:100%;position:relative;width:100%">
-            <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
-              <img src="https://fast.wistia.com/embed/medias/5423g9vqem/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+[//]: # ()
+[//]: # (<div class="horizontal-audio-list">)
+
+[//]: # (  <div class="audio-player-item">)
+
+[//]: # (    <div class="audio-title">📖 圣经故事之11-路得记</div>)
+
+[//]: # (    <div class="audio-player-wrapper">)
+
+[//]: # (      <script src="https://fast.wistia.com/embed/medias/5423g9vqem.jsonp" async></script>)
+
+[//]: # (      <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>)
+
+[//]: # (      <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">)
+
+[//]: # (        <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">)
+
+[//]: # (          <div class="wistia_embed wistia_async_5423g9vqem seo=true videoFoam=true" style="height:100%;position:relative;width:100%">)
+
+[//]: # (            <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">)
+
+[//]: # (              <img src="https://fast.wistia.com/embed/medias/5423g9vqem/swatch" style="filter:blur&#40;5px&#41;;height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />)
+
+[//]: # (            </div>)
+
+[//]: # (          </div>)
+
+[//]: # (        </div>)
+
+[//]: # (      </div>)
+
+[//]: # (    </div>)
+
+[//]: # (  </div>)
 
 [//]: # ()
 [//]: # (  <div class="audio-player-item">)
@@ -106,4 +123,138 @@
 [//]: # (    </div>)
 
 [//]: # (  </div>)
+[//]: # (</div>)
+
+
+
+<div class="wechat-audio-list">
+  <div class="audio-item">
+    <div class="audio-title">📖 路得记</div>
+    <div class="audio-player">
+      <audio controls preload="metadata" style="width:100%;">
+        <source src="https://8888.wistia.com/medias/5423g9vqem" type="audio/mpeg">
+        <source src="https://8888.wistia.com/medias/5423g9vqem" type="audio/ogg">
+        您的浏览器不支持音频播放，请点击链接收听：
+        <a href="https://8888.wistia.com/medias/5423g9vqem" target="_blank">路得记音频</a>
+      </audio>
+    </div>
+  </div>
+
+  <div class="audio-item">
+    <div class="audio-title">📖 创世纪</div>
+    <div class="audio-player">
+      <audio controls preload="metadata" style="width:100%;">
+        <source src="https://8888.wistia.com/medias/your-audio-id-2" type="audio/mpeg">
+        <source src="https://8888.wistia.com/medias/your-audio-id-2" type="audio/ogg">
+        您的浏览器不支持音频播放，请点击链接收听：
+        <a href="https://8888.wistia.com/medias/your-audio-id-2" target="_blank">创世纪音频</a>
+      </audio>
+    </div>
+  </div>
+
+  <div class="audio-item">
+    <div class="audio-title">📖 出埃及记</div>
+    <div class="audio-player">
+      <audio controls preload="metadata" style="width:100%;">
+        <source src="https://8888.wistia.com/medias/your-audio-id-3" type="audio/mpeg">
+        <source src="https://8888.wistia.com/medias/your-audio-id-3" type="audio/ogg">
+        您的浏览器不支持音频播放，请点击链接收听：
+        <a href="https://8888.wistia.com/medias/your-audio-id-3" target="_blank">出埃及记音频</a>
+      </audio>
+    </div>
+  </div>
+
+  <div class="audio-item">
+    <div class="audio-title">📖 诗篇精选</div>
+    <div class="audio-player">
+      <audio controls preload="metadata" style="width:100%;">
+        <source src="https://8888.wistia.com/medias/your-audio-id-4" type="audio/mpeg">
+        <source src="https://8888.wistia.com/medias/your-audio-id-4" type="audio/ogg">
+        您的浏览器不支持音频播放，请点击链接收听：
+        <a href="https://8888.wistia.com/medias/your-audio-id-4" target="_blank">诗篇精选音频</a>
+      </audio>
+    </div>
+  </div>
 </div>
+
+<!-- 备用方案：直接链接到Wistia页面 -->
+<div class="wechat-fallback">
+  <h3>微信用户专用链接</h3>
+  <p>如果上面的播放器无法使用，请点击以下链接在微信中收听：</p>
+  <ul>
+    <li><a href="https://8888.wistia.com/medias/5423g9vqem" target="_blank">路得记音频</a></li>
+    <li><a href="https://8888.wistia.com/medias/your-audio-id-2" target="_blank">创世纪音频</a></li>
+    <li><a href="https://8888.wistia.com/medias/your-audio-id-3" target="_blank">出埃及记音频</a></li>
+    <li><a href="https://8888.wistia.com/medias/your-audio-id-4" target="_blank">诗篇精选音频</a></li>
+  </ul>
+</div>
+
+
+<style>
+.wechat-audio-list {
+  margin: 25px 0;
+}
+
+.audio-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #4CAF50;
+}
+
+.audio-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-size: 1.1em;
+}
+
+.audio-player audio {
+  height: 40px;
+  border-radius: 4px;
+}
+
+.wechat-fallback {
+  margin: 20px 0;
+  padding: 15px;
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+}
+
+.wechat-fallback h3 {
+  color: #856404;
+  margin-top: 0;
+}
+
+.wechat-fallback ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.wechat-fallback li {
+  margin-bottom: 8px;
+}
+
+.wechat-fallback a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.wechat-fallback a:hover {
+  text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .audio-item {
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+  
+  .audio-title {
+    font-size: 1em;
+  }
+}
+</style>
