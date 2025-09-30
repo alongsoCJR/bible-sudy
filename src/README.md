@@ -35,7 +35,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/8apkhza0gq.js" async type="module"></script>
       <style>wistia-player[media-id='8apkhza0gq']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="8apkhza0gq" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="8apkhza0gq" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -46,7 +46,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/fdrgb1xsjg.js" async type="module"></script>
       <style>wistia-player[media-id='fdrgb1xsjg']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="fdrgb1xsjg" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="fdrgb1xsjg" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -57,7 +57,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/oh0xy6ef1v.js" async type="module"></script>
       <style>wistia-player[media-id='oh0xy6ef1v']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="oh0xy6ef1v" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="oh0xy6ef1v" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -68,7 +68,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/mvr5yng5w7.js" async type="module"></script>
       <style>wistia-player[media-id='mvr5yng5w7']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="mvr5yng5w7" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="mvr5yng5w7" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -79,7 +79,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/6bvfvavzke.js" async type="module"></script>
       <style>wistia-player[media-id='6bvfvavzke']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="6bvfvavzke" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="6bvfvavzke" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -90,7 +90,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/jyjzhzkij3.js" async type="module"></script>
       <style>wistia-player[media-id='jyjzhzkij3']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="jyjzhzkij3" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="jyjzhzkij3" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -101,7 +101,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/gwqvhqkvlo.js" async type="module"></script>
       <style>wistia-player[media-id='gwqvhqkvlo']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="gwqvhqkvlo" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="gwqvhqkvlo" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -112,7 +112,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/5ira7p7esc.js" async type="module"></script>
       <style>wistia-player[media-id='5ira7p7esc']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="5ira7p7esc" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="5ira7p7esc" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -123,7 +123,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/vslnzja432.js" async type="module"></script>
       <style>wistia-player[media-id='vslnzja432']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="vslnzja432" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="vslnzja432" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 
@@ -134,7 +134,7 @@
       <script src="https://fast.wistia.com/player.js" async></script>
       <script src="https://fast.wistia.com/embed/kn59bj4m5u.js" async type="module"></script>
       <style>wistia-player[media-id='kn59bj4m5u']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="kn59bj4m5u" swatch="false" style="width: 750px;height: 50px;"></wistia-player>
+      <wistia-player media-id="kn59bj4m5u" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
     </div>
   </div>
 </div>
@@ -144,7 +144,7 @@
   <h3>微信用户专用链接</h3>
   <p>如果上面的播放器无法使用，请点击以下链接在微信中收听：</p>
   <ul>
-    <li><a href="https://ydschool-online.nosdn.127.net/tiku/69db7bcecc203519e52500ab21cb064f82b43e1bb29ae49901bc3b0dd9a389b3.mp3" target="_blank">圣经故事之1 亚当 - 第一个有灵的活人</a></li>
+    <li><a href="https://alongsocjr.wistia.com/medias/8apkhza0gq" target="_blank">圣经故事之1 亚当 - 第一个有灵的活人</a></li>
     <li><a href="https://alongsocjr.wistia.com/medias/fdrgb1xsjg" target="_blank">圣经故事之2 挪亚 - 方舟的救恩</a></li>
     <li><a href="https://alongsocjr.wistia.com/medias/oh0xy6ef1v" target="_blank">圣经故事之3 亚伯拉罕 - 信心之父</a></li>
     <li><a href="https://alongsocjr.wistia.com/medias/mvr5yng5w7" target="_blank">圣经故事之4 以撒 - 神赐的孩子</a></li>
@@ -249,5 +249,4 @@
 </style>
 
 # <span class="bible-title">📖 导航图</span>
-
-- [圣经故事1-6【创世纪篇】](./bible/bible.md)
+- [灵性与灵魂](./bible/test.md)
