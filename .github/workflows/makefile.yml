@@ -23,7 +23,7 @@ jobs:
       - run: mdbook build # Build the book
       - run: find src -name '*.md' -exec mdbook test -- {} \; 2>/dev/null || true # Test only markdown files
       - name: Copy static HTML page to book directory
-        run: cp src/static/*.html book/static/
+        run: cp src/static/* book/static/
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages # The branch the action should deploy to.
