@@ -79,7 +79,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">目录</li><li class="chapter-item "><a href="index.html"><strong aria-hidden="true">1.</strong> 圣经有声频道</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="bible/test.html"><strong aria-hidden="true">1.1.</strong> 灵性与灵魂</a></li></ol></li><li class="chapter-item "><a href="ai/ai-train.html"><strong aria-hidden="true">2.</strong> AI探索</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/star-agent.html"><strong aria-hidden="true">2.1.</strong> 星斗智能体展示</a></li></ol></li><li class="chapter-item "><a href="static/reading-bible.html"><strong aria-hidden="true">3.</strong> 在线读圣经</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">目录</li><li class="chapter-item "><a href="index.html"><strong aria-hidden="true">1.</strong> 圣经有声频道</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="bible/test.html"><strong aria-hidden="true">1.1.</strong> 灵性与灵魂</a></li></ol></li><li class="chapter-item "><a href="ai/ai-train.html"><strong aria-hidden="true">2.</strong> AI探索</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/star-agent.html"><strong aria-hidden="true">2.1.</strong> 星斗智能体展示</a></li></ol></li><li class="chapter-item "><a href="static/reading-bible.html"><strong aria-hidden="true">3.</strong> 在线读圣经</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/index.html"><strong aria-hidden="true">3.1.</strong> 全览</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -4427,6 +4427,411 @@ function nextChapter() {
 }
 
 // ==================== 启动 ====================
+initHome();
+</script>
+</body>
+</html>
+<div style="break-before: page; page-break-before: always;"></div><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>手机版圣经在线阅读_信仰助手</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f0e8;
+            color: #333;
+            min-height: 100vh;
+        }
+<pre><code>    /* ========== 公共顶部导航栏 ========== */
+    .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #f5f0e8;
+        border-bottom: 1px solid #8b7355;
+        padding: 12px 15px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    .top-bar .back-home {
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .top-bar .back-home:active { color: #333; }
+    .top-bar .page-title {
+        font-size: 15px;
+        color: #333;
+        font-weight: bold;
+        position: relative;
+    }
+    .top-bar .page-title.active::after {
+        content: '';
+        position: absolute;
+        bottom: -13px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0; height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #8b7355;
+    }
+
+    /* ========== 首页标签导航 ========== */
+    .nav-tabs {
+        display: flex;
+        background-color: #f5f0e8;
+        border-bottom: 1px solid #8b7355;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    .nav-tab {
+        flex: 1;
+        text-align: center;
+        padding: 15px 0;
+        font-size: 16px;
+        color: #666;
+        cursor: pointer;
+        position: relative;
+        transition: color 0.3s;
+    }
+    .nav-tab.active { color: #333; }
+    .nav-tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0; height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #8b7355;
+    }
+
+    /* ========== 内容区域 ========== */
+    .content { padding: 20px 15px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ========== 首页书卷网格 ========== */
+    .book-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px 10px;
+    }
+    .book-item {
+        text-align: center;
+        padding: 10px 5px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        border-radius: 4px;
+        text-decoration: none;
+        color: inherit;
+    }
+    .book-item:active { background-color: rgba(139, 115, 85, 0.1); }
+    .book-abbr {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 5px;
+        font-weight: normal;
+    }
+    .book-name { font-size: 12px; color: #666; }
+
+    /* ========== 章节目录页 ========== */
+    .chapter-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px 8px;
+    }
+    .chapter-item {
+        text-align: center;
+        padding: 12px 5px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+    .chapter-item:active { background-color: rgba(139, 115, 85, 0.1); }
+
+    /* ========== 经文阅读页 ========== */
+    .verse-list { padding: 15px; }
+    .verse-item {
+        padding: 8px 0;
+        line-height: 1.8;
+        font-size: 16px;
+        color: #333;
+        border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+    }
+    .verse-num {
+        color: #8b7355;
+        font-weight: bold;
+        margin-right: 4px;
+        font-size: 14px;
+    }
+
+    /* ========== 底部翻页导航 ========== */
+    .page-nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        border-top: 1px solid #8b7355;
+        background-color: #f5f0e8;
+        position: sticky;
+        bottom: 0;
+    }
+    .page-nav a {
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        text-decoration: none;
+        padding: 8px 16px;
+    }
+    .page-nav a:active { color: #333; }
+    .page-nav a.disabled { color: #ccc; pointer-events: none; }
+
+    /* ========== 页面容器 ========== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ========== 响应式 ========== */
+    @media (max-width: 360px) {
+        .book-grid { grid-template-columns: repeat(3, 1fr); }
+        .chapter-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+&lt;/style&gt;
+</code></pre>
+</head>
+<body>
+<!-- ==================== 第1页：首页（书卷目录） ==================== -->
+<div id="page-home" class="page active">
+    <div class="nav-tabs">
+        <div class="nav-tab active" onclick="switchTab('old')">旧约目录</div>
+        <div class="nav-tab" onclick="switchTab('new')">新约目录</div>
+    </div>
+    <div id="old-testament" class="content tab-content active">
+        <div class="book-grid" id="old-grid"></div>
+    </div>
+    <div id="new-testament" class="content tab-content">
+        <div class="book-grid" id="new-grid"></div>
+    </div>
+</div>
+<!-- ==================== 第2页：章节目录 ==================== -->
+<div id="page-chapters" class="page">
+    <div class="top-bar">
+        <a class="back-home" onclick="goHome()">返回首页</a>
+        <span class="page-title active" id="chapter-page-title">创世记 目录</span>
+    </div>
+    <div class="content">
+        <div class="chapter-grid" id="chapter-grid"></div>
+    </div>
+</div>
+<!-- ==================== 第3页：经文阅读 ==================== -->
+<div id="page-read" class="page">
+    <div class="top-bar">
+        <a class="back-home" onclick="goHome()">返回首页</a>
+        <span class="page-title active" id="read-page-title">创世记 第1章</span>
+    </div>
+    <div class="verse-list" id="verse-list"></div>
+    <div class="page-nav">
+        <a id="prev-chapter" onclick="prevChapter()">往前翻页</a>
+        <a id="next-chapter" onclick="nextChapter()">往后翻页</a>
+    </div>
+</div>
+<script>
+// ==================== 圣经书卷数据 ====================
+const bibleBooks = {
+    old: [
+        { abbr: '创', name: '创世记', en: 'genesis', chapters: 50 },
+        { abbr: '出', name: '出埃及记', en: 'exodus', chapters: 40 },
+        { abbr: '利', name: '利未记', en: 'leviticus', chapters: 27 },
+        { abbr: '民', name: '民数记', en: 'numbers', chapters: 36 },
+        { abbr: '申', name: '申命记', en: 'deuteronomy', chapters: 34 },
+        { abbr: '书', name: '约书亚记', en: 'joshua', chapters: 24 },
+        { abbr: '士', name: '士师记', en: 'judges', chapters: 21 },
+        { abbr: '得', name: '路得记', en: 'ruth', chapters: 4 },
+        { abbr: '撒上', name: '撒母耳记上', en: '1-samuel', chapters: 31 },
+        { abbr: '撒下', name: '撒母耳记下', en: '2-samuel', chapters: 24 },
+        { abbr: '王上', name: '列王纪上', en: '1-kings', chapters: 22 },
+        { abbr: '王下', name: '列王纪下', en: '2-kings', chapters: 25 },
+        { abbr: '代上', name: '历代志上', en: '1-chronicles', chapters: 29 },
+        { abbr: '代下', name: '历代志下', en: '2-chronicles', chapters: 36 },
+        { abbr: '拉', name: '以斯拉记', en: 'ezra', chapters: 10 },
+        { abbr: '尼', name: '尼希米记', en: 'nehemiah', chapters: 13 },
+        { abbr: '斯', name: '以斯帖记', en: 'esther', chapters: 10 },
+        { abbr: '伯', name: '约伯记', en: 'job', chapters: 42 },
+        { abbr: '诗', name: '诗篇', en: 'psalms', chapters: 150 },
+        { abbr: '箴', name: '箴言', en: 'proverbs', chapters: 31 },
+        { abbr: '传', name: '传道书', en: 'ecclesiastes', chapters: 12 },
+        { abbr: '歌', name: '雅歌', en: 'song-of-songs', chapters: 8 },
+        { abbr: '赛', name: '以赛亚书', en: 'isaiah', chapters: 66 },
+        { abbr: '耶', name: '耶利米书', en: 'jeremiah', chapters: 52 },
+        { abbr: '哀', name: '耶利米哀歌', en: 'lamentations', chapters: 5 },
+        { abbr: '结', name: '以西结书', en: 'ezekiel', chapters: 48 },
+        { abbr: '但', name: '但以理书', en: 'daniel', chapters: 12 },
+        { abbr: '何', name: '何西阿书', en: 'hosea', chapters: 14 },
+        { abbr: '珥', name: '约珥书', en: 'joel', chapters: 3 },
+        { abbr: '摩', name: '阿摩司书', en: 'amos', chapters: 9 },
+        { abbr: '俄', name: '俄巴底亚书', en: 'obadiah', chapters: 1 },
+        { abbr: '拿', name: '约拿书', en: 'jonah', chapters: 4 },
+        { abbr: '弥', name: '弥迦书', en: 'micah', chapters: 7 },
+        { abbr: '鸿', name: '那鸿书', en: 'nahum', chapters: 3 },
+        { abbr: '哈', name: '哈巴谷书', en: 'habakkuk', chapters: 3 },
+        { abbr: '番', name: '西番雅书', en: 'zephaniah', chapters: 3 },
+        { abbr: '该', name: '哈该书', en: 'haggai', chapters: 2 },
+        { abbr: '亚', name: '撒迦利亚书', en: 'zechariah', chapters: 14 },
+        { abbr: '玛', name: '玛拉基书', en: 'malachi', chapters: 4 }
+    ],
+    new: [
+        { abbr: '太', name: '马太福音', en: 'matthew', chapters: 28 },
+        { abbr: '可', name: '马可福音', en: 'mark', chapters: 16 },
+        { abbr: '路', name: '路加福音', en: 'luke', chapters: 24 },
+        { abbr: '约', name: '约翰福音', en: 'john', chapters: 21 },
+        { abbr: '徒', name: '使徒行传', en: 'acts', chapters: 28 },
+        { abbr: '罗', name: '罗马书', en: 'romans', chapters: 16 },
+        { abbr: '林前', name: '哥林多前书', en: '1-corinthians', chapters: 16 },
+        { abbr: '林后', name: '哥林多后书', en: '2-corinthians', chapters: 13 },
+        { abbr: '加', name: '加拉太书', en: 'galatians', chapters: 6 },
+        { abbr: '弗', name: '以弗所书', en: 'ephesians', chapters: 6 },
+        { abbr: '腓', name: '腓立比书', en: 'philippians', chapters: 4 },
+        { abbr: '西', name: '歌罗西书', en: 'colossians', chapters: 4 },
+        { abbr: '帖前', name: '帖撒罗尼迦前书', en: '1-thessalonians', chapters: 5 },
+        { abbr: '帖后', name: '帖撒罗尼迦后书', en: '2-thessalonians', chapters: 3 },
+        { abbr: '提前', name: '提摩太前书', en: '1-timothy', chapters: 6 },
+        { abbr: '提后', name: '提摩太后书', en: '2-timothy', chapters: 4 },
+        { abbr: '多', name: '提多书', en: 'titus', chapters: 3 },
+        { abbr: '门', name: '腓利门书', en: 'philemon', chapters: 1 },
+        { abbr: '来', name: '希伯来书', en: 'hebrews', chapters: 13 },
+        { abbr: '雅', name: '雅各书', en: 'james', chapters: 5 },
+        { abbr: '彼前', name: '彼得前书', en: '1-peter', chapters: 5 },
+        { abbr: '彼后', name: '彼得后书', en: '2-peter', chapters: 3 },
+        { abbr: '约一', name: '约翰一书', en: '1-john', chapters: 5 },
+        { abbr: '约二', name: '约翰二书', en: '2-john', chapters: 1 },
+        { abbr: '约三', name: '约翰三书', en: '3-john', chapters: 1 },
+        { abbr: '犹', name: '犹大书', en: 'jude', chapters: 1 },
+        { abbr: '启', name: '启示录', en: 'revelation', chapters: 22 }
+    ]
+};
+
+// ==================== 创世记经文数据（和合本） ====================
+// ==================== 经文数据已移至外部bibleData ====================
+const genesisData = {};
+
+// ==================== 当前状态 ====================
+let currentBook = null;   // 当前书卷对象
+let currentChapter = 1;   // 当前章节
+
+// ==================== 初始化首页 ====================
+function initHome() {
+    const oldGrid = document.getElementById('old-grid');
+    const newGrid = document.getElementById('new-grid');
+    oldGrid.innerHTML = '';
+    newGrid.innerHTML = '';
+
+    bibleBooks.old.forEach((book, i) => {
+        oldGrid.innerHTML += `<div class="book-item" onclick="openChapters('old', ${i})">
+            <div class="book-abbr">${book.abbr}</div>
+            <div class="book-name">${book.name}</div>
+        </div>`;
+    });
+    bibleBooks.new.forEach((book, i) => {
+        newGrid.innerHTML += `<div class="book-item" onclick="openChapters('new', ${i})">
+            <div class="book-abbr">${book.abbr}</div>
+            <div class="book-name">${book.name}</div>
+        </div>`;
+    });
+}
+
+// ==================== 首页标签切换 ====================
+function switchTab(tab) {
+    const tabs = document.querySelectorAll('.nav-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(c => c.classList.remove('active'));
+    if (tab === 'old') {
+        tabs[0].classList.add('active');
+        document.getElementById('old-testament').classList.add('active');
+    } else {
+        tabs[1].classList.add('active');
+        document.getElementById('new-testament').classList.add('active');
+    }
+}
+
+// ==================== 页面切换 ====================
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+function goHome() {
+    showPage('page-home');
+}
+
+// ==================== 打开章节目录页 ====================
+function openChapters(testament, index) {
+    currentBook = bibleBooks[testament][index];
+    document.getElementById('chapter-page-title').textContent = currentBook.name + ' 目录';
+
+    const grid = document.getElementById('chapter-grid');
+    grid.innerHTML = '';
+    for (let i = 1; i <= currentBook.chapters; i++) {
+        grid.innerHTML += `<div class="chapter-item" onclick="openReader(${i})">${i}</div>`;
+    }
+    showPage('page-chapters');
+}
+
+// ==================== 打开经文阅读页 ====================
+function openReader(chapter) {
+    currentChapter = chapter;
+    document.getElementById('read-page-title').textContent = currentBook.name + ' 第' + chapter + '章';
+
+    const list = document.getElementById('verse-list');
+    list.innerHTML = '';
+
+    // 获取经文数据
+    const verses = getVerses(currentBook.en, chapter);
+    if (verses && verses.length > 0) {
+        verses.forEach((v, i) => {
+            list.innerHTML += `<div class="verse-item"><span class="verse-num">${i + 1}</span>${v}</div>`;
+        });
+    } else {
+        list.innerHTML = '<div class="verse-item" style="text-align:center;color:#999;padding:40px 0;">该章节经文数据暂未收录</div>';
+    }
+
+    // 更新翻页按钮状态
+    document.getElementById('prev-chapter').className = (chapter <= 1) ? 'disabled' : '';
+    document.getElementById('next-chapter').className = (chapter >= currentBook.chapters) ? 'disabled' : '';
+
+    showPage('page-read');
+}
+
+// ==================== 获取经文数据 ====================
+function getVerses(bookEn, chapter) {
+    if (bibleData[bookEn] && bibleData[bookEn].verses[chapter]) {
+        return bibleData[bookEn].verses[chapter];
+    }
+    return null;
+}
+
+// ==================== 翻页 ====================
+function prevChapter() {
+    if (currentChapter > 1) openReader(currentChapter - 1);
+}
+function nextChapter() {
+    if (currentChapter < currentBook.chapters) openReader(currentChapter + 1);
+}
+
+// ==================== 启动 ====================
+</script>
+<script src="bible_full.js"></script>
+<script>
 initHome();
 </script>
 </body>
