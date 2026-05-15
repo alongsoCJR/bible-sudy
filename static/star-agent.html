@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星斗智能体 - AI 教育出题解决方案</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg: #06060e;
+            --bg2: #0c0c1a;
+            --card: rgba(18, 18, 38, 0.65);
+            --card-solid: #121226;
+            --card2: rgba(30, 30, 60, 0.5);
+            --blue: #00d4ff;
+            --purple: #b44aff;
+            --pink: #ff4a8d;
+            --green: #00ff88;
+            --orange: #ff8c00;
+            --yellow: #ffd700;
+            --red: #ff4444;
+            --cyan: #00ffff;
+            --text: #eaeaf4;
+            --text2: #a8a8c4;
+            --text3: #00ff9d;
+            --muted: #5a5a78;
+            --gm: linear-gradient(135deg, #00d4ff, #b44aff, #ff4a8d);
+            --gf: linear-gradient(135deg, #00ffff, #00d4ff, #b44aff);
+            --go: linear-gradient(135deg, #ffd700, #ff8c00, #ff4a8d);
+            --glass: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== 粒子星空背景 ===== */
+        #starfield {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== 全局光晕 ===== */
+        .global-glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.12;
+            transition: all 1.5s ease;
+        }
+        .glow-1 { background: #b44aff; top: -200px; left: -200px; }
+        .glow-2 { background: #00d4ff; bottom: -200px; right: -200px; }
+        .glow-3 { background: #ff4a8d; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.06; }
+
+        /* ===== 通用布局容器 ===== */
+        .s {
+            min-height: 100vh;
+            padding: 100px 2rem 60px;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== 标题区 ===== */
+        .s-head {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .s-num {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--purple);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            padding: 0.3rem 1.2rem;
+            border: 1px solid rgba(180, 74, 255, 0.3);
+            border-radius: 20px;
+            background: rgba(180, 74, 255, 0.08);
+            margin-bottom: 1rem;
+        }
+        .s-title {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            line-height: 1.25;
+            margin: 0.8rem 0;
+        }
+        .gt {
+            background: var(--gm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .go {
+            background: var(--go);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .s-sub {
+            font-size: 1.05rem;
+            color: var(--text2);
+            max-width: 700px;
+            margin: 0.5rem auto 0;
+        }
+
+        /* ===== 玻璃拟态卡片 ===== */
+        .glass-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--gm);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+        .glass-card:hover::before { transform: scaleX(1); }
+        .glass-card:hover {
+            border-color: rgba(0, 212, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 212, 255, 0.05);
+        }
+
+        /* ===== 网格布局 ===== */
+        .grid-2, .grid-3, .grid-4, .grid-5 {
+            display: grid;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+        .grid-5 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+
+        /* ===== 统计数字 ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            margin: 4rem 0;
+        }
+        .stat {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gm);
+            transform: scaleX(0);
+            transition: 0.4s;
+        }
+        .stat:hover::after { transform: scaleX(1); }
+        .stat:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        .stat-v {
+            font-size: 2.6rem;
+            font-weight: 900;
+            background: var(--gm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        .stat-l {
+            font-size: 0.82rem;
+            color: var(--text2);
+            margin-top: 0.3rem;
+            font-weight: 500;
+        }
+        .stat-sub {
+            font-size: 0.72rem;
+            color: var(--text3);
+            margin-top: 0.15rem;
+            opacity: 0.8;
+        }
+
+        /* ===== 流程对比条 ===== */
+        .process-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            padding: 1.8rem;
+            margin: 1.2rem 0;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+        }
+        .process-row:hover {
+            border-color: rgba(0, 212, 255, 0.25);
+            transform: translateX(6px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--pink);
+            min-width: 120px;
+        }
+        .comparison { flex: 1; display: flex; gap: 1rem; }
+        .comp-item {
+            flex: 1;
+            padding: 1.2rem;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+        .comp-old {
+            background: rgba(255, 68, 68, 0.08);
+            border-color: rgba(255, 68, 68, 0.2);
+            color: #ff8888;
+        }
+        .comp-new {
+            background: rgba(0, 255, 136, 0.08);
+            border-color: rgba(0, 255, 136, 0.2);
+            color: var(--green);
+            position: relative;
+        }
+        .comp-new::after {
+            content: 'AI驱动';
+            position: absolute;
+            top: -10px; right: 12px;
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            color: #000;
+            font-size: 0.68rem;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        .result-badge {
+            font-weight: 800;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            color: var(--green);
+        }
+
+        /* ===== 滚动动画 ===== */
+        .rv {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .rv.vis {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .rv-delay-1 { transition-delay: 0.1s; }
+        .rv-delay-2 { transition-delay: 0.2s; }
+        .rv-delay-3 { transition-delay: 0.3s; }
+        .rv-delay-4 { transition-delay: 0.4s; }
+
+        /* ===== 弹幕样式 ===== */
+        .dm-box {
+            position: fixed;
+            top: 64px; left: 0; right: 0;
+            height: 120px;
+            pointer-events: none;
+            z-index: 500;
+            overflow: hidden;
+            opacity: 0.85;
+        }
+        .dm {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.4);
+            animation: dm-scroll linear forwards;
+            padding: 4px 16px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+        }
+        @keyframes dm-scroll {
+            from { transform: translateX(100vw); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* ===== 导航栏 ===== */
+        .nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(6, 6, 14, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(180, 74, 255, 0.1);
+            padding: 0 2rem;
+            display: flex; align-items: center; height: 56px;
+        }
+        .nav-logo {
+            font-size: 1.05rem; font-weight: 900;
+            background: var(--gm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: auto;
+            letter-spacing: 0.5px;
+        }
+        .nav-links { display: flex; gap: 0.2rem; }
+        .nav a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 0.78rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .nav a:hover {
+            color: var(--blue);
+            background: rgba(0, 212, 255, 0.08);
+        }
+        .nav a.active {
+            color: var(--blue);
+            background: rgba(0, 212, 255, 0.12);
+        }
+
+        /* ===== 功能表格 ===== */
+        .feature-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+        .feature-table th, .feature-table td {
+            padding: 1.1rem 1.4rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(180, 74, 255, 0.06);
+        }
+        .feature-table th {
+            background: rgba(180, 74, 255, 0.08);
+            color: var(--purple);
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .feature-table tr:last-child td { border-bottom: none; }
+        .feature-table tr:hover td {
+            background: rgba(0, 212, 255, 0.03);
+        }
+        .feature-table td {
+            font-size: 0.9rem;
+            color: var(--text2);
+        }
+
+        /* ===== 标签 ===== */
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin: 0.15rem;
+        }
+        .tag-blue { background: rgba(0, 212, 255, 0.12); color: var(--blue); border: 1px solid rgba(0, 212, 255, 0.2); }
+        .tag-purple { background: rgba(180, 74, 255, 0.12); color: var(--purple); border: 1px solid rgba(180, 74, 255, 0.2); }
+        .tag-green { background: rgba(0, 255, 136, 0.12); color: var(--green); border: 1px solid rgba(0, 255, 136, 0.2); }
+        .tag-orange { background: rgba(255, 140, 0, 0.12); color: var(--orange); border: 1px solid rgba(255, 140, 0, 0.2); }
+        .tag-pink { background: rgba(255, 74, 141, 0.12); color: var(--pink); border: 1px solid rgba(255, 74, 141, 0.2); }
+
+        /* ===== 流程步骤 ===== */
+        .flow-ring {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            border: 1px solid var(--glass-border);
+        }
+        .flow-step {
+            padding: 0.9rem 1.8rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(180, 74, 255, 0.1));
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            border-radius: 30px;
+            color: var(--blue);
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.3s;
+        }
+        .flow-step:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(180, 74, 255, 0.2));
+            transform: scale(1.05);
+        }
+        .flow-arrow {
+            color: var(--purple);
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: pulse-arrow 2s ease-in-out infinite;
+        }
+        @keyframes pulse-arrow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ===== 模型卡片 ===== */
+        .model-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.1rem;
+            background: rgba(0, 212, 255, 0.06);
+            border: 1px solid rgba(0, 212, 255, 0.18);
+            border-radius: 24px;
+            margin: 0.3rem;
+            font-size: 0.85rem;
+            color: var(--blue);
+            transition: all 0.3s;
+            cursor: default;
+        }
+        .model-card:hover {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ===== 闭环图示 ===== */
+        .loop-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            padding: 2.5rem;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            margin: 2rem 0;
+        }
+        .loop-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .loop-icon {
+            width: 64px; height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.12), rgba(180, 74, 255, 0.12));
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.4s;
+        }
+        .loop-item:hover .loop-icon {
+            transform: scale(1.15);
+            border-color: var(--blue);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+        }
+        .loop-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .loop-arrow {
+            font-size: 1.5rem;
+            color: var(--purple);
+            animation: pulse-arrow 2s ease-in-out infinite;
+        }
+
+        /* ===== 优势对比表 ===== */
+        .compare-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border: 1px solid var(--glass-border);
+        }
+        .compare-table th, .compare-table td {
+            padding: 1rem 1.2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(180, 74, 255, 0.06);
+        }
+        .compare-table th {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(180, 74, 255, 0.1));
+            color: var(--text);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table .best {
+            background: rgba(0, 255, 136, 0.08);
+            color: var(--green);
+            font-weight: bold;
+        }
+        .compare-table .highlight {
+            background: rgba(255, 215, 0, 0.08);
+            color: var(--yellow);
+            font-weight: bold;
+        }
+
+        /* ===== 价值卡片 ===== */
+        .value-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+        }
+        .value-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 212, 255, 0.08);
+        }
+        .value-card .check {
+            color: var(--green);
+            font-weight: bold;
+            margin-right: 4px;
+        }
+
+        /* ===== 图表容器 ===== */
+        .chart-container {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--text);
+        }
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* ===== 引言框 ===== */
+        .quote-box {
+            display: inline-block;
+            border: 1px solid rgba(180, 74, 255, 0.25);
+            border-radius: 20px;
+            padding: 2rem 3rem;
+            margin: 1.5rem 0;
+            background: linear-gradient(135deg, rgba(180, 74, 255, 0.06), rgba(0, 212, 255, 0.06));
+            backdrop-filter: blur(20px);
+        }
+
+        /* ===== 底部按钮 ===== */
+        .ending-btn {
+            display: inline-block;
+            background: var(--gm);
+            color: #fff;
+            padding: 1rem 3rem;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.4s;
+            letter-spacing: 1px;
+        }
+        .ending-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(180, 74, 255, 0.35);
+        }
+
+        /* ===== 分隔线 ===== */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(180, 74, 255, 0.25), transparent);
+            margin: 3rem 0;
+        }
+
+        /* ===== 小节标题 ===== */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 2.5rem 0 1.2rem;
+            padding-left: 14px;
+            border-left: 4px solid;
+        }
+        .section-label h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* ===== 高亮数字卡 ===== */
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(180, 74, 255, 0.08));
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+        .highlight-card .num {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: var(--gm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .highlight-card .desc {
+            color: var(--text2);
+            font-size: 0.88rem;
+            margin-top: 0.4rem;
+        }
+
+        /* ===== Hero区域特殊效果 ===== */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            font-size: 0.78rem;
+            color: var(--green);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: badge-glow 3s ease-in-out infinite;
+        }
+        @keyframes badge-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 136, 0.1); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 136, 0.2); }
+        }
+
+        /* ===== 进度条动画 ===== */
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.8rem;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: var(--gm);
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 1024px) {
+            .stats { grid-template-columns: repeat(3, 1fr); }
+            .chart-grid { grid-template-columns: 1fr; }
+            .grid-4[style*="repeat(4, 1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .process-row { flex-direction: column; }
+            .comparison { flex-direction: column; width: 100%; }
+            .nav { padding: 0 1rem; }
+            .nav-links { gap: 0; }
+            .nav a { padding: 0.2rem 0.5rem; font-size: 0.68rem; }
+            .grid-4[style*="repeat(4, 1fr)"] { grid-template-columns: 1fr !important; }
+            .loop-diagram { gap: 0.8rem; padding: 1.5rem; }
+            .loop-icon { width: 48px; height: 48px; font-size: 1.2rem; }
+        }
+
+        /* ===== 打字光标效果 ===== */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: var(--blue);
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ===== 浮动粒子 ===== */
+        .float-particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--blue);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-up 6s ease-in-out infinite;
+            opacity: 0.3;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            20% { opacity: 0.4; }
+            80% { opacity: 0.2; }
+            100% { transform: translateY(-200px) scale(0); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 粒子星空背景 -->
+    <canvas id="starfield"></canvas>
+
+    <!-- 全局光晕 -->
+    <div class="global-glow glow-1"></div>
+    <div class="global-glow glow-2"></div>
+    <div class="global-glow glow-3"></div>
+
+    <!-- 弹幕容器 -->
+    <div class="dm-box" id="dm"></div>
+
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <div class="nav-logo">✦ 星斗智能体</div>
+        <div class="nav-links">
+            <a href="#part1" class="active">总览</a>
+            <a href="#part2">核心能力</a>
+            <a href="#part3">功能矩阵</a>
+            <a href="#part4">数据对比</a>
+            <a href="#part5">价值总结</a>
+        </div>
+    </nav>
+
+    <!-- ====== 第一部分：场景引入与总览数据 ====== -->
+    <section id="part1" class="s">
+        <div class="s-head rv" style="margin-top:80px">
+            <div class="hero-badge">
+                <span style="width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block;"></span>
+                AI 教育出题解决方案
+            </div>
+            <span class="s-num">PART 01</span>
+            <h2 class="s-title">打破传统出题的<br><span class="gt">效率与质量壁垒</span></h2>
+            <p class="s-sub">
+                传统出题流程繁琐、周期长、质量不稳定。星斗智能体将出题过程彻底重构，一键生成多种题型练习内容。
+            </p>
+        </div>
+
+        <!-- 核心数据统计 -->
+        <div class="stats rv">
+            <div class="stat">
+                <div class="stat-v" data-target="120" data-suffix="x">0x</div>
+                <div class="stat-l">最高效率提升</div>
+                <div class="stat-sub">8小时 → 4分钟</div>
+            </div>
+            <div class="stat">
+                <div class="stat-v" data-target="10" data-suffix="">0</div>
+                <div class="stat-l">5种题型+5种练习模式</div>
+                <div class="stat-sub">全覆盖教学场景</div>
+            </div>
+            <div class="stat">
+                <div class="stat-v" data-target="3" data-suffix="步">0步</div>
+                <div class="stat-l">快速部署</div>
+                <div class="stat-sub">全程自动化</div>
+            </div>
+            <div class="stat">
+                <div class="stat-v" data-target="6" data-suffix="项">0项</div>
+                <div class="stat-l">一键生成</div>
+                <div class="stat-sub">题目/卷子/文档/代码/解析/测试用例</div>
+            </div>
+            <div class="stat">
+                <div class="stat-v" data-target="9" data-suffix="+">0+</div>
+                <div class="stat-l">大模型支持</div>
+                <div class="stat-sub">灵活切换</div>
+            </div>
+            <div class="stat">
+                <div class="stat-v" data-target="100" data-suffix="%">0%</div>
+                <div class="stat-l">IDE集成</div>
+                <div class="stat-sub">三个智能体合一</div>
+            </div>
+        </div>
+
+        <!-- 全流程闭环图 -->
+        <div class="rv">
+            <div class="loop-diagram">
+                <div class="loop-item">
+                    <div class="loop-icon">📝</div>
+                    <span class="loop-text">输入知识点</span>
+                </div>
+                <span class="loop-arrow">→</span>
+                <div class="loop-item">
+                    <div class="loop-icon">🤖</div>
+                    <span class="loop-text">AI一键生成</span>
+                </div>
+                <span class="loop-arrow">→</span>
+                <div class="loop-item">
+                    <div class="loop-icon">📋</div>
+                    <span class="loop-text">上传练习/考试</span>
+                </div>
+                <span class="loop-arrow">→</span>
+                <div class="loop-item">
+                    <div class="loop-icon">✍️</div>
+                    <span class="loop-text">学生作答</span>
+                </div>
+                <span class="loop-arrow">→</span>
+                <div class="loop-item">
+                    <div class="loop-icon">✅</div>
+                    <span class="loop-text">自动评分</span>
+                </div>
+                <span class="loop-arrow">→</span>
+                <div class="loop-item">
+                    <div class="loop-icon">📊</div>
+                    <span class="loop-text">教师管理</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 第二部分：核心能力展示 ====== -->
+    <section id="part2" class="s">
+        <div class="s-head rv">
+            <span class="s-num">PART 02</span>
+            <h2 class="s-title">核心能力 <span class="gt">全景展示</span></h2>
+            <p class="s-sub">三插件集成 IDE，五维体系科学训练，多模型灵活切换</p>
+        </div>
+
+        <!-- 题型支持 -->
+        <div class="section-label rv" style="border-color: var(--blue);">
+            <h3 style="color: var(--blue);">🎯 多种题型全面支持</h3>
+        </div>
+        <div class="grid-5 rv">
+            <div class="highlight-card">
+                <div class="num">✓</div>
+                <div class="desc">单选题</div>
+            </div>
+            <div class="highlight-card">
+                <div class="num">✓</div>
+                <div class="desc">多选题</div>
+            </div>
+            <div class="highlight-card">
+                <div class="num">✓</div>
+                <div class="desc">填空题</div>
+            </div>
+            <div class="highlight-card">
+                <div class="num">✓</div>
+                <div class="desc">简答题</div>
+            </div>
+            <div class="highlight-card">
+                <div class="num">✓</div>
+                <div class="desc">编程题</div>
+            </div>
+        </div>
+
+        <!-- 五维练习模式 -->
+        <div class="section-label rv" style="border-color: var(--purple);">
+            <h3 style="color: var(--purple);">📚 五维度练习模式</h3>
+        </div>
+        <div class="grid-5 rv">
+            <div class="glass-card" style="text-align: center; border-top: 3px solid var(--green); padding: 1.5rem;">
+                <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">🧱</div>
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem;">强基练习</div>
+                <div style="font-size: 0.85rem; color: var(--text2);">夯实基础知识点</div>
+                <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
+            </div>
+            <div class="glass-card" style="text-align: center; border-top: 3px solid var(--blue); padding: 1.5rem;">
+                <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">🔄</div>
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem;">巩固练习</div>
+                <div style="font-size: 0.85rem; color: var(--text2);">强化已学内容</div>
+                <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+            </div>
+            <div class="glass-card" style="text-align: center; border-top: 3px solid var(--purple); padding: 1.5rem;">
+                <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">📖</div>
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem;">课后作业</div>
+                <div style="font-size: 0.85rem; color: var(--text2);">延伸学习深度</div>
+                <div class="progress-bar"><div class="progress-fill" data-width="80%"></div></div>
+            </div>
+            <div class="glass-card" style="text-align: center; border-top: 3px solid var(--orange); padding: 1.5rem;">
+                <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">🚀</div>
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem;">拓展练习</div>
+                <div style="font-size: 0.85rem; color: var(--text2);">挑战高阶能力</div>
+                <div class="progress-bar"><div class="progress-fill" data-width="70%"></div></div>
+            </div>
+            <div class="glass-card" style="text-align: center; border-top: 3px solid var(--pink); padding: 1.5rem;">
+                <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">⏱️</div>
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.3rem;">随堂测试</div>
+                <div style="font-size: 0.85rem; color: var(--text2);">即时检验效果</div>
+                <div class="progress-bar"><div class="progress-fill" data-width="95%"></div></div>
+            </div>
+        </div>
+
+        <!-- 三插件架构 -->
+        <div class="section-label rv" style="border-color: var(--cyan);">
+            <h3 style="color: var(--cyan);">⚙️ 三插件集成架构</h3>
+        </div>
+        <div class="grid-3 rv">
+            <div class="glass-card" style="border-left: 4px solid var(--green);">
+                <div style="font-size: 1.8rem; margin-bottom: 0.6rem;">🔌</div>
+                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.4rem;">星斗插件</div>
+                <div style="font-size: 0.88rem; color: var(--text2); line-height: 1.8;">IDE环境深度集成，知识点一键解析，题目自动生成</div>
+            </div>
+            <div class="glass-card" style="border-left: 4px solid var(--blue);">
+                <div style="font-size: 1.8rem; margin-bottom: 0.6rem;">💬</div>
+                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.4rem;">星斗智聊</div>
+                <div style="font-size: 0.88rem; color: var(--text2); line-height: 1.8;">智能对话引擎，支持多轮交互，生成知识点解析</div>
+            </div>
+            <div class="glass-card" style="border-left: 4px solid var(--purple);">
+                <div style="font-size: 1.8rem; margin-bottom: 0.6rem;">🖥️</div>
+                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.4rem;">CC-GUI</div>
+                <div style="font-size: 0.88rem; color: var(--text2); line-height: 1.8;">多模型统一入口，支持9+大模型，灵活切换最优方案</div>
+            </div>
+        </div>
+
+        <!-- 能力雷达图 -->
+        <div class="chart-container rv" style="margin-top: 2rem;">
+            <div class="chart-title">📊 综合能力雷达图</div>
+            <div style="max-width: 500px; margin: 0 auto;">
+                <canvas id="radarChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 第三部分：一键生成功能矩阵 ====== -->
+    <section id="part3" class="s">
+        <div class="s-head rv">
+            <span class="s-num" style="border-color: var(--orange); color: var(--orange);">PART 03</span>
+            <h2 class="s-title">一键生成 <span class="go">功能矩阵</span></h2>
+            <p class="s-sub">6大核心功能，覆盖教学全场景</p>
+        </div>
+
+        <table class="feature-table rv">
+            <thead>
+                <tr>
+                    <th>功能</th>
+                    <th>说明</th>
+                    <th>输出形式</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="tag tag-blue">核心</span> 一键生成题目和知识点</td>
+                    <td>输入知识点名称，自动生成配套题目</td>
+                    <td>结构化数据</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-green">高效</span> 一键生成 MD 文档</td>
+                    <td>生成配套题目 MD 文档，支持上传git</td>
+                    <td>在知识点上，支持直接打开文档</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-purple">智能</span> 一键生成答案解析</td>
+                    <td>详细解析可集成到 AI 智能体</td>
+                    <td>智能体内部调用</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-orange">实用</span> 一键生成 JAVA 代码</td>
+                    <td>完整可运行代码，支持上传git</td>
+                    <td>在题目中，直接打开代码所在位置</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-pink">验证</span> 一键生成测试案例</td>
+                    <td>编程题测试用例，支持本地 check</td>
+                    <td>本地验证</td>
+                </tr>
+                <tr>
+                    <td><span class="tag tag-blue">闭环</span> 一键生成试卷</td>
+                    <td>自动组卷、自动判分、支持重答</td>
+                    <td>全流程闭环</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 功能覆盖率环形图 -->
+        <div class="chart-container rv">
+            <div class="chart-title">📈 功能覆盖率</div>
+            <div style="max-width: 400px; margin: 0 auto;">
+                <canvas id="doughnutChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 多模型支持 -->
+        <div class="section-label rv" style="border-color: var(--yellow);">
+            <h3 style="color: var(--yellow);">🤖 CC-GUI 支持多种大模型</h3>
+        </div>
+        <div class="rv" style="padding: 2rem; background: var(--card); backdrop-filter: blur(20px); border-radius: 18px; border: 1px solid var(--glass-border);">
+            <div class="model-card">⚡ 自定义配置</div>
+            <div class="model-card">智谱 GLM</div>
+            <div class="model-card">Kimi K2</div>
+            <div class="model-card">DeepSeek</div>
+            <div class="model-card">MiniMax</div>
+            <div class="model-card">Xiaomi MiMo</div>
+            <div class="model-card">千问</div>
+            <div class="model-card">OpenRouter</div>
+            <div class="model-card" style="border-color: var(--green); color: var(--green);">+ 更多模型...</div>
+        </div>
+    </section>
+
+    <!-- ====== 第四部分：效率对比 ====== -->
+    <section id="part4" class="s">
+        <div class="s-head rv">
+            <span class="s-num" style="border-color: var(--green); color: var(--green);">PART 04</span>
+            <h2 class="s-title">效率对比 <span class="gt">数据说话</span></h2>
+            <p class="s-sub">有 MD 文档和答案解析情况下的真实测试数据</p>
+        </div>
+
+        <!-- 效率对比柱状图 -->
+        <div class="chart-container rv">
+            <div class="chart-title">⚡ 效率对比：传统方式 vs 星斗智能体（单位：分钟）</div>
+            <canvas id="barChart" style="max-height: 350px;"></canvas>
+        </div>
+
+        <!-- 效率对比流程条 -->
+        <div class="process-container">
+            <div class="process-row rv">
+                <div class="step-title">8道编程题</div>
+                <div class="comparison">
+                    <div class="comp-item comp-old">
+                        <div>❌ 传统方式</div>
+                        <div style="font-size: 0.8rem; margin-top:5px;">手动编写<br>逐一调试</div>
+                        <div style="margin-top:10px; font-weight:bold;">耗时: 8 小时</div>
+                    </div>
+                    <div class="comp-item comp-new">
+                        <div>✅ 星斗智能体</div>
+                        <div style="font-size: 0.8rem; margin-top:5px;">一键生成<br>自动输出</div>
+                        <div style="margin-top:10px; font-weight:bold; color: var(--green);">耗时: 4分钟</div>
+                    </div>
+                </div>
+                <div class="result-badge">效率提升 120x</div>
+            </div>
+
+            <div class="process-row rv">
+                <div class="step-title">1套练习题</div>
+                <div class="comparison">
+                    <div class="comp-item comp-old">
+                        <div>❌ 传统方式</div>
+                        <div style="font-size: 0.8rem; margin-top:5px;">手动选题<br>排版整理</div>
+                        <div style="margin-top:10px; font-weight:bold;">耗时: 1 小时</div>
+                    </div>
+                    <div class="comp-item comp-new">
+                        <div>✅ 星斗智能体</div>
+                        <div style="font-size: 0.8rem; margin-top:5px;">智能生成<br>多题可选</div>
+                        <div style="margin-top:10px; font-weight:bold; color: var(--green);">耗时: 2 分钟</div>
+                    </div>
+                </div>
+                <div class="result-badge">效率提升 30x</div>
+            </div>
+
+            <div class="process-row rv">
+                <div class="step-title">1套考试卷</div>
+                <div class="comparison">
+                    <div class="comp-item comp-old">
+                        <div>❌ 传统方式</div>
+                        <div style="font-size: 0.8rem; margin-top:5px;">人工组卷<br>排版打印</div>
+                        <div style="margin-top:10px; font-weight:bold;">耗时: 30 分钟</div>
+                    </div>
+                    <div class="comp-item comp-new">
+                        <div>✅ 星斗智能体</div>
+                        <div style="font-size: 0.8rem; margin-top:5px;">自动组卷<br>即时生成</div>
+                        <div style="margin-top:10px; font-weight:bold; color: var(--green);">耗时: 2 分钟</div>
+                    </div>
+                </div>
+                <div class="result-badge">效率提升 15x</div>
+            </div>
+
+            <div class="process-row rv">
+                <div class="step-title">MD知识点文档</div>
+                <div class="comparison">
+                    <div class="comp-item comp-old">
+                        <div>❌ 传统方式</div>
+                        <div style="font-size: 0.8rem; margin-top:5px;">手动编写<br>格式调整</div>
+                        <div style="margin-top:10px; font-weight:bold;">耗时: 2 小时</div>
+                    </div>
+                    <div class="comp-item comp-new">
+                        <div>✅ 星斗智能体</div>
+                        <div style="font-size: 0.8rem; margin-top:5px;">智能撰写<br>格式规范</div>
+                        <div style="margin-top:10px; font-weight:bold; color: var(--green);">耗时: 4 分钟</div>
+                    </div>
+                </div>
+                <div class="result-badge">效率提升 30x</div>
+            </div>
+        </div>
+
+        <!-- 核心优势对比表 -->
+        <div class="rv" style="margin-top: 3rem;">
+            <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--text2); font-size: 1.1rem;">星斗智能体 vs 传统方式 vs 其他AI工具</h3>
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>对比维度</th>
+                        <th class="best">⭐ 星斗智能体</th>
+                        <th>传统方式</th>
+                        <th>其他AI工具</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>题型支持</td>
+                        <td class="best">5种题型</td>
+                        <td>有限</td>
+                        <td>2-3种</td>
+                    </tr>
+                    <tr>
+                        <td>练习模式</td>
+                        <td class="best">五维体系</td>
+                        <td>无体系</td>
+                        <td>单一模式</td>
+                    </tr>
+                    <tr>
+                        <td>IDE集成</td>
+                        <td class="best">深度集成</td>
+                        <td>无</td>
+                        <td>浅层集成</td>
+                    </tr>
+                    <tr>
+                        <td>生成速度</td>
+                        <td class="best">2-5分钟</td>
+                        <td>30分钟-8小时</td>
+                        <td>10-30分钟</td>
+                    </tr>
+                    <tr>
+                        <td>代码生成</td>
+                        <td class="best">自动生成+上传git</td>
+                        <td>手动编写</td>
+                        <td>需手动调整</td>
+                    </tr>
+                    <tr>
+                        <td>试卷流程</td>
+                        <td class="best">自动判分+重答</td>
+                        <td>人工判卷</td>
+                        <td>部分支持</td>
+                    </tr>
+                    <tr>
+                        <td>模型支持</td>
+                        <td class="best">9种大模型</td>
+                        <td>无</td>
+                        <td>1-2种</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ====== 第五部分：价值总结 ====== -->
+    <section id="part5" class="s">
+        <div class="s-head rv">
+            <span class="s-num" style="border-color: var(--yellow); color: var(--yellow);">PART 05</span>
+            <h2 class="s-title">落地推广 <span class="go">核心价值</span></h2>
+            <p class="s-sub">对教师、学生、机构、技术的全方位赋能</p>
+        </div>
+
+        <!-- 四大价值 -->
+        <div class="grid-4 rv" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem;">
+            <div class="glass-card value-card" style="border-top: 4px solid var(--green); text-align: center; padding: 1.8rem 1.2rem;">
+                <div style="font-size: 2.4rem; margin-bottom: 0.6rem;">👨‍🏫</div>
+                <div style="font-weight: 700; color: var(--green); font-size: 1.1rem; margin-bottom: 0.6rem;">教师价值</div>
+                <div style="font-size: 0.82rem; color: var(--text2); line-height: 1.8;">
+                    <span class="check">✓</span> 从繁琐出题工作中解放<br>
+                    <span class="check">✓</span> 精准教学，个性化练习<br>
+                    <span class="check">✓</span> AI辅助校验，减少错误
+                </div>
+            </div>
+            <div class="glass-card value-card" style="border-top: 4px solid var(--blue); text-align: center; padding: 1.8rem 1.2rem;">
+                <div style="font-size: 2.4rem; margin-bottom: 0.6rem;">👨‍🎓</div>
+                <div style="font-weight: 700; color: var(--blue); font-size: 1.1rem; margin-bottom: 0.6rem;">学生价值</div>
+                <div style="font-size: 0.82rem; color: var(--text2); line-height: 1.8;">
+                    <span class="check">✓</span> 即时反馈，强化记忆<br>
+                    <span class="check">✓</span> IDE真实环境，职场衔接<br>
+                    <span class="check">✓</span> 五维体系，科学学习路径
+                </div>
+            </div>
+            <div class="glass-card value-card" style="border-top: 4px solid var(--purple); text-align: center; padding: 1.8rem 1.2rem;">
+                <div style="font-size: 2.4rem; margin-bottom: 0.6rem;">🏢</div>
+                <div style="font-weight: 700; color: var(--purple); font-size: 1.1rem; margin-bottom: 0.6rem;">机构价值</div>
+                <div style="font-size: 0.82rem; color: var(--text2); line-height: 1.8;">
+                    <span class="check">✓</span> 可复制性强，标准化部署<br>
+                    <span class="check">✓</span> 多场景适用，K12/高校/职培<br>
+                    <span class="check">✓</span> 平台对接，无缝集成
+                </div>
+            </div>
+            <div class="glass-card value-card" style="border-top: 4px solid var(--orange); text-align: center; padding: 1.8rem 1.2rem;">
+                <div style="font-size: 2.4rem; margin-bottom: 0.6rem;">🤖</div>
+                <div style="font-weight: 700; color: var(--orange); font-size: 1.1rem; margin-bottom: 0.6rem;">技术价值</div>
+                <div style="font-size: 0.82rem; color: var(--text2); line-height: 1.8;">
+                    <span class="check">✓</span> 多模型支持，避免单一依赖<br>
+                    <span class="check">✓</span> 灵活配置，适配不同场景<br>
+                    <span class="check">✓</span> 成本优化，多价位模型切换
+                </div>
+            </div>
+        </div>
+
+        <!-- 部署流程 -->
+        <div class="rv" style="margin: 3rem 0 1.5rem; text-align: center;">
+            <h3 style="color: var(--pink); font-size: 1.3rem; display: inline-block; padding: 0.6rem 2.2rem; border: 1px solid rgba(255, 74, 141, 0.3); border-radius: 30px; background: rgba(255, 74, 141, 0.06);">
+               ⚡ 三步快速部署
+            </h3>
+        </div>
+        <div class="flow-ring rv">
+            <div class="flow-step">1. 安装插件（星斗 + CC-GUI）</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">2. 配置环境（Claude Code SDK + DeepSeek）</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">3. 导入智能体（配置 + 提示词模板）</div>
+        </div>
+
+        <!-- 结尾升华 -->
+        <div class="rv" style="text-align: center; margin-top: 4rem;">
+            <div class="quote-box" style="border: 1px solid rgba(180, 74, 255, 0.3); background: linear-gradient(135deg, rgba(180, 74, 255, 0.06), rgba(0, 212, 255, 0.06)); padding: 2.5rem 3.5rem; border-radius: 24px;">
+                <p style="font-size: 1.4rem; color: var(--text); margin-bottom: 0.8rem;">
+                    <strong style="font-size: 2rem; background: var(--gm); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        ✨ 星斗智能体 ✨
+                    </strong>
+                </p>
+                <p style="color: var(--text2); font-size: 1.15rem; letter-spacing: 2px;">
+                    让 AI 赋能教育，让学习无缝衔接职场
+                </p>
+            </div>
+            <button class="ending-btn" onclick="triggerCelebration()" style="margin-top: 2.5rem;">
+                🚀 感谢支持！
+            </button>
+            <p style="color: var(--muted); font-size: 0.72rem; margin-top: 2.5rem; letter-spacing: 1px;">
+                &copy; 2026 AI推广比赛参赛作品 &nbsp;|&nbsp; 星斗智能体 - AI教育出题解决方案
+            </p>
+        </div>
+    </section>
+
+    <!-- ====== 脚本 ====== -->
+    <script>
+    // ========== 1. 粒子星空背景 ==========
+    (function() {
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let w, h, stars = [], shootingStars = [];
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // 生成星星
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: Math.random() * 1.5 + 0.3,
+                alpha: Math.random() * 0.8 + 0.2,
+                speed: Math.random() * 0.0008 + 0.0003,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
+
+        // 流星
+        function createShootingStar() {
+            if (shootingStars.length < 2 && Math.random() < 0.005) {
+                shootingStars.push({
+                    x: Math.random() * w * 0.8,
+                    y: Math.random() * h * 0.3,
+                    len: 80 + Math.random() * 120,
+                    speed: 4 + Math.random() * 4,
+                    alpha: 1,
+                    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, w, h);
+
+            // 星星
+            const time = Date.now();
+            stars.forEach(s => {
+                const twinkle = Math.sin(time * s.speed + s.phase) * 0.3 + 0.7;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(200, 210, 255, ${s.alpha * twinkle})`;
+                ctx.fill();
+            });
+
+            // 流星
+            createShootingStar();
+            shootingStars = shootingStars.filter(ss => {
+                ss.x += Math.cos(ss.angle) * ss.speed;
+                ss.y += Math.sin(ss.angle) * ss.speed;
+                ss.alpha -= 0.008;
+
+                if (ss.alpha <= 0) return false;
+
+                const grad = ctx.createLinearGradient(
+                    ss.x, ss.y,
+                    ss.x - Math.cos(ss.angle) * ss.len,
+                    ss.y - Math.sin(ss.angle) * ss.len
+                );
+                grad.addColorStop(0, `rgba(200, 220, 255, ${ss.alpha})`);
+                grad.addColorStop(1, `rgba(200, 220, 255, 0)`);
+
+                ctx.beginPath();
+                ctx.moveTo(ss.x, ss.y);
+                ctx.lineTo(
+                    ss.x - Math.cos(ss.angle) * ss.len,
+                    ss.y - Math.sin(ss.angle) * ss.len
+                );
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                return true;
+            });
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+
+    // ========== 2. 滚动显现动画 ==========
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach((x, i) => {
+            if (x.isIntersecting) {
+                setTimeout(() => x.target.classList.add('vis'), i * 80);
+                if (x.target.classList.contains('rv')) {
+                    const sectionId = x.target.closest('.s')?.id;
+                    if (sectionId) showSectionDanmaku(sectionId);
+                }
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+    // ========== 3. 数字动画 ==========
+    const statEls = document.querySelectorAll('.stat-v');
+    let countStarted = false;
+
+    const animateCount = (el) => {
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        let count = 0;
+        const duration = 2000;
+        const increment = target / (duration / 16);
+
+        const update = () => {
+            count += increment;
+            if (count < target) {
+                el.innerText = Math.ceil(count) + suffix;
+                requestAnimationFrame(update);
+            } else {
+                el.innerText = target + suffix;
+            }
+        };
+        update();
+    };
+
+    const countObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !countStarted) {
+                statEls.forEach(el => animateCount(el));
+                countStarted = true;
+            }
+        });
+    }, { threshold: 0.3 });
+
+    if (statEls.length > 0) countObs.observe(statEls[0].closest('.stats'));
+
+    // ========== 4. 进度条动画 ==========
+    const progressObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const fills = entry.target.querySelectorAll('.progress-fill');
+                fills.forEach(fill => {
+                    fill.style.width = fill.dataset.width;
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.grid-5').forEach(el => progressObs.observe(el));
+
+    // ========== 5. 导航高亮 ==========
+    const navLinks = document.querySelectorAll('.nav a');
+    const sections = document.querySelectorAll('.s');
+
+    const navObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                const activeLink = document.querySelector(`.nav a[href="#${entry.target.id}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    sections.forEach(s => navObs.observe(s));
+
+    // ========== 6. 弹幕逻辑 ==========
+    const danmakuBox = document.getElementById('dm');
+    const danmakuPool = {
+        'part1': ['💡 效率提升120倍！', '📦 三智能体合体', '出题也太快了吧', 'IDE直接无感集成', '老师狂喜', '这效率牛了', '星斗智能体', '✨ AI赋能教育'],
+        'part2': ['五维练习yyds', '😱 IDE集成三合一，简直了', '深度融合', '编程题支持', '多模型切换', '雷达图满分！'],
+        'part3': ['竟然支持上传到git👍', '一键出卷+判分', 'Java项目秒生成', 'MD文档秒出', '多模型支持', 'DeepSeek', 'Kimi'],
+        'part4': ['⚡ 8小时→4分钟', '出题再也不用加班', '30倍效率', '成本暴降95%', '这才是AI价值', '😱 太强了', '柱状图太直观了'],
+        'part5': ['商业落地很强', 'K12/高校通吃', '教师幸福指数💯', '学员职场衔接', '全闭环教学', '支持星斗智能体👍']
+    };
+
+    function showSectionDanmaku(sectionId) {
+        const pool = danmakuPool[sectionId] || danmakuPool['part5'];
+        const count = 2 + Math.floor(Math.random() * 2);
+        for (let i = 0; i < count; i++) {
+            setTimeout(() => {
+                const text = pool[Math.floor(Math.random() * pool.length)];
+                dm(text);
+            }, i * 900);
+        }
+    }
+
+    function dm(text) {
+        const d = document.createElement('div');
+        d.className = 'dm';
+        d.textContent = text;
+        d.style.top = (15 + Math.random() * 65) + '%';
+        d.style.animationDuration = (8 + Math.random() * 8) + 's';
+        const colors = ['#00d4ff', '#b44aff', '#ff4a8d', '#00ff88', '#ffd700', '#ff8c00'];
+        d.style.color = colors[Math.floor(Math.random() * colors.length)];
+        danmakuBox.appendChild(d);
+        d.onanimationend = () => d.remove();
+    }
+
+    // 初始弹幕
+    setTimeout(() => {
+        const allSections = Object.keys(danmakuPool);
+        for (let i = 0; i < 4; i++) {
+            setTimeout(() => {
+                const sec = allSections[Math.floor(Math.random() * allSections.length)];
+                dm(danmakuPool[sec][Math.floor(Math.random() * danmakuPool[sec].length)]);
+            }, i * 1400);
+        }
+    }, 1000);
+
+    // ========== 7. 按钮特效 ==========
+    function triggerCelebration() {
+        const btn = document.querySelector('.ending-btn');
+        btn.innerText = "感谢支持！🎉";
+        btn.style.background = "linear-gradient(135deg, #00ff88, #00d4ff)";
+        btn.style.color = "#000";
+
+        for (let i = 0; i < 40; i++) {
+            const p = document.createElement('div');
+            p.style.cssText = `
+                position: fixed; left: 50%; top: 50%;
+                width: ${4 + Math.random() * 6}px;
+                height: ${4 + Math.random() * 6}px;
+                border-radius: 50%;
+                background: ${['#00d4ff','#b44aff','#ff4a8d','#00ff88','#ffd700','#ff8c00'][Math.floor(Math.random()*6)]};
+                transform: translate(-50%, -50%);
+                pointer-events: none; z-index: 9999;
+            `;
+            document.body.appendChild(p);
+
+            const angle = Math.random() * Math.PI * 2;
+            const vel = 60 + Math.random() * 180;
+            const tx = Math.cos(angle) * vel;
+            const ty = Math.sin(angle) * vel - 50;
+
+            p.animate([
+                { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0)`, opacity: 0 }
+            ], { duration: 900 + Math.random() * 600, easing: 'cubic-bezier(0,1,0.5,1)' }).onfinish = () => p.remove();
+        }
+    }
+
+    // ========== 8. Chart.js 图表 ==========
+
+    // 通用Chart.js配置
+    Chart.defaults.color = '#a8a8c4';
+    Chart.defaults.font.family = "'Noto Sans SC', sans-serif";
+    Chart.defaults.borderColor = 'rgba(180, 74, 255, 0.08)';
+
+    // --- 效率对比柱状图 ---
+    const barCtx = document.getElementById('barChart');
+    if (barCtx) {
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['8道编程题', '1套练习题', '1套考试卷', 'MD知识点文档'],
+                datasets: [
+                    {
+                        label: '传统方式 (分钟)',
+                        data: [480, 60, 30, 120],
+                        backgroundColor: 'rgba(255, 68, 68, 0.6)',
+                        borderColor: 'rgba(255, 68, 68, 0.8)',
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        barPercentage: 0.6,
+                    },
+                    {
+                        label: '星斗智能体 (分钟)',
+                        data: [4, 2, 2, 4],
+                        backgroundColor: 'rgba(0, 255, 136, 0.6)',
+                        borderColor: 'rgba(0, 255, 136, 0.8)',
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        barPercentage: 0.6,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyleWidth: 12,
+                            font: { size: 13, weight: '600' }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(18, 18, 38, 0.95)',
+                        borderColor: 'rgba(180, 74, 255, 0.3)',
+                        borderWidth: 1,
+                        titleFont: { size: 14, weight: '700' },
+                        bodyFont: { size: 13 },
+                        padding: 14,
+                        cornerRadius: 12,
+                        callbacks: {
+                            afterBody: function(context) {
+                                const idx = context[0].dataIndex;
+                                const trad = [480, 60, 30, 120][idx];
+                                const ai = [4, 2, 2, 4][idx];
+                                return `效率提升: ${Math.round(trad/ai)}x`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(180, 74, 255, 0.06)' },
+                        ticks: { font: { size: 12 } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 12, weight: '500' } }
+                    }
+                },
+                animation: {
+                    duration: 1500,
+                    easing: 'easeOutQuart'
+                }
+            }
+        });
+    }
+
+    // --- 能力雷达图 ---
+    const radarCtx = document.getElementById('radarChart');
+    if (radarCtx) {
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['题型覆盖', 'IDE集成', '生成速度', '自动化程度', '模型灵活性', '流程闭环'],
+                datasets: [
+                    {
+                        label: '星斗智能体',
+                        data: [95, 98, 97, 95, 92, 96],
+                        backgroundColor: 'rgba(0, 212, 255, 0.15)',
+                        borderColor: 'rgba(0, 212, 255, 0.8)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#00d4ff',
+                        pointBorderColor: '#00d4ff',
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                    },
+                    {
+                        label: '其他AI工具',
+                        data: [55, 35, 60, 45, 40, 50],
+                        backgroundColor: 'rgba(255, 140, 0, 0.1)',
+                        borderColor: 'rgba(255, 140, 0, 0.6)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#ff8c00',
+                        pointBorderColor: '#ff8c00',
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                    },
+                    {
+                        label: '传统方式',
+                        data: [40, 5, 15, 10, 5, 30],
+                        backgroundColor: 'rgba(255, 68, 68, 0.08)',
+                        borderColor: 'rgba(255, 68, 68, 0.5)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#ff4444',
+                        pointBorderColor: '#ff4444',
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyleWidth: 12,
+                            font: { size: 13, weight: '600' }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(18, 18, 38, 0.95)',
+                        borderColor: 'rgba(180, 74, 255, 0.3)',
+                        borderWidth: 1,
+                        padding: 14,
+                        cornerRadius: 12,
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 20,
+                            backdropColor: 'transparent',
+                            font: { size: 10 },
+                            color: 'rgba(168, 168, 196, 0.5)'
+                        },
+                        grid: { color: 'rgba(180, 74, 255, 0.1)' },
+                        angleLines: { color: 'rgba(180, 74, 255, 0.1)' },
+                        pointLabels: {
+                            font: { size: 13, weight: '600' },
+                            color: '#c8c8e0'
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1500,
+                    easing: 'easeOutQuart'
+                }
+            }
+        });
+    }
+
+    // --- 功能覆盖率环形图 ---
+    const doughnutCtx = document.getElementById('doughnutChart');
+    if (doughnutCtx) {
+        new Chart(doughnutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['题目生成', 'MD文档', '答案解析', '代码生成', '测试案例', '试卷组卷'],
+                datasets: [{
+                    data: [100, 100, 100, 100, 100, 100],
+                    backgroundColor: [
+                        'rgba(0, 212, 255, 0.7)',
+                        'rgba(0, 255, 136, 0.7)',
+                        'rgba(180, 74, 255, 0.7)',
+                        'rgba(255, 140, 0, 0.7)',
+                        'rgba(255, 74, 141, 0.7)',
+                        'rgba(0, 255, 255, 0.7)',
+                    ],
+                    borderColor: [
+                        'rgba(0, 212, 255, 1)',
+                        'rgba(0, 255, 136, 1)',
+                        'rgba(180, 74, 255, 1)',
+                        'rgba(255, 140, 0, 1)',
+                        'rgba(255, 74, 141, 1)',
+                        'rgba(0, 255, 255, 1)',
+                    ],
+                    borderWidth: 2,
+                    hoverOffset: 12,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 16,
+                            usePointStyle: true,
+                            pointStyleWidth: 12,
+                            font: { size: 12, weight: '600' }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(18, 18, 38, 0.95)',
+                        borderColor: 'rgba(180, 74, 255, 0.3)',
+                        borderWidth: 1,
+                        padding: 14,
+                        cornerRadius: 12,
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.label}: 100% 覆盖`;
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    animateRotate: true,
+                    duration: 1800,
+                    easing: 'easeOutQuart'
+                }
+            }
+        });
+    }
+
+    // ========== 9. 鼠标跟随光晕 ==========
+    document.addEventListener('mousemove', (e) => {
+        const glow3 = document.querySelector('.glow-3');
+        if (glow3) {
+            glow3.style.left = e.clientX + 'px';
+            glow3.style.top = e.clientY + 'px';
+            glow3.style.transform = 'translate(-50%, -50%)';
+        }
+    });
+    </script>
+</body>
+</html>
