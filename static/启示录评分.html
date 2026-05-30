@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>启示录练讲比赛 - 评分规则</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d1b2a 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* 星空背景动画 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            z-index: 1000;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-brand .cross {
+            font-size: 1.5rem;
+            color: #ffd700;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .nav-brand span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 60%;
+        }
+
+        /* 音乐播放器 */
+        .music-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .music-player:hover {
+            background: rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .music-player.playing {
+            animation: pulse-border 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(255, 215, 0, 0.3); }
+            50% { border-color: rgba(255, 215, 0, 0.8); }
+        }
+
+        .music-icon {
+            font-size: 1.2rem;
+            color: #ffd700;
+        }
+
+        .music-text {
+            font-size: 0.85rem;
+            color: #ffd700;
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        /* 标题区域 */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0c4ff;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        .cross-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 20px;
+        }
+
+        .cross-divider::before,
+        .cross-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .cross-icon {
+            font-size: 2rem;
+            color: #ffd700;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700; }
+            50% { text-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700; }
+        }
+
+        /* 总览区域 */
+        .overview-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '✦';
+            color: #ffd700;
+        }
+
+        .total-score {
+            text-align: center;
+            font-size: 3rem;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(180deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+        }
+
+        .score-distribution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .score-item {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(160, 196, 255, 0.1));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .score-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        .score-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 8px;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 评分详情卡片 */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .rule-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(160, 196, 255, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .rule-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #ffd700, #ffed4e);
+        }
+
+        .rule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .rule-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rule-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: rgba(255, 215, 0, 0.3);
+        }
+
+        .rule-score {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(180deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .rule-content {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+        }
+
+        .rule-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .rule-content li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .rule-content li::before {
+            content: '✝';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-size: 0.8rem;
+        }
+
+        .sub-item {
+            margin-left: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        /* 特殊提示卡片 */
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(238, 90, 90, 0.05));
+            border: 1px solid rgba(255, 107, 107, 0.4);
+        }
+
+        .highlight-card::before {
+            background: linear-gradient(180deg, #ff6b6b, #ee5a5a);
+        }
+
+        .highlight-card .rule-title {
+            color: #ff6b6b;
+        }
+
+        .highlight-card .rule-score {
+            background: linear-gradient(180deg, #ff6b6b, #ee5a5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer-verse {
+            color: #a0c4ff;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+
+            .music-player {
+                padding: 6px 12px;
+            }
+
+            .music-text {
+                display: none;
+            }
+
+            .container {
+                padding: 90px 15px 30px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .total-score {
+                font-size: 2rem;
+            }
+
+            .score-distribution {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="stars" id="stars"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="cross">✝</span>
+            <span>APOCALYPSE</span>
+        </div>
+        <div class="nav-links">
+            <a href="启示录抽签.html" class="nav-link">抽签</a>
+            <a href="启示录评分.html" class="nav-link active">评分规则</a>
+            <div class="music-player" id="musicPlayer" onclick="toggleMusic()">
+                <span class="music-icon" id="musicIcon">🎵</span>
+                <span class="music-text" id="musicText">播放音乐</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 音频元素 -->
+    <audio id="bgMusic" loop>
+        <source src="file:///Users/alongsocjr/Homething/ZM/宝贝请回家.MP3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- 标题 -->
+        <header class="header">
+            <h1 class="title">APOCALYPSE</h1>
+            <p class="subtitle">启示录练讲比赛</p>
+            <div class="cross-divider">
+                <span class="cross-icon">✝</span>
+            </div>
+        </header>
+
+        <!-- 总览区域 -->
+        <section class="overview-section">
+            <h2 class="section-title">评分规则总览</h2>
+            <div class="total-score">总分：100分</div>
+            <div class="score-distribution">
+                <div class="score-item">
+                    <div class="score-value">10</div>
+                    <div class="score-label">仪容仪表</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">15</div>
+                    <div class="score-label">板书</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">20</div>
+                    <div class="score-label">完整性</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">20</div>
+                    <div class="score-label">熟练程度</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">15</div>
+                    <div class="score-label">正体性</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">10</div>
+                    <div class="score-label">时间把控</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value">10</div>
+                    <div class="score-label">现场氛围</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 评分详情 -->
+        <div class="cross-divider">
+            <span class="cross-icon">✝</span>
+        </div>
+
+        <section class="rules-section">
+            <h2 class="section-title">评分细则</h2>
+            <div class="rules-grid">
+                <!-- 1. 仪容仪表 -->
+                <div class="rule-card">
+                    <div class="rule-header">
+                        <div class="rule-title">
+                            <span class="rule-number">01</span>
+                            仪容仪表
+                        </div>
+                        <div class="rule-score">10分</div>
+                    </div>
+                    <div class="rule-content">
+                        <ul>
+                            <li>着装礼节（正装，弟兄打领带，姊妹画淡妆）</li>
+                            <li>表情明朗，礼貌问候</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. 板书 -->
+                <div class="rule-card">
+                    <div class="rule-header">
+                        <div class="rule-title">
+                            <span class="rule-number">02</span>
+                            板书
+                        </div>
+                        <div class="rule-score">15分</div>
+                    </div>
+                    <div class="rule-content">
+                        <ul>
+                            <li>手写：字体美观，内容完整，布局合理
+                                <div class="sub-item">（最高分为15分）</div>
+                            </li>
+                            <li>PPT：动画新颖、趣味性强、有吸引力
+                                <div class="sub-item">（最高分为10分）</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. 完整性 -->
+                <div class="rule-card">
+                    <div class="rule-header">
+                        <div class="rule-title">
+                            <span class="rule-number">03</span>
+                            完整性
+                        </div>
+                        <div class="rule-score">20分</div>
+                    </div>
+                    <div class="rule-content">
+                        <ul>
+                            <li>题目</li>
+                            <li>本文</li>
+                            <li>序论</li>
+                            <li>本论</li>
+                            <li>结论</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4. 熟练程度 -->
+                <div class="rule-card">
+                    <div class="rule-header">
+                        <div class="rule-title">
+                            <span class="rule-number">04</span>
+                            熟练程度
+                        </div>
+                        <div class="rule-score">20分</div>
+                    </div>
+                    <div class="rule-content">
+                        <ul>
+                            <li>串讲流畅，思路清晰</li>
+                            <li>语言表达规范，口齿清晰，避免语气词</li>
+                            <li>脱稿</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. 正体性 -->
+                <div class="rule-card">
+                    <div class="rule-header">
+                        <div class="rule-title">
+                            <span class="rule-number">05</span>
+                            正体性
+                        </div>
+                        <div class="rule-score">15分</div>
+                    </div>
+                    <div class="rule-content">
+                        <ul>
+                            <li>价值</li>
+                            <li>感恩</li>
+                            <li>依靠</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6. 时间把控 -->
+                <div class="rule-card highlight-card">
+                    <div class="rule-header">
+                        <div class="rule-title">
+                            <span class="rule-number">06</span>
+                            时间把控
+                        </div>
+                        <div class="rule-score">10分</div>
+                    </div>
+                    <div class="rule-content">
+                        <ul>
+                            <li>总体用时10分~15分</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 7. 现场氛围 -->
+                <div class="rule-card">
+                    <div class="rule-header">
+                        <div class="rule-title">
+                            <span class="rule-number">07</span>
+                            现场氛围
+                        </div>
+                        <div class="rule-score">10分</div>
+                    </div>
+                    <div class="rule-content">
+                        <ul>
+                            <li>是否可以引起互动和共鸣</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p class="footer-text">愿神祝福每一位参赛者的分享</p>
+            <p class="footer-verse">「你要大声喊叫，不可止息，扬起声来，好像吹角。」— 以赛亚书 58:1</p>
+        </footer>
+    </div>
+
+    <script>
+        // 音乐播放控制
+        let isPlaying = false;
+        const musicPlayer = document.getElementById('musicPlayer');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
+        const bgMusic = document.getElementById('bgMusic');
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.textContent = '🎵';
+                musicText.textContent = '播放音乐';
+                musicPlayer.classList.remove('playing');
+            } else {
+                bgMusic.play().catch(e => {
+                    alert('无法播放音乐，请检查文件路径是否正确');
+                    console.error('音乐播放失败:', e);
+                });
+                musicIcon.textContent = '⏸';
+                musicText.textContent = '暂停音乐';
+                musicPlayer.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 初始化星空
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.opacity = Math.random();
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // 初始化
+        createStars();
+    </script>
+</body>
+</html>
