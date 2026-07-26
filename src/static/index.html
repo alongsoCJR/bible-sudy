@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>光与盐 · 圣经学习平台</title>
+  <meta name="description" content="光与盐圣经学习平台——在神的话语中寻见光，在真理的道上同行。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ===== 主页专属样式 ===== */
+
+    /* —— 英雄区 —— */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 0%, var(--night-700) 0%, var(--night-900) 60%),
+        var(--night-900);
+    }
+
+    /* 星空粒子层 */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 20% 30%, rgba(244, 213, 141, 0.6), transparent),
+        radial-gradient(1px 1px at 60% 20%, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1.5px 1.5px at 80% 60%, rgba(244, 213, 141, 0.4), transparent),
+        radial-gradient(1px 1px at 35% 70%, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1.5px 1.5px at 70% 85%, rgba(244, 213, 141, 0.3), transparent),
+        radial-gradient(1px 1px at 15% 55%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 90% 35%, rgba(244, 213, 141, 0.5), transparent);
+      background-size: 100% 100%;
+      animation: fadeIn 2s ease-out;
+    }
+
+    /* 光晕层 */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(244, 213, 141, 0.12) 0%, transparent 65%);
+      animation: pulseGlow 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 2rem;
+      animation: fadeUp 1.2s var(--ease) both;
+    }
+
+    .hero-verse-ref {
+      display: inline-block;
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      color: var(--gold-300);
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(244, 213, 141, 0.3);
+      border-radius: var(--radius-full);
+      margin-bottom: 2rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-verse {
+      font-family: var(--font-serif);
+      font-size: clamp(1.05rem, 2vw, 1.4rem);
+      color: var(--text-light);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.9;
+      font-style: italic;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* 向下滚动提示 */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .scroll-hint .arrow {
+      width: 22px;
+      height: 22px;
+      border-right: 2px solid var(--gold-300);
+      border-bottom: 2px solid var(--gold-300);
+      transform: rotate(45deg);
+    }
+
+    /* —— 经文每日金句区 —— */
+    .daily-verse {
+      padding: 5rem 0;
+      background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+    }
+
+    .verse-card {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 3rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(212, 160, 23, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .verse-card::before {
+      content: "\201C";
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-family: Georgia, serif;
+      font-size: 8rem;
+      color: rgba(212, 160, 23, 0.12);
+      line-height: 1;
+    }
+
+    .verse-card-body {
+      position: relative;
+      z-index: 1;
+    }
+
+    .verse-text {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      line-height: 1.9;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .verse-cite {
+      font-size: 0.95rem;
+      color: var(--gold-600);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* —— 学习板块 —— */
+    .features {
+      padding: 5rem 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(212, 160, 23, 0.1);
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-300));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, rgba(244, 213, 141, 0.25), rgba(212, 160, 23, 0.15));
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--text-primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .feature-card .feature-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--gold-600);
+    }
+
+    .feature-card .feature-link .arrow {
+      transition: transform 0.3s var(--ease);
+    }
+
+    .feature-card:hover .feature-link .arrow {
+      transform: translateX(5px);
+    }
+
+    /* —— 读者笔记预告区 —— */
+    .notes-preview {
+      padding: 5rem 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(27, 51, 88, 0.04) 0%, transparent 60%),
+        var(--parchment-dark);
+    }
+
+    .notes-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .note-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+      border: 1px solid rgba(212, 160, 23, 0.1);
+    }
+
+    .note-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .note-card-banner {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .note-card-banner.grace {
+      background: linear-gradient(135deg, #1b3358, #234070, #4a7ab5);
+    }
+
+    .note-card-banner.pride {
+      background: linear-gradient(135deg, #5c2a1e, #8b3a2a, #c4564a);
+    }
+
+    .note-card-banner .banner-symbol {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .note-card-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.25) 100%);
+    }
+
+    .note-card-body {
+      padding: 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .note-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold-600);
+      margin-bottom: 0.7rem;
+    }
+
+    .note-card-body h3 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-bottom: 0.7rem;
+      line-height: 1.4;
+    }
+
+    .note-card-body p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .note-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--parchment-dark);
+    }
+
+    .note-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .note-read {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gold-600);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: gap 0.3s var(--ease);
+    }
+
+    .note-card:hover .note-read {
+      gap: 0.6rem;
+    }
+
+    .notes-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* —— 引言区 —— */
+    .quote-section {
+      padding: 5rem 0;
+      background: var(--night-900);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-section::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(244, 213, 141, 0.06) 0%, transparent 60%);
+    }
+
+    .quote-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .quote-mark {
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      color: var(--gold-400);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .quote-text {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      line-height: 1.8;
+      color: var(--cream);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .quote-author {
+      font-size: 0.95rem;
+      color: var(--gold-300);
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 600px) {
+      .verse-card { padding: 2.5rem 1.5rem; }
+      .verse-text { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">✦</span>
+      <span>光与盐</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">首页</a></li>
+      <li><a href="#features">学习板块</a></li>
+      <li><a href="notes.html">读者笔记</a></li>
+      <li><a href="#quote">每日恩言</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- 英雄区 -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="hero-verse-ref">诗篇 119:105</span>
+      <h1 class="hero-title">你的话是我<br /><span class="accent">脚前的灯</span>，路上的光</h1>
+      <p class="hero-verse">
+        在神话语的光中行走，在真理的道上扎根。<br />
+        这里是光与盐圣经学习平台，与你一同领受从上头来的智慧。
+      </p>
+      <div class="hero-actions">
+        <a href="notes.html" class="btn btn-gold">阅读读者笔记 →</a>
+        <a href="#features" class="btn btn-outline">探索学习板块</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>向下探索</span>
+      <span class="arrow"></span>
+    </div>
+  </header>
+
+  <!-- 每日金句 -->
+  <section class="daily-verse">
+    <div class="container">
+      <div class="verse-card reveal">
+        <div class="verse-card-body">
+          <p class="verse-text">
+            我们晓得万事都互相效力，叫爱神的人得益处，就是按他旨意被召的人。
+          </p>
+          <span class="verse-cite">—— 罗马书 8:28</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 学习板块 -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">学习板块</span>
+        <h2 class="section-title">在真道上扎根生长</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">从经文研读到生命反思，多维度进入神的话语。</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">📖</div>
+          <h3>逐卷研读</h3>
+          <p>按卷逐章梳理圣经脉络，明白神在整个救赎历史中的作为与心意，建立扎实的根基。</p>
+          <a href="#" class="feature-link">开始研读 <span class="arrow">→</span></a>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">✝️</div>
+          <h3>主题查考</h3>
+          <p>围绕恩典、信心、祷告等核心主题，贯穿新旧约经文，看见神话语的丰富与一致。</p>
+          <a href="#" class="feature-link">查看主题 <span class="arrow">→</span></a>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">✍️</div>
+          <h3>读者笔记</h3>
+          <p>记录圣灵借着经文对生命的光照与提醒，在分享与反思中彼此勉励，同奔天路。</p>
+          <a href="notes.html" class="feature-link">阅读笔记 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 读者笔记预告 -->
+  <section class="notes-preview">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">读者笔记 · 精选</span>
+        <h2 class="section-title">生命的光照与回响</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">每一篇笔记，都是神话语在生命中真实动工的见证。</p>
+      </div>
+
+      <div class="notes-cards">
+        <a href="static/grace_article.html" class="note-card reveal reveal-delay-1">
+          <div class="note-card-banner grace">
+            <span class="banner-symbol">Jonah</span>
+          </div>
+          <div class="note-card-body">
+            <span class="note-tag">恩典 · 约拿书</span>
+            <h3>约拿的故事</h3>
+            <p>从逃离到顺服，从愤怒到仰望。约拿的经历让我们看见：神的恩典越过我们的悖逆，直达尼尼微。</p>
+            <div class="note-card-footer">
+              <span class="note-meta">约拿书 1-4 章</span>
+              <span class="note-read">阅读全文 →</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="static/pride_article.html" class="note-card reveal reveal-delay-2">
+          <div class="note-card-banner pride">
+            <span class="banner-symbol">Haman</span>
+          </div>
+          <div class="note-card-body">
+            <span class="note-tag">骄傲 · 以斯帖记</span>
+            <h3>哈曼最大的敌人不是末底改</h3>
+            <p>哈曼的灭亡并非始于末底改的不跪不拜，而是始于他自己心中膨胀的骄傲。骄傲，才是真正的绞刑架。</p>
+            <div class="note-card-footer">
+              <span class="note-meta">以斯帖记 3-7 章</span>
+              <span class="note-read">阅读全文 →</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="notes-cta reveal reveal-delay-3">
+        <a href="notes.html" class="btn btn-gold">查看全部笔记 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 引言区 -->
+  <section class="quote-section" id="quote">
+    <div class="quote-content reveal">
+      <div class="quote-mark">"</div>
+      <p class="quote-text">
+        圣经不是一本叫我们研究神的书，而是一本神借着它来研究我们的书。
+      </p>
+      <span class="quote-author">—— 陶恕 (A. W. Tozer)</span>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <div class="footer-brand">光与盐 · 圣经学习平台</div>
+        <p class="footer-desc">
+          在神的话语中寻见光，在真理的道上同行。
+          愿这里的每一篇文字，都成为你亲近神的脚注。
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">首页</a>
+        <a href="#features">学习板块</a>
+        <a href="notes.html">读者笔记</a>
+      </div>
+      <div class="footer-links">
+        <a href="static/grace_article.html">约拿的故事</a>
+        <a href="static/pride_article.html">哈曼最大的敌人</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 光与盐圣经学习平台 · 你的话是我脚前的灯，路上的光。</p>
+    </div>
+  </footer>
+
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // 移动端菜单
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // 滚动入场动画
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
