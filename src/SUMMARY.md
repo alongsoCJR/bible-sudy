@@ -6,6 +6,7 @@
 - [光与盐｜读者笔记](./static/notes.html)
     - [约拿的故事](./static/grace_article.html)
     - [哈曼最大的敌人不是末底改](./static/pride_article.html)
+    - [以诺与神同行三百年](./static/enoch_article.html)
 
 [//]: # (- [AI探索]&#40;./ai/ai-train.md&#41;)
 
