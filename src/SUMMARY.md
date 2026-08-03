@@ -7,6 +7,7 @@
     - [约拿的故事](./static/grace_article.html)
     - [哈曼最大的敌人不是末底改](./static/pride_article.html)
     - [以诺与神同行三百年](./static/enoch_article.html)
+    - [雅各的瘸腿——为什么神赐福却留下软弱](./static/jacob_article.html)
 
 [//]: # (- [AI探索]&#40;./ai/ai-train.md&#41;)
 
