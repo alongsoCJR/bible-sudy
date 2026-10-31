@@ -17,3 +17,5 @@
     - [加入我们](./static/join-us.html)       
 - [比赛抽签](static/bible_contest.html)
     - [评分规则](static/bible_score.html)
+- [活动](static/cd-activity.html)
+    - [竞赛页](static/cd-contest.html)
