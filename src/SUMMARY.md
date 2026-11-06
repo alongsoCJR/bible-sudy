@@ -1,8 +1,8 @@
 # Summary
 
 # 目录
-- [光与盐｜有声频道](./README.md)
-    - [灵性与灵魂](./bible/test.md)
+- [光与盐｜首页](./index.html)
+    - [有声频道](./static/audio-stories.html)
 - [光与盐｜读者笔记](./static/notes.html)
     - [约拿的故事](./static/grace_article.html)
     - [哈曼最大的敌人不是末底改](./static/pride_article.html)
@@ -14,10 +14,13 @@
 
 [//]: # (    - [星斗智能体展示]&#40;./static/star-agent.html&#41;)
 - [在线读圣经](./static/bible-online.html)
-    - [加入我们](./static/join-us.html)       
-- [比赛抽签](static/bible_contest.html)
-    - [评分规则](static/bible_score.html)
+    - [加入我们](./static/join-us.html)
 
+[//]: # (以下页面暂时从导航隐藏，仍可通过 URL 直接访问)
+[//]: # (- [比赛抽签]&#40;static/bible_contest.html&#41;)
+[//]: # (    - [评分规则]&#40;static/bible_score.html&#41;)
 [//]: # (- [活动]&#40;static/cd-activity.html&#41;)
-
 [//]: # (    - [竞赛页]&#40;static/cd-contest.html&#41;)
+
+[//]: # (资源打包用地图页，不在对外导航展示)
+[//]: # (- [站点地图]&#40;./site-map.md&#41;)

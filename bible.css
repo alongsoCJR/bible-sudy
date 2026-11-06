@@ -1,10 +1,237 @@
-/* 基础样式 */
-body {
-  font-family: 'Noto Serif SC', serif;
-  background-color: #f5f0eb;
-  color: #333;
-  line-height: 1.6;
-  padding: 2rem;
+/* mdBook 内容区样式：不要改写全局 body，以免破坏侧栏布局 */
+
+.content {
+  font-family: "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
+  color: #2a2018;
+  line-height: 1.75;
+}
+
+.bible-title {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  color: #1b3358;
+  letter-spacing: 0.02em;
+}
+
+/* 仅用于打包隐藏页，不在界面展示 */
+.site-hidden-links {
+  display: none !important;
+}
+
+.page-backlink {
+  margin: -0.4rem 0 1.6rem;
+  font-size: 0.92rem;
+  color: #8a7d6a;
+}
+
+.page-backlink a {
+  color: #234070;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.page-backlink a:hover {
+  color: #d4a017;
+  border-bottom-color: rgba(212, 160, 23, 0.5);
+}
+
+/* —— 有声频道页头 —— */
+.audio-hero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 1.75rem;
+  padding: 2rem 1.8rem;
+  border-radius: 18px;
+  color: #f5efe2;
+  background:
+    radial-gradient(ellipse at 18% 20%, rgba(244, 213, 141, 0.22), transparent 45%),
+    radial-gradient(ellipse at 88% 10%, rgba(74, 122, 181, 0.28), transparent 40%),
+    linear-gradient(145deg, #0d1b2a 0%, #1b3358 55%, #13243a 100%);
+  box-shadow: 0 16px 40px rgba(13, 27, 42, 0.18);
+}
+
+.audio-hero-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f4d58d;
+  margin-bottom: 0.7rem;
+}
+
+.audio-hero-title {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  line-height: 1.35;
+  margin: 0 0 0.75rem;
+  color: #fffdf8;
+}
+
+.audio-hero-lead {
+  margin: 0;
+  max-width: 40rem;
+  color: rgba(245, 239, 226, 0.82);
+  line-height: 1.75;
+}
+
+.audio-intro {
+  margin-top: 0;
+}
+
+.audio-section-head {
+  margin: 2.2rem 0 1rem;
+}
+
+.section-kicker {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #b8860b;
+  margin-bottom: 0.35rem;
+}
+
+.audio-section-desc {
+  margin: 0.35rem 0 0;
+  color: #5c4f3e;
+  font-size: 0.95rem;
+}
+
+/* —— 灵性与灵魂 —— */
+.soul-hero {
+  margin: 0 0 1.6rem;
+  padding: 2rem 1.8rem;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 70% 0%, rgba(244, 213, 141, 0.16), transparent 50%),
+    linear-gradient(160deg, #13243a 0%, #1b3358 48%, #234070 100%);
+  color: #f5efe2;
+  box-shadow: 0 16px 40px rgba(13, 27, 42, 0.16);
+}
+
+.soul-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f4d58d;
+  margin-bottom: 0.7rem;
+}
+
+.soul-heading {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 0 0 0.75rem;
+  color: #fffdf8;
+}
+
+.soul-lead {
+  margin: 0;
+  color: rgba(245, 239, 226, 0.84);
+  line-height: 1.8;
+}
+
+.soul-player-card {
+  margin: 0 0 1.75rem;
+  padding: 1.6rem 1.5rem 1.4rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fffdf8 0%, #faf6ee 100%);
+  border: 1px solid rgba(212, 160, 23, 0.2);
+  box-shadow: 0 10px 28px rgba(13, 27, 42, 0.08);
+}
+
+.soul-player-meta {
+  text-align: center;
+  margin-bottom: 1.1rem;
+}
+
+.soul-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #0d1b2a;
+  background: linear-gradient(135deg, #f4d58d, #d4a017);
+  margin-bottom: 0.7rem;
+}
+
+.soul-player-meta h3 {
+  margin: 0 0 0.4rem;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 1.35rem;
+  color: #1b3358;
+}
+
+.soul-player-meta p {
+  margin: 0;
+  color: #5c4f3e;
+  font-size: 0.95rem;
+}
+
+.soul-player-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.soul-player-wrap audio {
+  width: 100%;
+  max-width: 560px;
+  height: 48px;
+  border-radius: 999px;
+}
+
+.soul-tips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.85rem;
+}
+
+.soul-tip {
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(27, 51, 88, 0.05);
+  border: 1px solid rgba(27, 51, 88, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.soul-tip strong {
+  color: #1b3358;
+  font-size: 0.88rem;
+}
+
+.soul-tip span {
+  color: #5c4f3e;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.soul-verse {
+  text-align: center;
+  padding: 1.6rem 1.2rem;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(244, 213, 141, 0.12), rgba(250, 246, 238, 0.9));
+  border: 1px solid rgba(212, 160, 23, 0.22);
+}
+
+.soul-verse p {
+  margin: 0 0 0.55rem;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 1.2rem;
+  color: #1b3358;
+  line-height: 1.7;
+}
+
+.soul-verse cite {
+  color: #b8860b;
+  font-style: normal;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
 }
 
 /* 标题样式 */
@@ -15,47 +242,168 @@ body {
 
 .header h1 {
   font-size: 2.5rem;
-  color: #2D5F91;
+  color: #1b3358;
   margin-bottom: 1rem;
 }
 
 .header .divider {
   width: 80%;
   height: 2px;
-  background: linear-gradient(to right, transparent, #8B4513, transparent);
+  background: linear-gradient(to right, transparent, #d4a017, transparent);
   margin: 0 auto;
 }
 
 /* 引言卡片 */
 .intro-card {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 2rem;
-  margin-bottom: 3rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-left: 4px solid #8B4513;
+  background:
+    linear-gradient(180deg, #fffdf8 0%, #faf6ee 100%);
+  border-radius: 14px;
+  padding: 2rem 2.2rem;
+  margin: 1.5rem 0 2.5rem;
+  box-shadow: 0 8px 28px rgba(13, 27, 42, 0.08);
+  border: 1px solid rgba(212, 160, 23, 0.18);
+  border-left: 4px solid #d4a017;
+  white-space: pre-line;
+}
+
+.intro-card a {
+  color: #234070;
+  font-weight: 600;
+}
+
+.intro-card a:hover {
+  color: #d4a017;
 }
 
 /* 经文引用框 */
 .scripture-box {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   line-height: 1.9;
-  color: #2D5F91;
+  color: #1b3358;
   background-color: #f8fafd;
-  border-left: 4px solid #8B4513;
+  border-left: 4px solid #d4a017;
   padding: 1.5rem;
   margin: 2rem 0;
   position: relative;
+  border-radius: 0 10px 10px 0;
 }
 
 .scripture-box::before {
   content: "❝";
   font-size: 3rem;
-  color: #8B4513;
+  color: #d4a017;
   position: absolute;
   left: 10px;
   top: -10px;
   opacity: 0.3;
+}
+
+/* 音频列表 */
+.audio-list {
+  margin: 0.5rem 0 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.audio-item {
+  margin: 0;
+  padding: 1.15rem 1.2rem 1.2rem;
+  background:
+    linear-gradient(165deg, #fffdf8 0%, #faf6ee 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(212, 160, 23, 0.16);
+  border-left: 4px solid #d4a017;
+  box-shadow: 0 6px 18px rgba(13, 27, 42, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.audio-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 160, 23, 0.35);
+  box-shadow: 0 14px 28px rgba(13, 27, 42, 0.12);
+}
+
+.audio-title {
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  color: #1b3358;
+  font-size: 1.02em;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  line-height: 1.45;
+}
+
+.audio-player {
+  overflow: hidden;
+  border-radius: 10px;
+  min-height: 50px;
+}
+
+.audio-player wistia-player {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.audio-nav-card {
+  margin: 2rem 0 1rem;
+  padding: 1.4rem 1.5rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fffdf8, #f7f1e4);
+  border: 1px solid rgba(212, 160, 23, 0.2);
+}
+
+.audio-nav-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.8rem 0 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.audio-nav-card a {
+  display: inline-block;
+  color: #234070;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.audio-nav-card a:hover {
+  color: #d4a017;
+}
+
+.wechat-fallback {
+  margin: 2rem 0;
+  padding: 1.5rem 1.75rem;
+  background: linear-gradient(135deg, #eef5fb, #f7fafc);
+  border: 1px solid #c8d9ea;
+  border-radius: 12px;
+}
+
+.wechat-fallback h3 {
+  color: #1b3358;
+  margin-top: 0;
+}
+
+.wechat-fallback ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.wechat-fallback li {
+  margin: 0.55rem 0;
+}
+
+.wechat-fallback a {
+  color: #234070;
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.wechat-fallback a:hover {
+  background-color: rgba(212, 160, 23, 0.15);
+  color: #b8860b;
 }
 
 /* 时间轴容器 */
@@ -66,22 +414,20 @@ body {
   padding: 2rem 0;
   position: relative;
   scrollbar-width: thin;
-  scrollbar-color: #8B4513 #f5f0eb;
+  scrollbar-color: #d4a017 #f5f0eb;
 }
 
-/* 时间轴基准线 */
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 40px;
   width: 100%;
   height: 2px;
-  background: #8B4513;
+  background: #d4a017;
   z-index: 1;
 }
 
-/* 时间轴项目 */
 .timeline-item {
   flex: 0 0 220px;
   display: inline-flex;
@@ -91,28 +437,26 @@ body {
   z-index: 2;
 }
 
-/* 时间轴标记点 */
 .timeline-marker {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #8B4513;
+  background: #d4a017;
   margin: 0 auto 10px;
   position: relative;
 }
 
-/* 时间轴内容 */
 .timeline-content {
   background: white;
   padding: 1rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(13, 27, 42, 0.08);
   text-align: center;
 }
 
 .timeline-title {
   font-size: 1.1rem;
-  color: #2D5F91;
+  color: #1b3358;
   margin-bottom: 0.5rem;
 }
 
@@ -122,17 +466,15 @@ body {
   white-space: normal;
 }
 
-/* 视频容器 */
 .video-container {
   max-width: 800px;
   margin: 3rem auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(13, 27, 42, 0.1);
+  border-radius: 12px;
   overflow: hidden;
   position: relative;
 }
 
-/* 微信视频播放器样式 */
 .wx-video-player {
   position: relative;
   min-height: 300px;
@@ -145,7 +487,7 @@ body {
 
 .wx-loading-prompt {
   text-align: center;
-  color: #8B4513;
+  color: #b8860b;
   margin-bottom: 1rem;
 }
 
@@ -156,30 +498,29 @@ body {
 
 .wx-play-button {
   padding: 15px 30px;
-  background: #8B4513;
-  color: white;
+  background: #d4a017;
+  color: #0d1b2a;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: bold;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
+  box-shadow: 0 2px 8px rgba(212, 160, 23, 0.35);
 }
 
 .wx-play-button:hover {
-  background: #6b3a10;
+  background: #b8860b;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
+  box-shadow: 0 4px 12px rgba(212, 160, 23, 0.45);
 }
 
-/* 滚动条样式 */
 .timeline::-webkit-scrollbar {
   height: 8px;
 }
 
 .timeline::-webkit-scrollbar-thumb {
-  background-color: #8B4513;
+  background-color: #d4a017;
   border-radius: 4px;
 }
 
@@ -187,10 +528,22 @@ body {
   background: #f5f0eb;
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
-  body {
-    padding: 1rem;
+  .intro-card {
+    padding: 1.35rem 1.2rem;
+  }
+
+  .audio-hero,
+  .soul-hero {
+    padding: 1.45rem 1.2rem;
+  }
+
+  .audio-list {
+    grid-template-columns: 1fr;
+  }
+
+  .soul-player-card {
+    padding: 1.25rem 1rem;
   }
 
   .video-container {
@@ -206,4 +559,3 @@ body {
     font-size: 1rem;
   }
 }
-
