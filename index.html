@@ -1,419 +1,717 @@
-<!DOCTYPE HTML>
-<html lang="zh_CN" class="sidebar-visible no-js rust">
-    <head>
-        <!-- Book generated using mdBook -->
-        <meta charset="UTF-8">
-        <title>光与盐｜有声频道 - 真理使人自由</title>
-        <!-- Custom HTML head -->
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+<!DOCTYPE html>
+<html lang="zh-CN" data-root-home="1">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>光与盐 · 圣经学习平台</title>
+  <meta name="description" content="光与盐圣经学习平台——在神的话语中寻见光，在真理的道上同行。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/css/style.css" />
+  <style>
+    /* ===== 主页专属样式 ===== */
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
-        <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
-        <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+    /* —— 英雄区 —— */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 0%, var(--night-700) 0%, var(--night-900) 60%),
+        var(--night-900);
+    }
 
-        <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="bible.css">
-        <!-- MathJax -->
-        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    </head>
-    <body>
-        <!-- Provide site root to javascript -->
-        <script type="text/javascript">
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
-        </script>
+    /* 星空粒子层 */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 20% 30%, rgba(244, 213, 141, 0.6), transparent),
+        radial-gradient(1px 1px at 60% 20%, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1.5px 1.5px at 80% 60%, rgba(244, 213, 141, 0.4), transparent),
+        radial-gradient(1px 1px at 35% 70%, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1.5px 1.5px at 70% 85%, rgba(244, 213, 141, 0.3), transparent),
+        radial-gradient(1px 1px at 15% 55%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 90% 35%, rgba(244, 213, 141, 0.5), transparent);
+      background-size: 100% 100%;
+      animation: fadeIn 2s ease-out;
+    }
 
-        <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
-            try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+    /* 光晕层 */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(244, 213, 141, 0.12) 0%, transparent 65%);
+      animation: pulseGlow 6s ease-in-out infinite;
+      pointer-events: none;
+    }
 
-                if (theme.startsWith('"') && theme.endsWith('"')) {
-                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
-                }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 2rem;
+      animation: fadeUp 1.2s var(--ease) both;
+    }
 
-                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
-                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
-                }
-            } catch (e) { }
-        </script>
+    .hero-verse-ref {
+      display: inline-block;
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      color: var(--gold-300);
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(244, 213, 141, 0.3);
+      border-radius: var(--radius-full);
+      margin-bottom: 2rem;
+      backdrop-filter: blur(4px);
+    }
 
-        <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
-            var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
-            if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
-            html.classList.remove('rust')
-            html.classList.add(theme);
-            html.classList.add('js');
-        </script>
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.03em;
+    }
 
-        <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
-            if (document.body.clientWidth >= 1080) {
-                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
-                sidebar = sidebar || 'visible';
-            }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
-        </script>
+    .hero-title .accent {
+      background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">1.</strong> 光与盐｜有声频道</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="bible/test.html"><strong aria-hidden="true">1.1.</strong> 灵性与灵魂</a></li></ol></li><li class="chapter-item "><a href="static/notes.html"><strong aria-hidden="true">2.</strong> 光与盐｜读者笔记</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/grace_article.html"><strong aria-hidden="true">2.1.</strong> 约拿的故事</a></li><li class="chapter-item "><a href="static/pride_article.html"><strong aria-hidden="true">2.2.</strong> 哈曼最大的敌人不是末底改</a></li><li class="chapter-item "><a href="static/enoch_article.html"><strong aria-hidden="true">2.3.</strong> 以诺与神同行三百年</a></li><li class="chapter-item "><a href="static/jacob_article.html"><strong aria-hidden="true">2.4.</strong> 雅各的瘸腿——为什么神赐福却留下软弱</a></li><li class="chapter-item "><a href="static/samson_article.html"><strong aria-hidden="true">2.5.</strong> 参孙最大的敌人不是大利拉</a></li></ol></li><li class="chapter-item "><a href="static/bible-online.html"><strong aria-hidden="true">3.</strong> 在线读圣经</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/join-us.html"><strong aria-hidden="true">3.1.</strong> 加入我们</a></li></ol></li><li class="chapter-item "><a href="static/bible_contest.html"><strong aria-hidden="true">4.</strong> 比赛抽签</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/bible_score.html"><strong aria-hidden="true">4.1.</strong> 评分规则</a></li></ol></li></ol>
-            </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
-        </nav>
+    .hero-verse {
+      font-family: var(--font-serif);
+      font-size: clamp(1.05rem, 2vw, 1.4rem);
+      color: var(--text-light);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.9;
+      font-style: italic;
+    }
 
-        <div id="page-wrapper" class="page-wrapper">
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-            <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
-                    <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                        </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+    /* 向下滚动提示 */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      animation: float 3s ease-in-out infinite;
+    }
 
-                    <h1 class="menu-title">真理使人自由</h1>
+    .scroll-hint .arrow {
+      width: 22px;
+      height: 22px;
+      border-right: 2px solid var(--gold-300);
+      border-bottom: 2px solid var(--gold-300);
+      transform: rotate(45deg);
+    }
 
-                    <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
-                        </a>
-                        <a href="https://github.com/alongsoCJR/bible-study" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
-                        </a>
-                    </div>
-                </div>
+    /* —— 经文每日金句区 —— */
+    .daily-verse {
+      padding: 5rem 0;
+      background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+    }
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
-                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
-                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });
-                </script>
+    .verse-card {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 3rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(212, 160, 23, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
 
-                <div id="content" class="content">
-                    <main>
-                        <h1 id="-圣经有声平台"><a class="header" href="#-圣经有声平台"><span class="bible-title">📖 圣经有声平台</span></a></h1>
-<div class="intro-card">
-  亲爱的弟兄姊妹：
-<p>你是否曾翻开圣经，却被繁多的章节、古老的背景拦住脚步？是否想探寻其中的智慧，却不知从何切入？</p>
-<p>其实，圣经从不只是一本厚重的典籍，而是由一个个鲜活生命串联起的奇妙故事——有信心的先祖、勇敢的先知、舍己的仆人，还有那位改变世界的救赎主。</p>
-<p>这一次，我们不想用复杂的神学理论拉开距离，而是选择以「人」为钥匙，为你打开理解圣经的大门。我们从新旧约中精选了31个核心人物故事：</p>
-<blockquote>
-<p>从偷吃禁果的亚当，到救恩的挪亚方舟</p>
-<p>从呼召亚伯兰离开本族本家，到摩西带领选民穿越红海</p>
-<p>从大卫用小石子战胜巨人，到以赛亚预言「有一婴孩为我们而生」</p>
-<p>从耶稣在加利利海边呼召门徒，到保罗跨越山海传讲真理……</p>
-</blockquote>
-<p>每一个故事，都是圣经宏大叙事里的重要篇章。这些故事里，有选民的挣扎与信靠，有危难中的等候与得胜，更有神始终不变的应许与带领。</p>
-<p>当我们跟着这些人物的脚步，看他们如何在不同时代回应使命、面对挑战，圣经不再是零散的段落，而是一条清晰的脉络——从创世到救赎，从应许到成就。 或许你是第一次接触圣经，或许你早已熟悉其中的字句，愿这31个小故事，能带你以全新的视角走进这本“智慧之书”。不必担心错过关键信息，不必纠结晦涩的背景，只需静下心来，聆听每一个生命与真理相遇的时刻。相信当故事的碎片逐渐拼凑，你会看见圣经最核心的光芒，也会在这些叙事中，找到属于自己的生命启示。</p>
-</div>
-<h1 id="-音频播放器"><a class="header" href="#-音频播放器"><span class="bible-title">🎧 音频播放器</span></a></h1>
-<div class="audio-list">
-  <!-- 圣经故事之1 亚当 第一个有灵的活人 -->
-  <div class="audio-item">
-    <div class="audio-title">📖 圣经故事之1 亚当 - 第一个有灵的活人</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/8apkhza0gq.js" async type="module"></script>
-      <style>wistia-player[media-id='8apkhza0gq']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="8apkhza0gq" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
+    .verse-card::before {
+      content: "\201C";
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-family: Georgia, serif;
+      font-size: 8rem;
+      color: rgba(212, 160, 23, 0.12);
+      line-height: 1;
+    }
+
+    .verse-card-body {
+      position: relative;
+      z-index: 1;
+    }
+
+    .verse-text {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      line-height: 1.9;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .verse-cite {
+      font-size: 0.95rem;
+      color: var(--gold-600);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* —— 学习板块 —— */
+    .features {
+      padding: 5rem 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(212, 160, 23, 0.1);
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-300));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, rgba(244, 213, 141, 0.25), rgba(212, 160, 23, 0.15));
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--text-primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .feature-card .feature-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--gold-600);
+    }
+
+    .feature-card .feature-link .arrow {
+      transition: transform 0.3s var(--ease);
+    }
+
+    .feature-card:hover .feature-link .arrow {
+      transform: translateX(5px);
+    }
+
+    /* —— 读者笔记预告区 —— */
+    .notes-preview {
+      padding: 5rem 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(27, 51, 88, 0.04) 0%, transparent 60%),
+        var(--parchment-dark);
+    }
+
+    .notes-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .note-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+      border: 1px solid rgba(212, 160, 23, 0.1);
+    }
+
+    .note-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .note-card-banner {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .note-card-banner.grace {
+      background: linear-gradient(135deg, #1b3358, #234070, #4a7ab5);
+    }
+
+    .note-card-banner.pride {
+      background: linear-gradient(135deg, #5c2a1e, #8b3a2a, #c4564a);
+    }
+
+    .note-card-banner.walk {
+      background: linear-gradient(135deg, #3d4f35, #5C6B52, #7A8B6E);
+    }
+
+    .note-card-banner.life {
+      background: linear-gradient(135deg, #4a3520, #7a5530, #a67c52);
+    }
+
+    .note-card-banner.repent {
+      background: linear-gradient(135deg, #3d2a50, #5C4A7A, #7B68A0);
+    }
+
+    .note-card-banner .banner-symbol {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .note-card-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.25) 100%);
+    }
+
+    .note-card-body {
+      padding: 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .note-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold-600);
+      margin-bottom: 0.7rem;
+    }
+
+    .note-card-body h3 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin-bottom: 0.7rem;
+      line-height: 1.4;
+    }
+
+    .note-card-body p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .note-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--parchment-dark);
+    }
+
+    .note-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .note-read {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gold-600);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: gap 0.3s var(--ease);
+    }
+
+    .note-card:hover .note-read {
+      gap: 0.6rem;
+    }
+
+    .notes-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* —— 引言区 —— */
+    .quote-section {
+      padding: 5rem 0;
+      background: var(--night-900);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-section::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(244, 213, 141, 0.06) 0%, transparent 60%);
+    }
+
+    .quote-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .quote-mark {
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      color: var(--gold-400);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .quote-text {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      line-height: 1.8;
+      color: var(--cream);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .quote-author {
+      font-size: 0.95rem;
+      color: var(--gold-300);
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 600px) {
+      .verse-card { padding: 2.5rem 1.5rem; }
+      .verse-text { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">✦</span>
+      <span>光与盐</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">首页</a></li>
+      <li><a href="#features">学习板块</a></li>
+      <li><a href="static/notes.html">读者笔记</a></li>
+      <li><a href="static/audio-stories.html">有声频道</a></li>
+      <li><a href="static/bible-online.html">读圣经</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- 英雄区 -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="hero-verse-ref">诗篇 119:105</span>
+      <h1 class="hero-title">你的话是我<br /><span class="accent">脚前的灯</span>，路上的光</h1>
+      <p class="hero-verse">
+        在神话语的光中行走，在真理的道上扎根。<br />
+        这里是光与盐圣经学习平台，与你一同领受从上头来的智慧。
+      </p>
+      <div class="hero-actions">
+        <a href="static/bible-online.html" class="btn btn-gold">在线读圣经 →</a>
+        <a href="static/audio-stories.html" class="btn btn-outline">收听有声故事</a>
+      </div>
     </div>
-  </div>
-<!-- 圣经故事之2 挪亚方舟的救恩 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之2 挪亚 - 方舟的救恩</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/fdrgb1xsjg.js" async type="module"></script>
-      <style>wistia-player[media-id='fdrgb1xsjg']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="fdrgb1xsjg" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
+    <div class="scroll-hint">
+      <span>向下探索</span>
+      <span class="arrow"></span>
     </div>
-  </div>
-<!-- 圣经故事之3 亚伯拉罕 信心之父 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之3 亚伯拉罕 - 信心之父</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/oh0xy6ef1v.js" async type="module"></script>
-      <style>wistia-player[media-id='oh0xy6ef1v']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="oh0xy6ef1v" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
+  </header>
+
+  <!-- 每日金句 -->
+  <section class="daily-verse">
+    <div class="container">
+      <div class="verse-card reveal">
+        <div class="verse-card-body">
+          <p class="verse-text">
+            我们晓得万事都互相效力，叫爱神的人得益处，就是按他旨意被召的人。
+          </p>
+          <span class="verse-cite">—— 罗马书 8:28</span>
+        </div>
+      </div>
     </div>
-  </div>
-<!-- 圣经故事之4 以撒，神赐的孩子 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之4 以撒 - 神赐的孩子</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/mvr5yng5w7.js" async type="module"></script>
-      <style>wistia-player[media-id='mvr5yng5w7']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="mvr5yng5w7" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
-    </div>
-  </div>
-<!-- 圣经故事之5 雅各上 抓住福分 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之5 雅各（上） - 抓住福分</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/6bvfvavzke.js" async type="module"></script>
-      <style>wistia-player[media-id='6bvfvavzke']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="6bvfvavzke" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
-    </div>
-  </div>
-<!-- 圣经故事之5 雅各下 得胜的以色列 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之5 雅各（下） - 得胜的以色列</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/jyjzhzkij3.js" async type="module"></script>
-      <style>wistia-player[media-id='jyjzhzkij3']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="jyjzhzkij3" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
-    </div>
-  </div>
-<!-- 圣经故事之6 约瑟跌宕起伏的人生 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之6 约瑟 - 跌宕起伏的人生</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/gwqvhqkvlo.js" async type="module"></script>
-      <style>wistia-player[media-id='gwqvhqkvlo']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="gwqvhqkvlo" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
-    </div>
-  </div>
-<!-- 圣经故事之7 摩西出埃及记的传奇 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之7 摩西 - 出埃及记的传奇</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/5ira7p7esc.js" async type="module"></script>
-      <style>wistia-player[media-id='5ira7p7esc']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="5ira7p7esc" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
-    </div>
-  </div>
-<!-- 圣经故事之8 民数记巴兰的故事 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之8 巴兰 - 民数记的故事</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/vslnzja432.js" async type="module"></script>
-      <style>wistia-player[media-id='vslnzja432']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="vslnzja432" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
-    </div>
-  </div>
-<!-- 圣经故事之9 约书亚信心与勇气 -->
-<div class="audio-item">
-    <div class="audio-title">📖 圣经故事之9 约书亚 - 信心与勇气</div>
-    <div class="audio-player">
-      <script src="https://fast.wistia.com/player.js" async></script>
-      <script src="https://fast.wistia.com/embed/kn59bj4m5u.js" async type="module"></script>
-      <style>wistia-player[media-id='kn59bj4m5u']:not(:defined) { display: block; filter: blur(5px); }</style>
-      <wistia-player media-id="kn59bj4m5u" swatch="false" style="width: 350px;height: 50px;"></wistia-player>
-    </div>
-  </div>
-</div>
-<!-- 备用方案：直接链接到Wistia页面 -->
-<div class="wechat-fallback">
-  <h3 id="微信用户专用链接"><a class="header" href="#微信用户专用链接">微信用户专用链接</a></h3>
-  <p>如果上面的播放器无法使用，请点击以下链接在微信中收听：</p>
-  <ul>
-    <li><a href="https://alongsocjr.wistia.com/medias/8apkhza0gq" target="_blank">圣经故事之1 亚当 - 第一个有灵的活人</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/fdrgb1xsjg" target="_blank">圣经故事之2 挪亚 - 方舟的救恩</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/oh0xy6ef1v" target="_blank">圣经故事之3 亚伯拉罕 - 信心之父</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/mvr5yng5w7" target="_blank">圣经故事之4 以撒 - 神赐的孩子</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/6bvfvavzke" target="_blank">圣经故事之5 雅各（上） - 抓住福分</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/jyjzhzkij3" target="_blank">圣经故事之5 雅各（下） - 得胜的以色列</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/gwqvhqkvlo" target="_blank">圣经故事之6 约瑟 - 跌宕起伏的人生</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/5ira7p7esc" target="_blank">圣经故事之7 摩西 - 出埃及记的传奇</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/vslnzja432" target="_blank">圣经故事之8 巴兰 - 民数记的故事</a></li>
-    <li><a href="https://alongsocjr.wistia.com/medias/kn59bj4m5u" target="_blank">圣经故事之9 约书亚 - 信心与勇气</a></li>
-  </ul>
-</div>
-<style>
+  </section>
 
+  <!-- 学习板块 -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">学习板块</span>
+        <h2 class="section-title">在真道上扎根生长</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">从经文研读到生命反思，多维度进入神的话语。</p>
+      </div>
 
-
-.audio-list  {
-  margin: 25px 0;
-}
-
-.audio-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #4CAF50;
-}
-
-.audio-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #2c3e50;
-  font-size: 1.1em;
-}
-
-.audio-player audio {
-  height: 40px;
-  border-radius: 4px;
-}
-
-
-
-
-.wechat-fallback {
-  margin: 30px 0;
-  padding: 20px;
-  background: #e3f2fd;
-  border: 1px solid #bbdefb;
-  border-radius: 10px;
-}
-
-.wechat-fallback h3 {
-  color: #1565c0;
-  margin-top: 0;
-}
-
-.wechat-fallback ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.wechat-fallback li {
-  margin: 8px 0;
-}
-
-.wechat-fallback a {
-  color: #1976d2;
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.wechat-fallback a:hover {
-  background-color: #bbdefb;
-  text-decoration: underline;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .audio-item {
-    flex: 0 0 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-  }
-  
-  .audio-list {
-    gap: 15px;
-  }
-  
-  .wechat-fallback {
-    padding: 15px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .audio-item {
-    flex: 0 0 calc(33.333% - 20px);
-  }
-}
-</style>
-<h1 id="-导航图"><a class="header" href="#-导航图"><span class="bible-title">📖 导航图</span></a></h1>
-<ul>
-<li><a href="./bible/test.html">灵性与灵魂</a></li>
-</ul>
-
-                    </main>
-
-                    <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
-                            <a rel="next" href="bible/test.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        <div style="clear: both"></div>
-                    </nav>
-                </div>
-            </div>
-
-            <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="bible/test.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-            </nav>
-
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">📖</div>
+          <h3>在线读圣经</h3>
+          <p>随时打开经文，按卷逐章梳理圣经脉络，明白神在整个救赎历史中的作为与心意。</p>
+          <a href="static/bible-online.html" class="feature-link">开始研读 <span class="arrow">→</span></a>
         </div>
 
-        <script type="text/javascript">
-            window.playground_copyable = true;
-        </script>
-        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
-        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
-        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
-        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">🎧</div>
+          <h3>有声频道</h3>
+          <p>圣经人物故事与灵性分享分模块收听——从亚当到约书亚，也有安静的灵性与灵魂。</p>
+          <a href="static/audio-stories.html" class="feature-link">立刻收听 <span class="arrow">→</span></a>
+        </div>
 
-        <!-- Custom JS scripts -->
-        <script type="text/javascript" src="mermaid.min.js"></script>
-        <script type="text/javascript" src="mermaid-init.js"></script>
-        <script type="text/javascript" src="smart-anchor.js"></script>
-        <script src="https://utteranc.es/client.js"
-        repo="RustMagazine/rust_magazine_2021"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async></script>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">✍️</div>
+          <h3>读者笔记</h3>
+          <p>记录圣灵借着经文对生命的光照与提醒，在分享与反思中彼此勉励，同奔天路。</p>
+          <a href="static/notes.html" class="feature-link">阅读笔记 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    </body>
+  <!-- 读者笔记预告 -->
+  <section class="notes-preview">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">读者笔记 · 精选</span>
+        <h2 class="section-title">生命的光照与回响</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">每一篇笔记，都是神话语在生命中真实动工的见证。</p>
+      </div>
+
+      <div class="notes-cards">
+        <a href="static/grace_article.html" class="note-card reveal reveal-delay-1">
+          <div class="note-card-banner grace">
+            <span class="banner-symbol">Jonah</span>
+          </div>
+          <div class="note-card-body">
+            <span class="note-tag">恩典 · 约拿书</span>
+            <h3>约拿的故事</h3>
+            <p>从逃离到顺服，从愤怒到仰望。约拿的经历让我们看见：神的恩典越过我们的悖逆，直达尼尼微。</p>
+            <div class="note-card-footer">
+              <span class="note-meta">约拿书 1-4 章</span>
+              <span class="note-read">阅读全文 →</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="static/pride_article.html" class="note-card reveal reveal-delay-2">
+          <div class="note-card-banner pride">
+            <span class="banner-symbol">Haman</span>
+          </div>
+          <div class="note-card-body">
+            <span class="note-tag">骄傲 · 以斯帖记</span>
+            <h3>哈曼最大的敌人不是末底改</h3>
+            <p>哈曼的灭亡并非始于末底改的不跪不拜，而是始于他自己心中膨胀的骄傲。骄傲，才是真正的绞刑架。</p>
+            <div class="note-card-footer">
+              <span class="note-meta">以斯帖记 3-7 章</span>
+              <span class="note-read">阅读全文 →</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="static/enoch_article.html" class="note-card reveal reveal-delay-3">
+          <div class="note-card-banner walk">
+            <span class="banner-symbol">Enoch</span>
+          </div>
+          <div class="note-card-body">
+            <span class="note-tag">同行 · 创世记</span>
+            <h3>以诺与神同行三百年</h3>
+            <p>没有神迹，没有伟绩，没有战场。一个普通人的人生，却收获了神最大的喜悦——与神同行的生命。</p>
+            <div class="note-card-footer">
+              <span class="note-meta">创世记 5:21-24</span>
+              <span class="note-read">阅读全文 →</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="static/jacob_article.html" class="note-card reveal reveal-delay-4">
+          <div class="note-card-banner life">
+            <span class="banner-symbol">Jacob</span>
+          </div>
+          <div class="note-card-body">
+            <span class="note-tag">生命 · 创世记</span>
+            <h3>雅各的瘸腿</h3>
+            <p>为什么神赐福，却留下软弱？毗努伊勒的那一夜，他失去了腿上的力量，却遇见了真正的生命。</p>
+            <div class="note-card-footer">
+              <span class="note-meta">创世记 32:22-32</span>
+              <span class="note-read">阅读全文 →</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="static/samson_article.html" class="note-card reveal reveal-delay-5">
+          <div class="note-card-banner repent">
+            <span class="banner-symbol">Samson</span>
+          </div>
+          <div class="note-card-body">
+            <span class="note-tag">悔改 · 士师记</span>
+            <h3>参孙最大的敌人不是大利拉</h3>
+            <p>罪不是突然把人拖垮的。一次次妥协，里面的警觉慢慢迟钝。直到有一天，才发现主已经离开了。</p>
+            <div class="note-card-footer">
+              <span class="note-meta">士师记 13-16 章</span>
+              <span class="note-read">阅读全文 →</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="notes-cta reveal reveal-delay-3">
+        <a href="static/notes.html" class="btn btn-gold">查看全部笔记 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <div class="footer-brand">光与盐 · 圣经学习平台</div>
+        <p class="footer-desc">
+          在神的话语中寻见光，在真理的道上同行。
+          愿这里的每一篇文字，都成为你亲近神的脚注。
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">首页</a>
+        <a href="#features">学习板块</a>
+        <a href="static/notes.html">读者笔记</a>
+        <a href="static/audio-stories.html">有声频道</a>
+        <a href="static/bible-online.html">读圣经</a>
+      </div>
+      <div class="footer-links">
+        <a href="static/grace_article.html">约拿的故事</a>
+        <a href="static/pride_article.html">哈曼最大的敌人</a>
+        <a href="static/enoch_article.html">以诺与神同行</a>
+        <a href="static/jacob_article.html">雅各的瘸腿</a>
+        <a href="static/samson_article.html">参孙与大利拉</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 光与盐圣经学习平台 · 你的话是我脚前的灯，路上的光。</p>
+    </div>
+  </footer>
+
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // 移动端菜单
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // 滚动入场动画
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
 </html>

@@ -15,28 +15,35 @@
 
         /* ========== 公共顶部导航栏 ========== */
         .top-bar {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: space-between;
             background-color: #f5f0e8;
             border-bottom: 1px solid #8b7355;
             padding: 12px 15px;
             position: sticky;
             top: 0;
             z-index: 100;
+            gap: 8px;
         }
         .top-bar .back-home {
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: #234070;
             cursor: pointer;
             text-decoration: none;
+            font-weight: 600;
         }
-        .top-bar .back-home:active { color: #333; }
+        .top-bar .back-home:active { color: #0d1b2a; }
+        .top-bar .back-home:last-child {
+            justify-self: end;
+            text-align: right;
+        }
         .top-bar .page-title {
             font-size: 15px;
             color: #333;
             font-weight: bold;
             position: relative;
+            text-align: center;
         }
         .top-bar .page-title.active::after {
             content: '';
@@ -50,49 +57,75 @@
             border-bottom: 6px solid #8b7355;
         }
 
-        /* ========== 顶部加入我们按钮 ========== */
+        /* ========== 顶部站点导航 ========== */
         .header-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(135deg, #8b7355 0%, #6b5a45 100%);
+            gap: 10px;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b3358 55%, #234070 100%);
             padding: 12px 15px;
             position: sticky;
             top: 0;
             z-index: 101;
+            border-bottom: 1px solid rgba(244, 213, 141, 0.2);
+        }
+        .site-home {
+            color: #f4d58d;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(244, 213, 141, 0.35);
+            background: rgba(244, 213, 141, 0.08);
+        }
+        .site-home:hover, .site-home:active {
+            background: rgba(244, 213, 141, 0.18);
+            color: #ffe6a8;
         }
         .header-title {
-            font-size: 16px;
-            color: #fff;
+            font-size: 15px;
+            color: #fffdf8;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 6px;
+            flex: 1;
+            justify-content: center;
+            min-width: 0;
         }
         .header-title::before {
-            content: '✝';
-            font-size: 18px;
+            content: '✦';
+            font-size: 14px;
+            color: #f4d58d;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
         }
         .join-btn {
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
+            background: linear-gradient(135deg, #e8b84b, #d4a017);
+            color: #0d1b2a;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 4px;
             transition: all 0.3s;
+            white-space: nowrap;
         }
         .join-btn:hover, .join-btn:active {
-            background: rgba(255,255,255,0.3);
             transform: scale(1.02);
-        }
-        .join-btn::before {
-            content: '✨';
+            box-shadow: 0 4px 14px rgba(212, 160, 23, 0.35);
         }
 
         /* ========== 首页标签导航 ========== */
@@ -222,12 +255,15 @@
 </head>
 <body>
 
-<!-- ==================== 第1页：首页（书卷目录） ==================== -->
+<!-- ==================== 第1页：书卷目录 ==================== -->
 <div id="page-home" class="page active">
-    <!-- 顶部导航栏 -->
+    <!-- 顶部导航栏：可回到站点主页 -->
     <div class="header-bar">
-        <div class="header-title">圣经在线阅读</div>
-        <a href="join-us.html" class="join-btn">加入我们</a>
+        <a class="site-home" href="../index.html">← 光与盐</a>
+        <div class="header-title">在线读圣经</div>
+        <div class="header-actions">
+            <a href="join-us.html" class="join-btn">加入我们</a>
+        </div>
     </div>
     <div class="nav-tabs">
         <div class="nav-tab active" onclick="switchTab('old')">旧约目录</div>
@@ -244,8 +280,9 @@
 <!-- ==================== 第2页：章节目录 ==================== -->
 <div id="page-chapters" class="page">
     <div class="top-bar">
-        <a class="back-home" onclick="goHome()">返回首页</a>
+        <a class="back-home" href="../index.html">网站首页</a>
         <span class="page-title active" id="chapter-page-title">创世记 目录</span>
+        <a class="back-home" onclick="goCatalog()" style="cursor:pointer">返回目录</a>
     </div>
     <div class="content">
         <div class="chapter-grid" id="chapter-grid"></div>
@@ -255,8 +292,9 @@
 <!-- ==================== 第3页：经文阅读 ==================== -->
 <div id="page-read" class="page">
     <div class="top-bar">
-        <a class="back-home" onclick="goHome()">返回首页</a>
+        <a class="back-home" href="../index.html">网站首页</a>
         <span class="page-title active" id="read-page-title">创世记 第1章</span>
+        <a class="back-home" onclick="goCatalog()" style="cursor:pointer">返回目录</a>
     </div>
     <div class="verse-list" id="verse-list"></div>
     <div class="page-nav">
@@ -391,8 +429,13 @@
         window.scrollTo(0, 0);
     }
 
-    function goHome() {
+    function goCatalog() {
         showPage('page-home');
+    }
+
+    // 兼容旧调用
+    function goHome() {
+        goCatalog();
     }
 
     // ==================== 打开章节目录页 ====================

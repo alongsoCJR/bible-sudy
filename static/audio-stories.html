@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>有声频道 · 光与盐圣经学习平台</title>
+  <meta name="description" content="有声频道：圣经人物故事与灵性分享，在网页中安静收听。" />
+  <meta name="robots" content="noarchive" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { background: var(--parchment); padding-bottom: 6.5rem; }
+
+    .page-hero {
+      position: relative;
+      padding: 9rem 2rem 4.5rem;
+      text-align: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 20% 10%, rgba(244, 213, 141, 0.18), transparent 42%),
+        radial-gradient(ellipse at 80% 0%, rgba(74, 122, 181, 0.22), transparent 40%),
+        radial-gradient(ellipse at 50% 0%, var(--night-700) 0%, var(--night-900) 72%);
+      color: var(--cream);
+    }
+
+    .page-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 15% 40%, rgba(244, 213, 141, 0.5), transparent),
+        radial-gradient(1px 1px at 50% 25%, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1.5px 1.5px at 80% 50%, rgba(244, 213, 141, 0.3), transparent);
+      pointer-events: none;
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      animation: fadeUp 1s var(--ease) both;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .breadcrumb a { color: var(--text-light); }
+    .breadcrumb a:hover { color: var(--gold-300); }
+    .breadcrumb .sep { color: var(--gold-600); }
+
+    .page-hero-eyebrow {
+      display: inline-block;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-300);
+      margin-bottom: 1rem;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .page-hero h1 .accent {
+      background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-hero-desc {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .module-wrap {
+      max-width: 1100px;
+      margin: -1.6rem auto 0;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 3;
+    }
+
+    .module-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      justify-content: center;
+      padding: 0.55rem;
+      background: rgba(255, 253, 248, 0.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(212, 160, 23, 0.2);
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-md);
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto 2rem;
+    }
+
+    .module-tab {
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.7rem 1.35rem;
+      border-radius: var(--radius-full);
+      color: var(--text-secondary);
+      background: transparent;
+      transition: all 0.3s var(--ease);
+    }
+
+    .module-tab:hover { color: var(--night-700); }
+    .module-tab.active {
+      color: var(--night-900);
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      box-shadow: var(--shadow-gold);
+    }
+
+    .module-panel { display: none; }
+    .module-panel.active { display: block; animation: fadeUp 0.55s var(--ease) both; }
+
+    .intro-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 1.8rem 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(212, 160, 23, 0.16);
+      border-left: 4px solid var(--gold-500);
+      color: var(--text-secondary);
+      white-space: pre-line;
+      max-width: 820px;
+      margin: 0 auto 2rem;
+    }
+
+    .intro-card blockquote {
+      margin: 1rem 0;
+      padding-left: 1rem;
+      border-left: 3px solid rgba(212, 160, 23, 0.45);
+      color: var(--text-primary);
+      font-family: var(--font-serif);
+    }
+
+    .playlist-section { padding: 0 0 2rem; }
+
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .track-card {
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1.25rem 1.15rem;
+      border: 1px solid rgba(212, 160, 23, 0.14);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .track-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(212, 160, 23, 0.35);
+    }
+
+    .track-card.is-active {
+      border-color: var(--gold-500);
+      box-shadow: var(--shadow-gold);
+      background: linear-gradient(165deg, #fffdf8, #f7efd8);
+    }
+
+    .track-card.is-loading { opacity: 0.72; pointer-events: none; }
+
+    .track-top { display: flex; gap: 0.95rem; align-items: flex-start; }
+
+    .track-play {
+      flex: 0 0 46px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      color: var(--night-900);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .track-play svg { width: 18px; height: 18px; fill: currentColor; }
+    .track-meta { flex: 1; min-width: 0; }
+    .track-index {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--gold-600);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .track-title {
+      font-family: var(--font-serif);
+      font-size: 1.08rem;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 0.25rem;
+    }
+    .track-sub { font-size: 0.88rem; color: var(--text-muted); }
+
+    .track-progress {
+      margin-top: 0.95rem;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(13, 27, 42, 0.08);
+      overflow: hidden;
+    }
+
+    .track-progress > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold-400), var(--gold-500));
+      border-radius: inherit;
+    }
+
+    /* 灵性模块 */
+    .soul-shell {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(212, 160, 23, 0.18);
+      overflow: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .soul-art {
+      padding: 2.2rem 1.5rem 1.5rem;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(244, 213, 141, 0.22), transparent 55%),
+        linear-gradient(160deg, #13243a 0%, #1b3358 55%, #234070 100%);
+      color: var(--cream);
+    }
+
+    .disc {
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 1.1rem;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, #f4d58d 0 10%, transparent 11%),
+        conic-gradient(from 0deg, #0d1b2a, #234070, #0d1b2a, #1b3358, #0d1b2a);
+      border: 4px solid rgba(244, 213, 141, 0.45);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+      position: relative;
+    }
+
+    .disc.spinning { animation: spinDisc 8s linear infinite; }
+    @keyframes spinDisc { to { transform: rotate(360deg); } }
+
+    .disc::after {
+      content: "";
+      position: absolute;
+      inset: 28%;
+      border-radius: 50%;
+      background: rgba(13, 27, 42, 0.85);
+      border: 2px solid rgba(244, 213, 141, 0.35);
+    }
+
+    .soul-art .badge {
+      display: inline-block;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--night-900);
+      background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
+      margin-bottom: 0.7rem;
+    }
+
+    .soul-art h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .soul-art p { color: rgba(245, 239, 226, 0.8); font-size: 0.95rem; }
+
+    .soul-controls { padding: 1.5rem 1.4rem 1.6rem; }
+
+    .seek-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .seek-row span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      min-width: 2.4rem;
+    }
+
+    .seek {
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(13, 27, 42, 0.1);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .seek::-webkit-slider-thumb {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      box-shadow: var(--shadow-gold);
+      cursor: pointer;
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .ctrl-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 160, 23, 0.25);
+      background: var(--parchment);
+      color: var(--night-700);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    .ctrl-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .ctrl-btn.main {
+      width: 64px;
+      height: 64px;
+      border: none;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      color: var(--night-900);
+      box-shadow: var(--shadow-gold);
+    }
+    .ctrl-btn.main svg { width: 24px; height: 24px; }
+    .ctrl-btn:disabled { opacity: 0.55; cursor: wait; }
+
+    .status-line {
+      margin-top: 0.9rem;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      min-height: 1.2em;
+    }
+
+    .soul-tips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.85rem;
+      max-width: 720px;
+      margin: 1.4rem auto 0;
+    }
+
+    .soul-tip {
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: rgba(27, 51, 88, 0.05);
+      border: 1px solid rgba(27, 51, 88, 0.08);
+    }
+
+    .soul-tip strong {
+      display: block;
+      color: var(--night-700);
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .soul-tip span {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .soul-verse {
+      max-width: 720px;
+      margin: 1.5rem auto 0;
+      text-align: center;
+      padding: 1.5rem 1.2rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(244, 213, 141, 0.12), rgba(250, 246, 238, 0.95));
+      border: 1px solid rgba(212, 160, 23, 0.22);
+    }
+
+    .soul-verse p {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--night-700);
+      margin-bottom: 0.45rem;
+    }
+
+    .soul-verse cite {
+      color: var(--gold-600);
+      font-style: normal;
+      font-size: 0.9rem;
+    }
+
+    .continue-box {
+      max-width: 820px;
+      margin: 2.5rem auto 0;
+      padding: 1.4rem 1.6rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, #fffdf8, #f7f1e4);
+      border: 1px solid rgba(212, 160, 23, 0.2);
+    }
+
+    .continue-box .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.4rem;
+      margin-top: 0.7rem;
+    }
+
+    .continue-box a { color: var(--night-600); font-weight: 600; }
+    .continue-box a:hover { color: var(--gold-600); }
+
+    .now-playing {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1200;
+      background: rgba(13, 27, 42, 0.96);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(244, 213, 141, 0.2);
+      padding: 0.85rem 1.2rem;
+      display: none;
+      align-items: center;
+      gap: 1rem;
+      color: var(--cream);
+      box-shadow: 0 -10px 30px rgba(13, 27, 42, 0.25);
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .now-playing.visible { display: flex; }
+
+    .np-btn {
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      color: var(--night-900);
+      display: grid;
+      place-items: center;
+    }
+
+    .np-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .np-info { flex: 1; min-width: 0; }
+    .np-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-300);
+      margin-bottom: 0.15rem;
+    }
+    .np-title {
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .np-time {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .np-seek {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 3px;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .np-seek::-webkit-slider-runnable-track {
+      height: 3px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .np-seek::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      margin-top: -4.5px;
+      border-radius: 50%;
+      background: var(--gold-400);
+    }
+
+    @media (max-width: 700px) {
+      .page-hero { padding: 7.5rem 1.2rem 3.5rem; }
+      .module-wrap { padding: 0 1.2rem; }
+      .module-tabs { border-radius: 16px; }
+      .intro-card { padding: 1.35rem 1.2rem; }
+      .np-time { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <a href="../index.html" class="nav-logo">
+      <span class="logo-icon">✦</span>
+      <span>光与盐</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">首页</a></li>
+      <li><a href="../index.html#features">学习板块</a></li>
+      <li><a href="notes.html">读者笔记</a></li>
+      <li><a href="audio-stories.html" class="active">有声频道</a></li>
+      <li><a href="bible-online.html">读圣经</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-content">
+      <nav class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="sep">/</span>
+        <span>有声频道</span>
+      </nav>
+      <span class="page-hero-eyebrow">Audio Channel</span>
+      <h1>听见真理<br /><span class="accent">走进生命</span></h1>
+      <p class="page-hero-desc">
+        圣经人物故事与灵性分享，分模块安静收听。<br />
+        戴上耳机，让话语先进入耳朵，再进入生命。
+      </p>
+    </div>
+  </header>
+
+  <div class="module-wrap">
+    <div class="module-tabs" role="tablist" aria-label="有声频道模块">
+      <button class="module-tab active" type="button" data-module="stories" role="tab" aria-selected="true">圣经故事</button>
+      <button class="module-tab" type="button" data-module="soul" role="tab" aria-selected="false">灵性与灵魂</button>
+    </div>
+
+    <!-- 模块一：圣经故事 -->
+    <section class="module-panel active" id="module-stories" data-module="stories" role="tabpanel">
+      <div class="intro-card reveal">亲爱的弟兄姊妹：
+
+你是否曾翻开圣经，却被繁多的章节拦住脚步？其实圣经是由一个个鲜活生命串联起的奇妙故事。
+
+这一次，我们以「人」为钥匙打开理解圣经的大门：
+<blockquote>从亚当到挪亚，从亚伯拉罕到摩西，从约瑟到约书亚……</blockquote>
+愿你静下心来，聆听每一个生命与真理相遇的时刻。</div>
+
+      <div class="playlist-section">
+        <div class="section-header reveal">
+          <span class="section-eyebrow">Module 01 · Stories</span>
+          <h2 class="section-title">圣经人物故事</h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle">点击卡片即可收听；同一时间只会播放一首。</p>
+        </div>
+        <div class="track-grid" id="trackGrid"></div>
+      </div>
+    </section>
+
+    <!-- 模块二：灵性与灵魂 -->
+    <section class="module-panel" id="module-soul" data-module="soul" role="tabpanel">
+      <div class="intro-card reveal">灵魂不是一套抽象概念，而是我们在神面前真实的生命状态。
+愿这一段分享，帮助你辨认里面的声音，重新把心安放在主里。</div>
+
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Module 02 · Soul</span>
+        <h2 class="section-title">灵性与灵魂</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">安静下来，给自己一段不被打断的时间。</p>
+      </div>
+
+      <div class="soul-shell" id="soulShell">
+        <div class="soul-art">
+          <div class="disc" id="disc" aria-hidden="true"></div>
+          <span class="badge">音频分享</span>
+          <h3>灵性与灵魂</h3>
+          <p>在安静中遇见神</p>
+        </div>
+        <div class="soul-controls">
+          <div class="seek-row">
+            <span id="soulCur">0:00</span>
+            <input class="seek" id="soulSeek" type="range" min="0" max="1000" value="0" aria-label="播放进度" />
+            <span id="soulDur">0:00</span>
+          </div>
+          <div class="control-row">
+            <button class="ctrl-btn" id="soulBack" type="button" aria-label="后退15秒">
+              <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8zm-1.1 11H9.3v-4.5l-1.1.35v-1.1l2-.65h.7V16z"/></svg>
+            </button>
+            <button class="ctrl-btn main" id="soulPlay" type="button" aria-label="播放/暂停">
+              <svg id="soulPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <button class="ctrl-btn" id="soulFwd" type="button" aria-label="前进15秒">
+              <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8zm1.9 11h-1.7v-4.5l-1.1.35v-1.1l2-.65h.8V16z"/></svg>
+            </button>
+          </div>
+          <p class="status-line" id="soulStatus">点击播放，在网页中收听</p>
+        </div>
+      </div>
+
+      <div class="soul-tips reveal">
+        <div class="soul-tip">
+          <strong>建议场景</strong>
+          <span>清晨灵修、通勤路上，或睡前安静片刻</span>
+        </div>
+        <div class="soul-tip">
+          <strong>聆听提示</strong>
+          <span>不必急着做笔记，先让话语在心里停留</span>
+        </div>
+      </div>
+
+      <div class="soul-verse reveal">
+        <p>「你们要休息，要知道我是神。」</p>
+        <cite>—— 诗篇 46:10</cite>
+      </div>
+    </section>
+
+    <div class="continue-box reveal">
+      <span class="section-eyebrow">Continue</span>
+      <h2 class="section-title" style="font-size:1.45rem;margin-top:0.3rem;">继续探索</h2>
+      <div class="links">
+        <a href="notes.html">读者笔记 →</a>
+        <a href="bible-online.html">在线读圣经 →</a>
+        <a href="../index.html">返回首页 →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <div class="footer-brand">光与盐 · 圣经学习平台</div>
+        <p class="footer-desc">在神的话语中寻见光，在真理的道上同行。</p>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html">首页</a>
+        <a href="notes.html">读者笔记</a>
+        <a href="audio-stories.html">有声频道</a>
+        <a href="bible-online.html">读圣经</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 光与盐圣经学习平台 · 你的话是我脚前的灯，路上的光。</p>
+    </div>
+  </footer>
+
+  <div class="now-playing" id="nowPlaying" aria-live="polite">
+    <input class="np-seek" id="npSeek" type="range" min="0" max="1000" value="0" aria-label="进度" />
+    <button class="np-btn" id="npToggle" aria-label="播放/暂停">
+      <svg id="npIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="np-info">
+      <div class="np-label">正在播放</div>
+      <div class="np-title" id="npTitle">—</div>
+    </div>
+    <div class="np-time" id="npTime">0:00 / 0:00</div>
+  </div>
+
+  <script>
+    const TRACKS = [
+      { id: "8apkhza0gq", no: "01", title: "亚当 - 第一个有灵的活人", sub: "圣经故事之1 · 创世记" },
+      { id: "fdrgb1xsjg", no: "02", title: "挪亚 - 方舟的救恩", sub: "圣经故事之2 · 创世记" },
+      { id: "oh0xy6ef1v", no: "03", title: "亚伯拉罕 - 信心之父", sub: "圣经故事之3 · 创世记" },
+      { id: "mvr5yng5w7", no: "04", title: "以撒 - 神赐的孩子", sub: "圣经故事之4 · 创世记" },
+      { id: "6bvfvavzke", no: "05", title: "雅各（上） - 抓住福分", sub: "圣经故事之5 · 创世记" },
+      { id: "jyjzhzkij3", no: "06", title: "雅各（下） - 得胜的以色列", sub: "圣经故事之5 · 创世记" },
+      { id: "gwqvhqkvlo", no: "07", title: "约瑟 - 跌宕起伏的人生", sub: "圣经故事之6 · 创世记" },
+      { id: "5ira7p7esc", no: "08", title: "摩西 - 出埃及记的传奇", sub: "圣经故事之7 · 出埃及记" },
+      { id: "vslnzja432", no: "09", title: "巴兰 - 民数记的故事", sub: "圣经故事之8 · 民数记" },
+      { id: "kn59bj4m5u", no: "10", title: "约书亚 - 信心与勇气", sub: "圣经故事之9 · 约书亚记" }
+    ];
+
+    const SOUL_REF = atob("aHR0cHM6Ly95ZHNjaG9vbC1vbmxpbmUubm9zZG4uMTI3Lm5ldC90aWt1LzY1MTFhYzQ3OTQ1MmNhMmNkMzQ4ZjFkMDExNTAwNjdjYmViYmY1MGQ0NWJmMzI2MzExZGI2NzRlYjA5MzU4OWIubXAz");
+    const SOUL_TITLE = "灵性与灵魂";
+
+    const playIcon = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+    const pauseIcon = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>';
+    const playSvg = '<path d="M8 5v14l11-7z"/>';
+    const pauseSvg = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
+
+    const audio = new Audio();
+    audio.controls = false;
+    audio.setAttribute("controlsList", "nodownload noplaybackrate");
+    audio.preload = "none";
+
+    let currentKey = null; // "story-0" | "soul"
+    let currentIndex = -1;
+    let seeking = false;
+    let objectUrl = null;
+    let soulReady = false;
+    const blobCache = new Map();
+
+    const grid = document.getElementById("trackGrid");
+    const nowPlaying = document.getElementById("nowPlaying");
+    const npToggle = document.getElementById("npToggle");
+    const npTitle = document.getElementById("npTitle");
+    const npTime = document.getElementById("npTime");
+    const npSeek = document.getElementById("npSeek");
+    const disc = document.getElementById("disc");
+    const soulPlay = document.getElementById("soulPlay");
+    const soulPlayIcon = document.getElementById("soulPlayIcon");
+    const soulBack = document.getElementById("soulBack");
+    const soulFwd = document.getElementById("soulFwd");
+    const soulSeek = document.getElementById("soulSeek");
+    const soulCur = document.getElementById("soulCur");
+    const soulDur = document.getElementById("soulDur");
+    const soulStatus = document.getElementById("soulStatus");
+
+    function fmt(sec) {
+      if (!isFinite(sec)) return "0:00";
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60).toString().padStart(2, "0");
+      return m + ":" + s;
+    }
+
+    function revokeCurrent() {
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+        objectUrl = null;
+      }
+    }
+
+    async function resolveWistia(mediaId) {
+      if (blobCache.has(mediaId)) return blobCache.get(mediaId);
+      const meta = await fetch("https://fast.wistia.net/embed/medias/" + mediaId + ".json", {
+        credentials: "omit",
+        cache: "force-cache"
+      }).then(r => r.json());
+      const assets = (meta.media && meta.media.assets) || [];
+      const asset = assets.find(a => a.type === "mp3_audio" || a.ext === "mp3") ||
+        assets.find(a => String(a.type || "").includes("audio"));
+      if (!asset || !asset.url) throw new Error("stream unavailable");
+      const res = await fetch(asset.url, { credentials: "omit", cache: "force-cache" });
+      if (!res.ok) throw new Error("stream fetch failed");
+      const blob = await res.blob();
+      const typed = blob.type && blob.type.startsWith("audio/")
+        ? blob
+        : new Blob([blob], { type: "audio/mpeg" });
+      blobCache.set(mediaId, typed);
+      return typed;
+    }
+
+    async function resolveSoul() {
+      if (blobCache.has("soul")) return blobCache.get("soul");
+      const res = await fetch(SOUL_REF, { credentials: "omit", cache: "force-cache" });
+      if (!res.ok) throw new Error("unavailable");
+      const blob = await res.blob();
+      const typed = blob.type && blob.type.startsWith("audio/")
+        ? blob
+        : new Blob([blob], { type: "audio/mpeg" });
+      blobCache.set("soul", typed);
+      return typed;
+    }
+
+    function setModule(name) {
+      document.querySelectorAll(".module-tab").forEach(tab => {
+        const on = tab.dataset.module === name;
+        tab.classList.toggle("active", on);
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      document.querySelectorAll(".module-panel").forEach(panel => {
+        panel.classList.toggle("active", panel.dataset.module === name);
+      });
+      history.replaceState(null, "", name === "soul" ? "#soul" : "#stories");
+    }
+
+    document.querySelectorAll(".module-tab").forEach(tab => {
+      tab.addEventListener("click", () => setModule(tab.dataset.module));
+    });
+
+    function renderTracks() {
+      grid.innerHTML = TRACKS.map((t, i) => `
+        <article class="track-card reveal" data-index="${i}" id="track-${i}">
+          <div class="track-top">
+            <button class="track-play" type="button" aria-label="播放 ${t.title}">${playIcon}</button>
+            <div class="track-meta">
+              <div class="track-index">STORY ${t.no}</div>
+              <h3 class="track-title">${t.title}</h3>
+              <div class="track-sub">${t.sub}</div>
+            </div>
+          </div>
+          <div class="track-progress"><span></span></div>
+        </article>
+      `).join("");
+
+      grid.querySelectorAll(".track-card").forEach(card => {
+        card.addEventListener("click", () => {
+          const idx = Number(card.dataset.index);
+          if (currentKey === "story-" + idx) togglePlay();
+          else playStory(idx);
+        });
+        card.addEventListener("contextmenu", e => e.preventDefault());
+      });
+    }
+
+    function setPlayingUI(playing) {
+      const iconHost = document.getElementById("npIcon");
+      if (iconHost) {
+        iconHost.outerHTML = playing
+          ? '<svg id="npIcon" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>'
+          : '<svg id="npIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+      }
+
+      grid.querySelectorAll(".track-card").forEach((card, i) => {
+        const btn = card.querySelector(".track-play");
+        const active = currentKey === "story-" + i;
+        card.classList.toggle("is-active", active);
+        btn.innerHTML = active && playing ? pauseIcon : playIcon;
+      });
+
+      const soulActive = currentKey === "soul";
+      soulPlayIcon.innerHTML = soulActive && playing ? pauseSvg : playSvg;
+      disc.classList.toggle("spinning", soulActive && playing);
+      if (soulActive) {
+        soulStatus.textContent = playing ? "正在收听" : (soulReady ? "已暂停" : "点击播放，在网页中收听");
+      }
+    }
+
+    async function playStory(index) {
+      const card = grid.querySelector("#track-" + index);
+      if (card) card.classList.add("is-loading");
+      try {
+        const track = TRACKS[index];
+        const blob = await resolveWistia(track.id);
+        revokeCurrent();
+        objectUrl = URL.createObjectURL(blob);
+        currentIndex = index;
+        currentKey = "story-" + index;
+        audio.src = objectUrl;
+        await audio.play();
+        nowPlaying.classList.add("visible");
+        npTitle.textContent = track.title;
+        setPlayingUI(true);
+      } catch (err) {
+        alert("暂时无法播放，请稍后再试。");
+      } finally {
+        if (card) card.classList.remove("is-loading");
+      }
+    }
+
+    async function playSoul() {
+      try {
+        soulPlay.disabled = true;
+        soulStatus.textContent = "正在准备播放…";
+        const blob = await resolveSoul();
+        revokeCurrent();
+        objectUrl = URL.createObjectURL(blob);
+        soulReady = true;
+        currentKey = "soul";
+        currentIndex = -1;
+        audio.src = objectUrl;
+        await audio.play();
+        nowPlaying.classList.add("visible");
+        npTitle.textContent = SOUL_TITLE;
+        setPlayingUI(true);
+      } catch (e) {
+        soulStatus.textContent = "暂时无法播放，请稍后再试";
+      } finally {
+        soulPlay.disabled = false;
+      }
+    }
+
+    function togglePlay() {
+      if (!currentKey) {
+        playStory(0);
+        return;
+      }
+      if (audio.paused) {
+        audio.play().catch(() => {});
+        setPlayingUI(true);
+      } else {
+        audio.pause();
+        setPlayingUI(false);
+      }
+    }
+
+    soulPlay.addEventListener("click", () => {
+      if (currentKey === "soul") togglePlay();
+      else playSoul();
+    });
+    soulBack.addEventListener("click", () => {
+      if (currentKey !== "soul") return;
+      audio.currentTime = Math.max(0, audio.currentTime - 15);
+    });
+    soulFwd.addEventListener("click", () => {
+      if (currentKey !== "soul") return;
+      audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 15);
+    });
+
+    npToggle.addEventListener("click", togglePlay);
+    nowPlaying.addEventListener("contextmenu", e => e.preventDefault());
+    document.getElementById("soulShell").addEventListener("contextmenu", e => e.preventDefault());
+
+    audio.addEventListener("timeupdate", () => {
+      if (seeking || !audio.duration) return;
+      const ratio = audio.currentTime / audio.duration;
+      npSeek.value = Math.floor(ratio * 1000);
+      npTime.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+      if (currentKey && currentKey.startsWith("story-")) {
+        const bar = grid.querySelector(`#track-${currentIndex} .track-progress > span`);
+        if (bar) bar.style.width = (ratio * 100).toFixed(2) + "%";
+      }
+      if (currentKey === "soul") {
+        soulSeek.value = Math.floor(ratio * 1000);
+        soulCur.textContent = fmt(audio.currentTime);
+        soulDur.textContent = fmt(audio.duration);
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      if (currentKey && currentKey.startsWith("story-") && currentIndex < TRACKS.length - 1) {
+        playStory(currentIndex + 1);
+      } else {
+        setPlayingUI(false);
+        if (currentKey === "soul") soulStatus.textContent = "本段已听完";
+      }
+    });
+
+    audio.addEventListener("pause", () => setPlayingUI(false));
+    audio.addEventListener("play", () => setPlayingUI(true));
+    audio.addEventListener("loadedmetadata", () => {
+      if (currentKey === "soul") soulDur.textContent = fmt(audio.duration);
+    });
+
+    npSeek.addEventListener("input", () => { seeking = true; });
+    npSeek.addEventListener("change", () => {
+      if (audio.duration) audio.currentTime = (npSeek.value / 1000) * audio.duration;
+      seeking = false;
+    });
+    soulSeek.addEventListener("input", () => { seeking = true; });
+    soulSeek.addEventListener("change", () => {
+      if (audio.duration) audio.currentTime = (soulSeek.value / 1000) * audio.duration;
+      seeking = false;
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === "s" || e.key === "S")) e.preventDefault();
+    });
+
+    renderTracks();
+
+    const hash = (location.hash || "").replace("#", "");
+    setModule(hash === "soul" ? "soul" : "stories");
+
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 40);
+    });
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+    navToggle.addEventListener("click", () => {
+      navToggle.classList.toggle("active");
+      navLinks.classList.toggle("open");
+    });
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navToggle.classList.remove("active");
+        navLinks.classList.remove("open");
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
