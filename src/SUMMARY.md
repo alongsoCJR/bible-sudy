@@ -14,7 +14,7 @@
 
 [//]: # (    - [星斗智能体展示]&#40;./static/star-agent.html&#41;)
 - [在线读圣经](./static/bible-online.html)
-    - [加入我们](./static/join-us.html)
+    - [加入我们](http://42.194.137.245/static/join-us.html)
 
 [//]: # (以下页面暂时从导航隐藏，仍可通过 URL 直接访问)
 [//]: # (- [比赛抽签]&#40;static/bible_contest.html&#41;)
