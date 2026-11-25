@@ -626,6 +626,7 @@
       <li><a href="static/notes.html">读者笔记</a></li>
       <li><a href="static/audio-stories.html">有声频道</a></li>
       <li><a href="static/bible-online.html">读圣经</a></li>
+      <li><a href="static/join-us.html">加入我们</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="菜单">
       <span></span><span></span><span></span>
@@ -642,7 +643,7 @@
       </p>
       <div class="hero-actions">
         <a href="static/bible-online.html" class="btn btn-gold">在线读圣经 →</a>
-        <a href="static/audio-stories.html" class="btn btn-outline">收听有声故事</a>
+        <a href="static/join-us.html" class="btn btn-outline">加入查经学习</a>
       </div>
     </div>
     <div class="scroll-hint">
@@ -805,6 +806,7 @@
         <a href="static/notes.html">读者笔记</a>
         <a href="static/audio-stories.html">有声频道</a>
         <a href="static/bible-online.html">读圣经</a>
+        <a href="static/join-us.html">加入我们</a>
       </div>
       <div class="footer-links">
         <a href="static/grace_article.html">约拿的故事</a>
@@ -6661,44 +6663,49 @@ text-transform: uppercase;
     .social-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        gap: 16px;
+        align-items: stretch;
     }
     .social-card {
         text-align: center;
-    }
-    .qr-placeholder {
-        width: 100%;
-        aspect-ratio: 1;
-        background: linear-gradient(135deg, #f5f0e8 0%, #e8dfd0 100%);
-        border-radius: 12px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        margin-bottom: 10px;
-        border: 2px dashed #c4b8a8;
-        position: relative;
+    }
+    /* 两张码统一外框比例，避免一方方形、一方竖图视觉失衡 */
+    .qr-frame {
+        width: 100%;
+        max-width: 168px;
+        aspect-ratio: 7 / 8;
+        border-radius: 14px;
+        margin: 0 auto 12px;
+        border: 1px solid rgba(139,115,85,0.16);
+        box-shadow: 0 3px 14px rgba(58,50,40,0.07);
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
     }
-    .qr-placeholder::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url(&quot;data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='2' y='2' width='6' height='6' fill='%23c4b8a8'/%3E%3Crect x='12' y='2' width='6' height='6' fill='%23c4b8a8'/%3E%3Crect x='2' y='12' width='6' height='6' fill='%23c4b8a8'/%3E%3C/svg%3E&quot;);
-        opacity: 0.3;
+    .qr-frame.qr-wechat {
+        background: #fff;
     }
-    .qr-icon {
-        font-size: 36px;
-        margin-bottom: 5px;
-        z-index: 1;
+    .qr-frame.qr-douyin {
+        background: #7484a6;
+        padding: 0;
     }
-    .qr-text {
-        font-size: 11px;
-        color: #8b7355;
-        z-index: 1;
+    .qr-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+    .qr-frame.qr-wechat img {
+        border-radius: 6px;
+        background: #fff;
+    }
+    .qr-frame.qr-douyin img {
+        object-fit: cover;
     }
     .social-name {
         font-size: 14px;
@@ -6709,8 +6716,9 @@ text-transform: uppercase;
     .social-id {
         font-size: 12px;
         color: #888;
+        line-height: 1.4;
     }
-    .upload-hint {
+    .social-tip {
         font-size: 11px;
         color: #999;
         margin-top: 15px;
@@ -6759,9 +6767,9 @@ text-transform: uppercase;
     .success-content {
         background: #fff;
         border-radius: 20px;
-        padding: 35px 30px;
+        padding: 35px 28px;
         text-align: center;
-        max-width: 320px;
+        max-width: 360px;
         width: 100%;
         animation: modalIn 0.3s ease;
     }
@@ -6800,9 +6808,9 @@ text-transform: uppercase;
 <body>
     <!-- 顶部导航 -->
     <div class="top-bar">
-        <a class="back-home" href="static/bible-online.html">返回读经</a>
+        <a class="back-home" id="bibleOnlineLink" href="static/bible-online.html">返回读经</a>
         <span class="page-title">✝ 加入我们</span>
-        <a class="back-home" href="static/../index.html" style="opacity:.95">网站首页</a>
+        <a class="back-home" id="siteHomeLink" href="static/../index.html" style="opacity:.95">网站首页</a>
     </div>
 <pre><code>&lt;!-- 英雄区域 --&gt;
 &lt;div class=&quot;hero-section&quot;&gt;
@@ -6866,23 +6874,33 @@ text-transform: uppercase;
                 &lt;/label&gt;
                 &lt;select class=&quot;form-select&quot; name=&quot;background&quot;&gt;
                     &lt;option value=&quot;&quot;&gt;请选择&lt;/option&gt;
-                    &lt;option value=&quot;new&quot;&gt;初信者&lt;/option&gt;
-                    &lt;option value=&quot;growing&quot;&gt;成长中&lt;/option&gt;
-                    &lt;option value=&quot;mature&quot;&gt;成熟信徒&lt;/option&gt;
-                    &lt;option value=&quot;seeking&quot;&gt;寻求真理&lt;/option&gt;
+                    &lt;option value=&quot;new&quot;&gt;初信者（1-2年）&lt;/option&gt;
+                    &lt;option value=&quot;cradle&quot;&gt;母胎信仰（从小信）&lt;/option&gt;
+                    &lt;option value=&quot;growing&quot;&gt;灵命成长中（3-10年）&lt;/option&gt;
+                    &lt;option value=&quot;mature&quot;&gt;成熟信徒（10年以上）&lt;/option&gt;
+                    &lt;option value=&quot;minister&quot;&gt;牧道友（讲道人）&lt;/option&gt;
                 &lt;/select&gt;
             &lt;/div&gt;
             &lt;div class=&quot;form-group&quot;&gt;
                 &lt;label class=&quot;form-label&quot;&gt;
                     想参加的活动
                 &lt;/label&gt;
-                &lt;select class=&quot;form-select&quot; name=&quot;activity&quot;&gt;
+                &lt;select class=&quot;form-select&quot; name=&quot;activity&quot; id=&quot;activitySelect&quot;&gt;
                     &lt;option value=&quot;&quot;&gt;请选择&lt;/option&gt;
-                    &lt;option value=&quot;morning&quot;&gt;晨间查经&lt;/option&gt;
-                    &lt;option value=&quot;evening&quot;&gt;晚间查经&lt;/option&gt;
-                    &lt;option value=&quot;weekend&quot;&gt;周末团契&lt;/option&gt;
-                    &lt;option value=&quot;online&quot;&gt;线上查经&lt;/option&gt;
+                    &lt;option value=&quot;morning&quot;&gt;晨间查经（6:00-7:00）&lt;/option&gt;
+                    &lt;option value=&quot;evening&quot;&gt;晚间查经（20:00-21:00）&lt;/option&gt;
+                    &lt;option value=&quot;online&quot;&gt;线上培灵会&lt;/option&gt;
+                    &lt;option value=&quot;beijing_youth&quot;&gt;北京青年团契&lt;/option&gt;
+                    &lt;option value=&quot;weekend&quot;&gt;周末线下活动&lt;/option&gt;
+                    &lt;option value=&quot;other&quot;&gt;其他时间段&lt;/option&gt;
                 &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot; id=&quot;activityCustomGroup&quot; style=&quot;display:none;&quot;&gt;
+                &lt;label class=&quot;form-label&quot;&gt;
+                    合适的时间段 &lt;span class=&quot;required&quot;&gt;*&lt;/span&gt;
+                &lt;/label&gt;
+                &lt;input type=&quot;text&quot; class=&quot;form-input&quot; name=&quot;activityCustom&quot; id=&quot;activityCustomInput&quot;
+                       placeholder=&quot;请填写您方便的时间段，例如：周六下午 14:00-16:00&quot; maxlength=&quot;128&quot;&gt;
             &lt;/div&gt;
             &lt;div class=&quot;form-group&quot;&gt;
                 &lt;label class=&quot;form-label&quot;&gt;
@@ -6890,36 +6908,35 @@ text-transform: uppercase;
                 &lt;/label&gt;
                 &lt;textarea class=&quot;form-textarea&quot; name=&quot;message&quot; placeholder=&quot;有什么想对我们说的，或需要代祷的事项...&quot;&gt;&lt;/textarea&gt;
             &lt;/div&gt;
-            &lt;button type=&quot;submit&quot; class=&quot;submit-btn&quot;&gt;
+            &lt;button type=&quot;submit&quot; class=&quot;submit-btn&quot; id=&quot;submitBtn&quot;&gt;
                 提交报名
             &lt;/button&gt;
+            &lt;p id=&quot;formError&quot; style=&quot;display:none;margin-top:12px;color:#c0392b;font-size:14px;text-align:center;&quot;&gt;&lt;/p&gt;
         &lt;/form&gt;
     &lt;/div&gt;
 
     &lt;!-- 社交媒体 --&gt;
-    &lt;div class=&quot;social-section&quot;&gt;
+    &lt;div class=&quot;social-section&quot; id=&quot;socialSection&quot;&gt;
         &lt;h3 class=&quot;social-title&quot;&gt;📱 关注我们&lt;/h3&gt;
-        &lt;p class=&quot;social-subtitle&quot;&gt;扫码加入社群，获取更多灵修资源&lt;/p&gt;
+        &lt;p class=&quot;social-subtitle&quot;&gt;扫码关注官方账号，获取更多灵修资源&lt;/p&gt;
         &lt;div class=&quot;social-grid&quot;&gt;
             &lt;div class=&quot;social-card&quot;&gt;
-                &lt;div class=&quot;qr-placeholder&quot;&gt;
-                    &lt;div class=&quot;qr-icon&quot;&gt;💬&lt;/div&gt;
-                    &lt;div class=&quot;qr-text&quot;&gt;微信二维码&lt;/div&gt;
+                &lt;div class=&quot;qr-frame qr-wechat&quot;&gt;
+                    &lt;img src=&quot;images/wechat-qr.jpg&quot; alt=&quot;微信公众号：天上青年北京&quot; loading=&quot;lazy&quot;&gt;
                 &lt;/div&gt;
-                &lt;div class=&quot;social-name&quot;&gt;微信群&lt;/div&gt;
-                &lt;div class=&quot;social-id&quot;&gt;微信号: BibleStudy2024&lt;/div&gt;
+                &lt;div class=&quot;social-name&quot;&gt;微信公众号&lt;/div&gt;
+                &lt;div class=&quot;social-id&quot;&gt;天上青年北京&lt;/div&gt;
             &lt;/div&gt;
             &lt;div class=&quot;social-card&quot;&gt;
-                &lt;div class=&quot;qr-placeholder&quot;&gt;
-                    &lt;div class=&quot;qr-icon&quot;&gt;🎵&lt;/div&gt;
-                    &lt;div class=&quot;qr-text&quot;&gt;抖音二维码&lt;/div&gt;
+                &lt;div class=&quot;qr-frame qr-douyin&quot;&gt;
+                    &lt;img src=&quot;images/douyin-qr.jpg&quot; alt=&quot;抖音官方号：信仰笔记&quot; loading=&quot;lazy&quot;&gt;
                 &lt;/div&gt;
                 &lt;div class=&quot;social-name&quot;&gt;抖音号&lt;/div&gt;
-                &lt;div class=&quot;social-id&quot;&gt;抖音: @FaithJourney&lt;/div&gt;
+                &lt;div class=&quot;social-id&quot;&gt;@信仰笔记 · xinyangbiji&lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;upload-hint&quot;&gt;
-            💡 提示：将微信/抖音二维码图片替换到 images/wechat-qr.png 和 images/douyin-qr.png
+        &lt;div class=&quot;social-tip&quot;&gt;
+            微信扫左侧码关注公众号；抖音可保存右侧图后，在抖音搜索页扫一扫
         &lt;/div&gt;
     &lt;/div&gt;
 
@@ -6941,45 +6958,154 @@ text-transform: uppercase;
         &lt;h3 class=&quot;success-title&quot;&gt;报名成功！&lt;/h3&gt;
         &lt;p class=&quot;success-text&quot;&gt;
             感谢您的报名，我们会尽快与您联系。&lt;br&gt;
+            为方便更快联系到您，您也可以关注下面的官方公众号和抖音号。&lt;br&gt;
             愿神赐福您的查经之旅！
         &lt;/p&gt;
-        &lt;button class=&quot;success-btn&quot; onclick=&quot;closeModal()&quot;&gt;确定&lt;/button&gt;
+        &lt;button class=&quot;success-btn&quot; onclick=&quot;closeModal()&quot;&gt;去关注&lt;/button&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-    // 表单提交
-    document.getElementById('joinForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // 获取表单数据
-        const formData = new FormData(this);
-        const data = {};
-        formData.forEach((value, key) =&gt; {
-            data[key] = value;
-        });
-        
-        // 这里可以发送到服务器
-        console.log('报名信息:', data);
-        
-        // 显示成功提示
-        document.getElementById('successModal').classList.add('active');
-        
-        // 重置表单
-        this.reset();
-    });
+    (function () {
+        const params = new URLSearchParams(location.search);
+        const GH_SITE = 'https://alongsocjr.github.io/bible-sudy';
 
-    // 关闭成功提示
-    function closeModal() {
-        document.getElementById('successModal').classList.remove('active');
-    }
-
-    // 点击模态框背景关闭
-    document.getElementById('successModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeModal();
+        function isServerHost(h) {
+            return h === '42.194.137.245' ||
+                h === 'bible-join.duckdns.org' ||
+                h.endsWith('.sslip.io') ||
+                h.endsWith('.nip.io') ||
+                h.endsWith('.duckdns.org');
         }
-    });
+
+        // 网站首页 / 返回读经：Pages 走站内相对路径；DuckDNS 报名页回 GitHub 站点
+        (function resolveNavLinks() {
+            const h = location.hostname;
+            const home = document.getElementById('siteHomeLink');
+            const bible = document.getElementById('bibleOnlineLink');
+            if (h.endsWith('github.io')) {
+                const root = location.pathname.split('/').filter(Boolean)[0];
+                if (home) home.href = root ? '/' + root + '/' : '/';
+                if (bible) bible.href = root ? '/' + root + '/static/bible-online.html' : 'bible-online.html';
+            } else if (isServerHost(h)) {
+                if (home) home.href = GH_SITE + '/';
+                if (bible) bible.href = GH_SITE + '/static/bible-online.html';
+            }
+        })();
+
+        function defaultApiBase() {
+            const h = location.hostname;
+            if (h === 'localhost' || h === '127.0.0.1') {
+                return 'http://localhost:8080';
+            }
+            // 已挂在业务服务器（含 DuckDNS HTTPS）→ 同域走 Apache 反代
+            if (isServerHost(h)) {
+                return '';
+            }
+            // GitHub Pages 等外站 → HTTPS 域名（避免混合内容）
+            return 'https://bible-join.duckdns.org';
+        }
+        const API_BASE = (params.get('api') || defaultApiBase()).replace(/\/$/, '');
+
+        const form = document.getElementById('joinForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formError = document.getElementById('formError');
+        const activitySelect = document.getElementById('activitySelect');
+        const activityCustomGroup = document.getElementById('activityCustomGroup');
+        const activityCustomInput = document.getElementById('activityCustomInput');
+
+        function syncActivityCustom() {
+            const isOther = activitySelect.value === 'other';
+            activityCustomGroup.style.display = isOther ? 'block' : 'none';
+            activityCustomInput.required = isOther;
+            if (!isOther) {
+                activityCustomInput.value = '';
+            }
+        }
+        activitySelect.addEventListener('change', syncActivityCustom);
+        syncActivityCustom();
+
+        function showError(msg) {
+            formError.textContent = msg || '提交失败，请稍后重试';
+            formError.style.display = 'block';
+        }
+
+        function clearError() {
+            formError.textContent = '';
+            formError.style.display = 'none';
+        }
+
+        function setLoading(loading) {
+            submitBtn.disabled = loading;
+            submitBtn.textContent = loading ? '提交中…' : '提交报名';
+            submitBtn.style.opacity = loading ? '0.7' : '1';
+        }
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            clearError();
+
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) =&gt; {
+                data[key] = typeof value === 'string' ? value.trim() : value;
+            });
+
+            if (!data.name) {
+                showError('请填写称呼');
+                return;
+            }
+            if (!/^1[3-9]\d{9}$/.test(data.phone || '')) {
+                showError('请填写正确的手机号');
+                return;
+            }
+            if (data.activity === 'other' &amp;&amp; !data.activityCustom) {
+                showError('请填写您合适的时间段');
+                return;
+            }
+            if (data.activity !== 'other') {
+                data.activityCustom = '';
+            }
+
+            setLoading(true);
+            try {
+                const res = await fetch(API_BASE + '/api/enrollment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                let body = null;
+                try {
+                    body = await res.json();
+                } catch (_) { /* ignore */ }
+                if (!res.ok || !body || !body.success) {
+                    showError((body &amp;&amp; body.message) || ('提交失败（' + res.status + '）'));
+                    return;
+                }
+                form.reset();
+                syncActivityCustom();
+                document.getElementById('successModal').classList.add('active');
+            } catch (err) {
+                showError('网络异常，请确认后端已启动（' + API_BASE + '）');
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        window.closeModal = function () {
+            document.getElementById('successModal').classList.remove('active');
+            const social = document.getElementById('socialSection');
+            if (social) {
+                social.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        };
+
+        document.getElementById('successModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    })();
 &lt;/script&gt;
 </code></pre>
 </body>
