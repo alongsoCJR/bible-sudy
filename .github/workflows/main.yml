@@ -21,6 +21,11 @@ jobs:
           curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.14/mdbook-v0.4.14-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
           echo "$(pwd)/bin" >> $GITHUB_PATH
       - run: mdbook build # Build the book
+      - name: Sync static enrollment assets
+        run: |
+          mkdir -p book/static/js book/static/images
+          cp -f src/static/join-us.html book/static/ || true
+          cp -f src/static/images/wechat-qr.jpg src/static/images/douyin-qr.jpg book/static/images/ || true
       - run: find src -name '*.md' -exec mdbook test -- {} \; 2>/dev/null || true # Test only markdown files
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:

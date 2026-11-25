@@ -6,11 +6,14 @@ cd "$ROOT"
 mdbook clean
 mdbook build
 
-mkdir -p book/static/js
+mkdir -p book/static/js book/static/images
 cp -f src/static/bible_contest.html src/static/bible_score.html \
       src/static/cd-activity.html src/static/cd-contest.html \
+      src/static/join-us.html \
       book/static/ 2>/dev/null || true
 cp -f src/static/js/cd-music.js book/static/js/ 2>/dev/null || true
+cp -f src/static/images/wechat-qr.jpg src/static/images/douyin-qr.jpg \
+      book/static/images/ 2>/dev/null || true
 
 echo "access at http://localhost:3000/"
 mdbook serve

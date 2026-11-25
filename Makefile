@@ -9,6 +9,9 @@ init:
 deploy: init
 	@echo "====> deploying to github"
 	mdbook build
+	mkdir -p book/static/images
+	cp -f src/static/join-us.html book/static/ || true
+	cp -f src/static/images/wechat-qr.jpg src/static/images/douyin-qr.jpg book/static/images/ || true
 	rm -rf /tmp/book/*
 	cp -rp book/* /tmp/book/
 	cd /tmp/book && \
