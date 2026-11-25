@@ -558,6 +558,8 @@
         (function () {
             const params = new URLSearchParams(location.search);
             const GH_SITE = 'https://alongsocjr.github.io/bible-sudy';
+            // DuckDNS 在腾讯云未备案会被 RST；对外统一走裸 IP HTTP
+            const SERVER_HTTP = 'http://42.194.137.245';
 
             function isServerHost(h) {
                 return h === '42.194.137.245' ||
@@ -567,7 +569,13 @@
                     h.endsWith('.duckdns.org');
             }
 
-            // 网站首页 / 返回读经：Pages 走站内相对路径；DuckDNS 报名页回 GitHub 站点
+            // GitHub Pages 是 HTTPS，浏览器会拦截对 HTTP API 的请求 → 跳到服务器报名页
+            if (location.hostname.endsWith('github.io') && !params.has('api')) {
+                location.replace(SERVER_HTTP + '/static/join-us.html' + location.search + location.hash);
+                return;
+            }
+
+            // 网站首页 / 返回读经：Pages 走站内相对路径；服务器报名页回 GitHub 站点
             (function resolveNavLinks() {
                 const h = location.hostname;
                 const home = document.getElementById('siteHomeLink');
@@ -587,12 +595,12 @@
                 if (h === 'localhost' || h === '127.0.0.1') {
                     return 'http://localhost:8080';
                 }
-                // 已挂在业务服务器（含 DuckDNS HTTPS）→ 同域走 Apache 反代
+                // 已挂在业务服务器 → 同域走 Apache 反代
                 if (isServerHost(h)) {
                     return '';
                 }
-                // GitHub Pages 等外站 → HTTPS 域名（避免混合内容）
-                return 'https://bible-join.duckdns.org';
+                // 外站兜底：裸 IP HTTP（勿用 DuckDNS，大陆链路不稳定）
+                return SERVER_HTTP;
             }
             const API_BASE = (params.get('api') || defaultApiBase()).replace(/\/$/, '');
 
