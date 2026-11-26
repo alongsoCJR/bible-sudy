@@ -22,12 +22,12 @@ jobs:
           echo "$(pwd)/bin" >> $GITHUB_PATH
       - run: mdbook build # Build the book
       - run: find src -name '*.md' -exec mdbook test -- {} \; 2>/dev/null || true # Test only markdown files
-      - name: Sync static enrollment assets
+      - name: Sync static site assets
         run: |
-          mkdir -p book/static/js book/static/images
+          mkdir -p book/static
           cp -f src/static/*.html book/static/ || true
-          cp -f src/static/js/* book/static/js/ 2>/dev/null || true
-          cp -f src/static/images/* book/static/images/ 2>/dev/null || true
+          cp -R src/static/js src/static/css src/static/images book/static/ || true
+          cp -f src/static/bible_full.js book/static/ 2>/dev/null || true
       - uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
           branch: gh-pages # The branch the action should deploy to.

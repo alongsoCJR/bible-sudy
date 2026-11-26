@@ -1,6 +1,6 @@
 # <span class="bible-title">灵性与灵魂</span>
 
-<p class="page-backlink"><a href="../static/index.html">← 返回光与盐首页</a> · <a href="../audio.html">有声频道</a></p>
+<p class="page-backlink"><a href="../static/index.html">← 返回北京青年团契首页</a> · <a href="../audio.html">有声频道</a></p>
 
 <div class="soul-hero">
   <span class="soul-eyebrow">Quiet Listening</span>
