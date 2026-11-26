@@ -1,24 +1,63 @@
 /**
- * 全站统一顶部导航：各页结构、文案、顺序保持一致。
- * 用法：页面引入 style.css 后放置 <div id="site-nav"></div>，再引入本脚本。
- * 也可不放挂载点，脚本会自动插到 body 最前。
+ * 全站统一顶部导航。
+ * 策略：仅「加入我们」走业务服务器；其余页面一律走 GitHub Pages。
  */
 (function () {
+  var GH_SITE = "https://alongsocjr.github.io/bible-sudy";
+  var SERVER_JOIN = "http://42.194.137.245/static/join-us.html";
+
   var path = (location.pathname || "").replace(/\\/g, "/");
-  var inStatic = /\/static(?:\/|$)/.test(path);
   var file = (path.split("/").pop() || "").toLowerCase();
-  var root = inStatic ? "../" : "";
-  var st = inStatic ? "" : "static/";
+  var host = location.hostname || "";
+  var inStatic = /\/static(?:\/|$)/.test(path);
+
+  function isServerHost(h) {
+    return (
+      h === "42.194.137.245" ||
+      h === "bible-join.duckdns.org" ||
+      h.endsWith(".sslip.io") ||
+      h.endsWith(".nip.io") ||
+      h.endsWith(".duckdns.org")
+    );
+  }
+
+  var onServer = isServerHost(host);
+  var onGh = host.endsWith("github.io");
+  var isLocal = host === "localhost" || host === "127.0.0.1" || host === "" || location.protocol === "file:";
+
+  var homeHref;
+  var staticBase;
+  var joinHref;
+
+  if (onServer) {
+    // 报名页在服务器：其他入口全部回 GitHub Pages
+    homeHref = GH_SITE + "/";
+    staticBase = GH_SITE + "/static/";
+    joinHref = "/static/join-us.html";
+  } else if (onGh) {
+    homeHref = GH_SITE + "/";
+    staticBase = GH_SITE + "/static/";
+    joinHref = SERVER_JOIN;
+  } else {
+    // 本地预览：站内相对路径，方便联调
+    homeHref = inStatic ? "../index.html" : "index.html";
+    staticBase = inStatic ? "" : "static/";
+    joinHref = staticBase + "join-us.html";
+  }
 
   var items = [
-    { id: "home", label: "首页", href: root + "index.html" },
-    { id: "about", label: "关于我们", href: root + "index.html#about" },
-    { id: "game", label: "启示录闯关", href: st + "revelation-game.html" },
-    { id: "notes", label: "读者笔记", href: st + "notes.html" },
-    { id: "audio", label: "有声频道", href: st + "audio-stories.html" },
-    { id: "bible", label: "读圣经", href: st + "bible-online.html" },
-    { id: "join", label: "加入我们", href: st + "join-us.html" }
+    { id: "home", label: "首页", href: homeHref },
+    { id: "about", label: "关于我们", href: onServer || onGh ? GH_SITE + "/#about" : homeHref.replace(/index\.html$/, "") + (homeHref.indexOf("index.html") >= 0 ? "index.html#about" : "#about") },
+    { id: "game", label: "启示录闯关", href: staticBase + "revelation-game.html" },
+    { id: "notes", label: "读者笔记", href: staticBase + "notes.html" },
+    { id: "audio", label: "有声频道", href: staticBase + "audio-stories.html" },
+    { id: "bible", label: "读圣经", href: staticBase + "bible-online.html" },
+    { id: "join", label: "加入我们", href: joinHref }
   ];
+
+  if (isLocal) {
+    items[1].href = inStatic ? "../index.html#about" : "index.html#about";
+  }
 
   function activeId() {
     if (file === "notes.html") return "notes";
@@ -41,7 +80,7 @@
 
   var html =
     '<nav class="navbar" id="navbar">' +
-    '<a href="' + root + 'index.html" class="nav-logo">' +
+    '<a href="' + items[0].href + '" class="nav-logo">' +
     '<span class="logo-icon">✦</span><span>北京青年团契</span>' +
     "</a>" +
     '<ul class="nav-links" id="navLinks">' +
