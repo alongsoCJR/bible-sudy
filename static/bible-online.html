@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-nav-offset="1">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>手机版圣经在线阅读_信仰助手</title>
+    <title>在线读圣经 · 北京青年团契</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -56,76 +58,38 @@
             border-right: 6px solid transparent;
             border-bottom: 6px solid #8b7355;
         }
-
-        /* ========== 顶部站点导航 ========== */
-        .header-bar {
+        .page-subhead {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            background: linear-gradient(135deg, #0d1b2a 0%, #1b3358 55%, #234070 100%);
-            padding: 12px 15px;
-            position: sticky;
-            top: 0;
-            z-index: 101;
-            border-bottom: 1px solid rgba(244, 213, 141, 0.2);
-        }
-        .site-home {
+            background: linear-gradient(135deg, #1b3358, #234070);
             color: #f4d58d;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            white-space: nowrap;
-            padding: 6px 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(244, 213, 141, 0.35);
-            background: rgba(244, 213, 141, 0.08);
-        }
-        .site-home:hover, .site-home:active {
-            background: rgba(244, 213, 141, 0.18);
-            color: #ffe6a8;
-        }
-        .header-title {
-            font-size: 15px;
-            color: #fffdf8;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex: 1;
-            justify-content: center;
-            min-width: 0;
-        }
-        .header-title::before {
-            content: '✦';
+            padding: 10px 15px;
             font-size: 14px;
-            color: #f4d58d;
+            font-weight: 600;
+            letter-spacing: 0.06em;
         }
-        .header-actions {
-            display: flex;
+        .page-subhead .subhead-title {
+            flex: 1;
+            text-align: center;
+        }
+        .page-subhead .join-entry {
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-        .join-btn {
+            padding: 6px 12px;
+            border-radius: 999px;
             background: linear-gradient(135deg, #e8b84b, #d4a017);
             color: #0d1b2a;
-            border: none;
-            padding: 7px 12px;
-            border-radius: 999px;
+            text-decoration: none;
             font-size: 12px;
             font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: all 0.3s;
+            letter-spacing: 0;
             white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(212, 160, 23, 0.28);
         }
-        .join-btn:hover, .join-btn:active {
-            transform: scale(1.02);
-            box-shadow: 0 4px 14px rgba(212, 160, 23, 0.35);
+        .page-subhead .join-entry:active {
+            transform: scale(0.98);
         }
 
         /* ========== 首页标签导航 ========== */
@@ -134,7 +98,7 @@
             background-color: #f5f0e8;
             border-bottom: 1px solid #8b7355;
             position: sticky;
-            top: 44px;
+            top: 0;
             z-index: 100;
         }
         .nav-tab {
@@ -253,17 +217,15 @@
         }
     </style>
 </head>
-<body>
+<body data-nav-offset="1">
+<div id="site-nav"></div>
 
 <!-- ==================== 第1页：书卷目录 ==================== -->
 <div id="page-home" class="page active">
-    <!-- 顶部导航栏：可回到站点主页 -->
-    <div class="header-bar">
-        <a class="site-home" href="../index.html">← 光与盐</a>
-        <div class="header-title">在线读圣经</div>
-        <div class="header-actions">
-            <a href="http://42.194.137.245/static/join-us.html" class="join-btn">加入我们</a>
-        </div>
+    <div class="page-subhead">
+        <span style="width:72px"></span>
+        <span class="subhead-title">在线读圣经</span>
+        <a class="join-entry" href="http://42.194.137.245/static/join-us.html">加入我们</a>
     </div>
     <div class="nav-tabs">
         <div class="nav-tab active" onclick="switchTab('old')">旧约目录</div>
@@ -280,9 +242,9 @@
 <!-- ==================== 第2页：章节目录 ==================== -->
 <div id="page-chapters" class="page">
     <div class="top-bar">
-        <a class="back-home" href="../index.html">网站首页</a>
-        <span class="page-title active" id="chapter-page-title">创世记 目录</span>
         <a class="back-home" onclick="goCatalog()" style="cursor:pointer">返回目录</a>
+        <span class="page-title active" id="chapter-page-title">创世记 目录</span>
+        <a class="back-home" href="http://42.194.137.245/static/join-us.html">加入我们</a>
     </div>
     <div class="content">
         <div class="chapter-grid" id="chapter-grid"></div>
@@ -292,9 +254,9 @@
 <!-- ==================== 第3页：经文阅读 ==================== -->
 <div id="page-read" class="page">
     <div class="top-bar">
-        <a class="back-home" href="../index.html">网站首页</a>
-        <span class="page-title active" id="read-page-title">创世记 第1章</span>
         <a class="back-home" onclick="goCatalog()" style="cursor:pointer">返回目录</a>
+        <span class="page-title active" id="read-page-title">创世记 第1章</span>
+        <a class="back-home" href="http://42.194.137.245/static/join-us.html">加入我们</a>
     </div>
     <div class="verse-list" id="verse-list"></div>
     <div class="page-nav">
@@ -405,6 +367,35 @@
                 <div class="book-name">${book.name}</div>
             </div>`;
         });
+
+        // 支持 ?book=revelation&chapter=1&verse=3 深链（闯关对照读经）
+        try {
+            const params = new URLSearchParams(location.search);
+            const bookEn = (params.get('book') || '').toLowerCase();
+            const chapter = parseInt(params.get('chapter') || '0', 10);
+            if (!bookEn || !chapter) return;
+            let testament = null, index = -1;
+            ['old', 'new'].forEach((t) => {
+                const i = bibleBooks[t].findIndex((b) => b.en === bookEn);
+                if (i >= 0) { testament = t; index = i; }
+            });
+            if (testament == null) return;
+            switchTab(testament);
+            openChapters(testament, index);
+            if (chapter >= 1 && chapter <= currentBook.chapters) {
+                openReader(chapter);
+                const verse = parseInt(params.get('verse') || '0', 10);
+                if (verse > 0) {
+                    setTimeout(() => {
+                        const el = document.querySelector('#verse-list .verse-item:nth-child(' + verse + ')');
+                        if (el) {
+                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            el.style.outline = '2px solid #d4a017';
+                        }
+                    }, 200);
+                }
+            }
+        } catch (e) { /* ignore */ }
     }
 
     // ==================== 首页标签切换 ====================
@@ -495,6 +486,7 @@
     // ==================== 启动 ====================
 </script>
 <script src="bible_full.js"></script>
+<script src="js/site-nav.js"></script>
 <script>
     initHome();
 </script>

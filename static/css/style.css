@@ -87,6 +87,11 @@ img {
   display: block;
 }
 
+/* ---- 全站统一导航占位（工具页等无自带顶栏留白时使用） ---- */
+body.site-nav-offset {
+  padding-top: 68px;
+}
+
 /* ---- 顶部导航栏 ---- */
 .navbar {
   position: fixed;
@@ -116,9 +121,10 @@ img {
   gap: 0.65rem;
   color: var(--gold-300);
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
   font-weight: 700;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .nav-logo .logo-icon {
@@ -137,7 +143,7 @@ img {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2.2rem;
+  gap: clamp(1rem, 1.8vw, 2.2rem);
   list-style: none;
 }
 

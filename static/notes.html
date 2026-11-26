@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>读者笔记 · 光与盐圣经学习平台</title>
+  <title>读者笔记 · 北京青年团契</title>
   <meta name="description" content="读者笔记——记录神话语在生命中的光照与回响，在恩典与真理中彼此勉励。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -482,22 +482,7 @@
 <body>
 
   <!-- 导航栏 -->
-  <nav class="navbar" id="navbar">
-    <a href="../index.html" class="nav-logo">
-      <span class="logo-icon">✦</span>
-      <span>光与盐</span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="../index.html">首页</a></li>
-      <li><a href="../index.html#features">学习板块</a></li>
-      <li><a href="notes.html" class="active">读者笔记</a></li>
-      <li><a href="audio-stories.html">有声频道</a></li>
-      <li><a href="bible-online.html">读圣经</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="菜单">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+  <div id="site-nav"></div>
 
   <!-- 页面头部 -->
   <header class="page-hero">
@@ -723,15 +708,17 @@
   <footer class="footer">
     <div class="footer-content">
       <div>
-        <div class="footer-brand">光与盐 · 圣经学习平台</div>
+        <div class="footer-brand">北京青年团契</div>
         <p class="footer-desc">
-          在神的话语中寻见光，在真理的道上同行。
-          愿这里的每一篇文字，都成为你亲近神的脚注。
+          扎根真理、践行大爱、同奔天路。
+          愿这里成为你在北京遇见属灵家人的地方。
         </p>
       </div>
       <div class="footer-links">
         <a href="../index.html">首页</a>
-        <a href="../index.html#features">学习板块</a>
+        <a href="../index.html#about">关于我们</a>
+        <a href="revelation-game.html">启示录闯关</a>
+        <a href="http://42.194.137.245/static/join-us.html">加入我们</a>
         <a href="notes.html">读者笔记</a>
         <a href="audio-stories.html">有声频道</a>
         <a href="bible-online.html">读圣经</a>
@@ -745,32 +732,12 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 光与盐圣经学习平台 · 你的话是我脚前的灯，路上的光。</p>
+      <p>© 2026 北京青年团契 · 扎根真理、践行大爱、同奔天路</p>
     </div>
   </footer>
 
+  <script src="js/site-nav.js"></script>
   <script>
-    // 导航栏滚动效果
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
-    // 移动端菜单
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navLinks.classList.toggle('open');
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navLinks.classList.remove('open');
-      });
-    });
-
-    // 滚动入场动画
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

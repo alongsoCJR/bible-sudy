@@ -79,7 +79,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">目录</li><li class="chapter-item "><a href="index.html"><strong aria-hidden="true">1.</strong> 光与盐｜首页</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/audio-stories.html"><strong aria-hidden="true">1.1.</strong> 有声频道</a></li></ol></li><li class="chapter-item "><a href="static/notes.html"><strong aria-hidden="true">2.</strong> 光与盐｜读者笔记</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/grace_article.html"><strong aria-hidden="true">2.1.</strong> 约拿的故事</a></li><li class="chapter-item "><a href="static/pride_article.html"><strong aria-hidden="true">2.2.</strong> 哈曼最大的敌人不是末底改</a></li><li class="chapter-item "><a href="static/enoch_article.html"><strong aria-hidden="true">2.3.</strong> 以诺与神同行三百年</a></li><li class="chapter-item "><a href="static/jacob_article.html"><strong aria-hidden="true">2.4.</strong> 雅各的瘸腿——为什么神赐福却留下软弱</a></li><li class="chapter-item "><a href="static/samson_article.html"><strong aria-hidden="true">2.5.</strong> 参孙最大的敌人不是大利拉</a></li></ol></li><li class="chapter-item "><a href="static/bible-online.html"><strong aria-hidden="true">3.</strong> 在线读圣经</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="http://42.194.137.245/static/join-us.html"><strong aria-hidden="true">3.1.</strong> 加入我们</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><li class="part-title">目录</li><li class="chapter-item "><a href="index.html"><strong aria-hidden="true">1.</strong> 北京青年团契｜首页</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/audio-stories.html"><strong aria-hidden="true">1.1.</strong> 有声频道</a></li></ol></li><li class="chapter-item "><a href="static/notes.html"><strong aria-hidden="true">2.</strong> 北京青年团契｜读者笔记</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/grace_article.html"><strong aria-hidden="true">2.1.</strong> 约拿的故事</a></li><li class="chapter-item "><a href="static/pride_article.html"><strong aria-hidden="true">2.2.</strong> 哈曼最大的敌人不是末底改</a></li><li class="chapter-item "><a href="static/enoch_article.html"><strong aria-hidden="true">2.3.</strong> 以诺与神同行三百年</a></li><li class="chapter-item "><a href="static/jacob_article.html"><strong aria-hidden="true">2.4.</strong> 雅各的瘸腿——为什么神赐福却留下软弱</a></li><li class="chapter-item "><a href="static/samson_article.html"><strong aria-hidden="true">2.5.</strong> 参孙最大的敌人不是大利拉</a></li></ol></li><li class="chapter-item "><a href="static/bible-online.html"><strong aria-hidden="true">3.</strong> 在线读圣经</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="static/revelation-game.html"><strong aria-hidden="true">3.1.</strong> 趣味·启示录闯关（22章404节）</a></li><li class="chapter-item "><a href="http://42.194.137.245/static/join-us.html"><strong aria-hidden="true">3.2.</strong> 加入我们</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,707 +146,425 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>光与盐 · 圣经学习平台</title>
-  <meta name="description" content="光与盐圣经学习平台——在神的话语中寻见光，在真理的道上同行。" />
+  <title>北京青年团契 · 青年基督徒的聚会平台</title>
+  <meta name="description" content="北京青年团契——一群在北京工作的年轻基督徒组成的属灵大家庭。扎根真理、践行大爱、同奔天路。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="static/css/style.css" />
   <style>
-    /* ===== 主页专属样式 ===== */
-<pre><code>/* —— 英雄区 —— */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at 50% 0%, var(--night-700) 0%, var(--night-900) 60%),
-    var(--night-900);
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: var(--night-900);
+    }
+<pre><code>.hero-media {
+  position: absolute;
+  inset: 0;
 }
 
-/* 星空粒子层 */
-.hero::before {
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  transform: scale(1.03);
+  animation: heroDrift 20s ease-in-out infinite alternate;
+}
+
+.hero-media::after {
   content: &quot;&quot;;
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(1.5px 1.5px at 20% 30%, rgba(244, 213, 141, 0.6), transparent),
-    radial-gradient(1px 1px at 60% 20%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1.5px 1.5px at 80% 60%, rgba(244, 213, 141, 0.4), transparent),
-    radial-gradient(1px 1px at 35% 70%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1.5px 1.5px at 70% 85%, rgba(244, 213, 141, 0.3), transparent),
-    radial-gradient(1px 1px at 15% 55%, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(1px 1px at 90% 35%, rgba(244, 213, 141, 0.5), transparent);
-  background-size: 100% 100%;
-  animation: fadeIn 2s ease-out;
+  background:
+    linear-gradient(180deg, rgba(13, 27, 42, 0.5) 0%, rgba(13, 27, 42, 0.78) 100%),
+    radial-gradient(ellipse at 50% 15%, rgba(244, 213, 141, 0.14), transparent 50%);
 }
 
-/* 光晕层 */
-.hero::after {
-  content: &quot;&quot;;
-  position: absolute;
-  top: -20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 900px;
-  background: radial-gradient(circle, rgba(244, 213, 141, 0.12) 0%, transparent 65%);
-  animation: pulseGlow 6s ease-in-out infinite;
-  pointer-events: none;
+@keyframes heroDrift {
+  from { transform: scale(1.03); }
+  to { transform: scale(1.07); }
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 0 2rem;
-  animation: fadeUp 1.2s var(--ease) both;
+  padding: 0 1.5rem;
+  animation: fadeUp 1s var(--ease) both;
 }
 
-.hero-verse-ref {
-  display: inline-block;
+.hero-brand {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
-  letter-spacing: 0.15em;
-  color: var(--gold-300);
-  padding: 0.5rem 1.5rem;
-  border: 1px solid rgba(244, 213, 141, 0.3);
-  border-radius: var(--radius-full);
-  margin-bottom: 2rem;
-  backdrop-filter: blur(4px);
-}
-
-.hero-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(2.4rem, 6.5vw, 4.2rem);
   font-weight: 900;
   line-height: 1.15;
   color: var(--cream);
-  margin-bottom: 1.2rem;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.85rem;
 }
 
-.hero-title .accent {
+.hero-brand .accent {
   background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.hero-verse {
+.hero-tagline {
   font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--gold-300);
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+}
+
+.hero-lead {
+  font-size: 1rem;
   color: var(--text-light);
-  max-width: 580px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.9;
-  font-style: italic;
+  max-width: 420px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
 }
 
 .hero-actions {
   display: flex;
-  gap: 1.2rem;
+  gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-/* 向下滚动提示 */
 .scroll-hint {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 1.8rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
   color: var(--text-muted);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
   animation: float 3s ease-in-out infinite;
 }
 
-.scroll-hint .arrow {
-  width: 22px;
-  height: 22px;
-  border-right: 2px solid var(--gold-300);
-  border-bottom: 2px solid var(--gold-300);
-  transform: rotate(45deg);
+/* —— 关于 + 活动（合一） —— */
+.fellowship {
+  padding: 4.5rem 0;
+  background: linear-gradient(180deg, var(--parchment) 0%, var(--cream) 100%);
 }
 
-/* —— 经文每日金句区 —— */
-.daily-verse {
-  padding: 5rem 0;
-  background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
-}
-
-.verse-card {
-  max-width: 820px;
+.fellowship-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 2.5rem;
+  align-items: center;
+  max-width: 1040px;
   margin: 0 auto;
-  background: var(--cream);
+}
+
+.fellowship-poster {
   border-radius: var(--radius-lg);
-  padding: 3.5rem 3rem;
+  overflow: hidden;
   box-shadow: var(--shadow-md);
-  border: 1px solid rgba(212, 160, 23, 0.12);
-  position: relative;
-  overflow: hidden;
+  border: 1px solid rgba(212, 160, 23, 0.15);
+  background: #f5f2ea;
 }
 
-.verse-card::before {
-  content: &quot;\201C&quot;;
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  font-family: Georgia, serif;
-  font-size: 8rem;
-  color: rgba(212, 160, 23, 0.12);
-  line-height: 1;
-}
-
-.verse-card-body {
-  position: relative;
-  z-index: 1;
-}
-
-.verse-text {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  line-height: 1.9;
-  color: var(--text-primary);
-  margin-bottom: 1.5rem;
-  font-weight: 400;
-}
-
-.verse-cite {
-  font-size: 0.95rem;
-  color: var(--gold-600);
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-/* —— 学习板块 —— */
-.features {
-  padding: 5rem 0;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
-  background: var(--cream);
-  border-radius: var(--radius-lg);
-  padding: 2.5rem 2rem;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(212, 160, 23, 0.1);
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  position: relative;
-  overflow: hidden;
-}
-
-.feature-card::after {
-  content: &quot;&quot;;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.fellowship-poster img {
   width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--gold-400), var(--gold-300));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s var(--ease);
+  height: auto;
+  display: block;
 }
 
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-.feature-card:hover::after {
-  transform: scaleX(1);
-}
-
-.feature-icon {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, rgba(244, 213, 141, 0.25), rgba(212, 160, 23, 0.15));
-}
-
-.feature-card h3 {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  color: var(--text-primary);
-  margin-bottom: 0.8rem;
-}
-
-.feature-card p {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.75;
-}
-
-.feature-card .feature-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 1.2rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--gold-600);
-}
-
-.feature-card .feature-link .arrow {
-  transition: transform 0.3s var(--ease);
-}
-
-.feature-card:hover .feature-link .arrow {
-  transform: translateX(5px);
-}
-
-/* —— 读者笔记预告区 —— */
-.notes-preview {
-  padding: 5rem 0;
-  background:
-    radial-gradient(ellipse at 30% 50%, rgba(27, 51, 88, 0.04) 0%, transparent 60%),
-    var(--parchment-dark);
-}
-
-.notes-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.note-card {
-  display: flex;
-  flex-direction: column;
-  background: var(--cream);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  border: 1px solid rgba(212, 160, 23, 0.1);
-}
-
-.note-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-.note-card-banner {
-  height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.note-card-banner.grace {
-  background: linear-gradient(135deg, #1b3358, #234070, #4a7ab5);
-}
-
-.note-card-banner.pride {
-  background: linear-gradient(135deg, #5c2a1e, #8b3a2a, #c4564a);
-}
-
-.note-card-banner.walk {
-  background: linear-gradient(135deg, #3d4f35, #5C6B52, #7A8B6E);
-}
-
-.note-card-banner.life {
-  background: linear-gradient(135deg, #4a3520, #7a5530, #a67c52);
-}
-
-.note-card-banner.repent {
-  background: linear-gradient(135deg, #3d2a50, #5C4A7A, #7B68A0);
-}
-
-.note-card-banner .banner-symbol {
-  font-family: var(--font-serif);
-  font-size: 3.5rem;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
-.note-card-banner::after {
-  content: &quot;&quot;;
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.25) 100%);
-}
-
-.note-card-body {
-  padding: 1.8rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.note-tag {
+.fellowship-copy .eyebrow {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.18em;
   color: var(--gold-600);
   margin-bottom: 0.7rem;
 }
 
-.note-card-body h3 {
+.fellowship-copy h2 {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
   color: var(--text-primary);
-  margin-bottom: 0.7rem;
-  line-height: 1.4;
+  line-height: 1.35;
+  margin-bottom: 1rem;
 }
 
-.note-card-body p {
-  font-size: 0.92rem;
+.fellowship-copy .lead {
   color: var(--text-secondary);
-  line-height: 1.75;
-  flex: 1;
+  font-size: 1rem;
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
 }
 
-.note-card-footer {
+.fellowship-meta {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 1.2rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--parchment-dark);
-}
-
-.note-meta {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-
-.note-read {
-  font-size: 0.88rem;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+  margin-bottom: 1.6rem;
+  font-size: 0.9rem;
+  color: var(--night-700);
   font-weight: 600;
-  color: var(--gold-600);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: gap 0.3s var(--ease);
 }
 
-.note-card:hover .note-read {
-  gap: 0.6rem;
+.fellowship-meta span::before {
+  content: &quot;·&quot;;
+  margin-right: 0.55rem;
+  color: var(--gold-500);
 }
 
-.notes-cta {
-  text-align: center;
-  margin-top: 3rem;
+.fellowship-meta span:first-child::before {
+  content: none;
+  margin: 0;
 }
 
-/* —— 引言区 —— */
-.quote-section {
-  padding: 5rem 0;
-  background: var(--night-900);
-  position: relative;
-  overflow: hidden;
+.activity-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1.6rem;
 }
 
-.quote-section::before {
-  content: &quot;&quot;;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(244, 213, 141, 0.06) 0%, transparent 60%);
+.activity-chips span {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  padding: 0.4rem 0.85rem;
+  border: 1px solid rgba(212, 160, 23, 0.28);
+  border-radius: var(--radius-full);
+  background: rgba(255, 253, 248, 0.8);
+  letter-spacing: 0.04em;
 }
 
-.quote-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.quote-mark {
-  font-family: Georgia, serif;
-  font-size: 4rem;
-  color: var(--gold-400);
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-.quote-text {
+.fellowship-motto {
   font-family: var(--font-serif);
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
-  line-height: 1.8;
+  font-size: 1.05rem;
+  color: var(--night-700);
+  letter-spacing: 0.06em;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(212, 160, 23, 0.22);
+}
+
+/* —— 入口区 —— */
+.entries {
+  padding: 4rem 0 4.5rem;
+  background: var(--parchment-dark);
+}
+
+.entries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.entry {
+  display: block;
+  padding: 1.6rem 1.3rem;
+  background: var(--cream);
+  border: 1px solid rgba(212, 160, 23, 0.12);
+  border-radius: var(--radius-md);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  min-height: 100%;
+}
+
+.entry:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.entry .icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.entry h3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 0.45rem;
+}
+
+.entry p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.entry.highlight {
+  background: linear-gradient(160deg, var(--night-800), var(--night-700));
+  border-color: rgba(244, 213, 141, 0.25);
+}
+
+.entry.highlight h3,
+.entry.highlight p {
   color: var(--cream);
-  font-weight: 400;
-  margin-bottom: 1.5rem;
 }
 
-.quote-author {
-  font-size: 0.95rem;
-  color: var(--gold-300);
-  letter-spacing: 0.1em;
+.entry.highlight p {
+  color: var(--text-light);
 }
 
-@media (max-width: 600px) {
-  .verse-card { padding: 2.5rem 1.5rem; }
-  .verse-text { font-size: 1.2rem; }
+/* —— 邀请条 —— */
+.invite-bar {
+  padding: 2.8rem 1.5rem;
+  background: var(--night-900);
+  text-align: center;
+}
+
+.invite-bar p {
+  font-family: var(--font-serif);
+  color: var(--cream);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 900px) {
+  .fellowship-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .fellowship-poster {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .entries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .entries-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: 82vh;
+  }
 }
 </code></pre>
 </style>
 </head>
 <body>
-<!-- 导航栏 -->
-<nav class="navbar" id="navbar">
-    <a href="index.html" class="nav-logo">
-      <span class="logo-icon">✦</span>
-      <span>光与盐</span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">首页</a></li>
-      <li><a href="index.html#features">学习板块</a></li>
-      <li><a href="static/notes.html">读者笔记</a></li>
-      <li><a href="static/audio-stories.html">有声频道</a></li>
-      <li><a href="static/bible-online.html">读圣经</a></li>
-      <li><a href="http://42.194.137.245/static/join-us.html">加入我们</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="菜单">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-<!-- 英雄区 -->
+<div id="site-nav"></div>
 <header class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img src="static/images/activities/activity-hike.jpg" alt="" />
+    </div>
     <div class="hero-content">
-      <span class="hero-verse-ref">诗篇 119:105</span>
-      <h1 class="hero-title">你的话是我<br /><span class="accent">脚前的灯</span>，路上的光</h1>
-      <p class="hero-verse">
-        在神话语的光中行走，在真理的道上扎根。<br />
-        这里是光与盐圣经学习平台，与你一同领受从上头来的智慧。
-      </p>
+      <h1 class="hero-brand">北京<span class="accent">青年团契</span></h1>
+      <p class="hero-tagline">扎根真理 · 践行大爱 · 同奔天路</p>
+      <p class="hero-lead">北京青年基督徒的聚会平台，在这里遇见同路人。</p>
       <div class="hero-actions">
-        <a href="static/bible-online.html" class="btn btn-gold">在线读圣经 →</a>
-        <a href="http://42.194.137.245/static/join-us.html" class="btn btn-outline">加入查经学习</a>
+        <a href="http://42.194.137.245/static/join-us.html" class="btn btn-gold">加入团契 →</a>
+        <a href="static/revelation-game.html" class="btn btn-outline">启示录闯关</a>
       </div>
     </div>
-    <div class="scroll-hint">
-      <span>向下探索</span>
-      <span class="arrow"></span>
-    </div>
+    <div class="scroll-hint">向下了解</div>
   </header>
-<!-- 每日金句 -->
-<section class="daily-verse">
+<section class="fellowship" id="about">
     <div class="container">
-      <div class="verse-card reveal">
-        <div class="verse-card-body">
-          <p class="verse-text">
-            我们晓得万事都互相效力，叫爱神的人得益处，就是按他旨意被召的人。
+      <div class="fellowship-layout">
+        <figure class="fellowship-poster reveal">
+          <img src="static/images/today-word.jpg" alt="今日一句 · 北京青年团契介绍" />
+        </figure>
+        <div class="fellowship-copy reveal reveal-delay-1">
+          <span class="eyebrow">关于我们</span>
+          <h2 id="一群在北京相遇的年轻人"><a class="header" href="#一群在北京相遇的年轻人">一群在北京相遇的年轻人</a></h2>
+          <p class="lead">
+            我们是来自三十多个省市、在北京工作的年轻基督徒组成的属灵大家庭。
+            因着同一位救主相遇，彼此陪伴，共同走信仰的道路。
           </p>
-          <span class="verse-cite">—— 罗马书 8:28</span>
+          <div class="fellowship-meta">
+            <span>300+ 成员</span>
+            <span>30+ 省市</span>
+            <span>每周活动</span>
+          </div>
+          <div class="activity-chips" aria-label="团契活动">
+            <span>音乐会</span>
+            <span>读书会</span>
+            <span>查经会</span>
+            <span>茶话会</span>
+            <span>运动会</span>
+          </div>
+          <p class="fellowship-motto">不分宗派，只求在基督里合一；不论背景，只愿在爱中彼此接纳。</p>
         </div>
       </div>
     </div>
   </section>
-<!-- 学习板块 -->
-<section class="features" id="features">
+<section class="entries" id="explore">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-eyebrow">学习板块</span>
-        <h2 class="section-title">在真道上扎根生长</h2>
+        <span class="section-eyebrow">一起探索</span>
+        <h2 class="section-title">学习 · 闯关 · 同行</h2>
         <div class="section-divider"></div>
-        <p class="section-subtitle">从经文研读到生命反思，多维度进入神的话语。</p>
       </div>
-<pre><code>  &lt;div class=&quot;features-grid&quot;&gt;
-    &lt;div class=&quot;feature-card reveal reveal-delay-1&quot;&gt;
-      &lt;div class=&quot;feature-icon&quot;&gt;📖&lt;/div&gt;
-      &lt;h3&gt;在线读圣经&lt;/h3&gt;
-      &lt;p&gt;随时打开经文，按卷逐章梳理圣经脉络，明白神在整个救赎历史中的作为与心意。&lt;/p&gt;
-      &lt;a href=&quot;static/bible-online.html&quot; class=&quot;feature-link&quot;&gt;开始研读 &lt;span class=&quot;arrow&quot;&gt;→&lt;/span&gt;&lt;/a&gt;
-    &lt;/div&gt;
-
-    &lt;div class=&quot;feature-card reveal reveal-delay-2&quot;&gt;
-      &lt;div class=&quot;feature-icon&quot;&gt;🎧&lt;/div&gt;
-      &lt;h3&gt;有声频道&lt;/h3&gt;
-      &lt;p&gt;圣经人物故事与灵性分享分模块收听——从亚当到约书亚，也有安静的灵性与灵魂。&lt;/p&gt;
-      &lt;a href=&quot;static/audio-stories.html&quot; class=&quot;feature-link&quot;&gt;立刻收听 &lt;span class=&quot;arrow&quot;&gt;→&lt;/span&gt;&lt;/a&gt;
-    &lt;/div&gt;
-
-    &lt;div class=&quot;feature-card reveal reveal-delay-3&quot;&gt;
-      &lt;div class=&quot;feature-icon&quot;&gt;✍️&lt;/div&gt;
-      &lt;h3&gt;读者笔记&lt;/h3&gt;
-      &lt;p&gt;记录圣灵借着经文对生命的光照与提醒，在分享与反思中彼此勉励，同奔天路。&lt;/p&gt;
-      &lt;a href=&quot;static/notes.html&quot; class=&quot;feature-link&quot;&gt;阅读笔记 &lt;span class=&quot;arrow&quot;&gt;→&lt;/span&gt;&lt;/a&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-</section>
-<!-- 读者笔记预告 -->
-<section class="notes-preview">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-eyebrow">读者笔记 · 精选</span>
-        <h2 class="section-title">生命的光照与回响</h2>
-        <div class="section-divider"></div>
-        <p class="section-subtitle">每一篇笔记，都是神话语在生命中真实动工的见证。</p>
+      <div class="entries-grid">
+        <a href="static/revelation-game.html" class="entry highlight reveal">
+          <div class="icon">🕊</div>
+          <h3 id="趣味启示录"><a class="header" href="#趣味启示录">趣味·启示录</a></h3>
+          <p>22 章 · 404 节词块闯关，与读经同源，边玩边背。</p>
+        </a>
+        <a href="static/bible-online.html" class="entry reveal reveal-delay-1">
+          <div class="icon">📖</div>
+          <h3 id="在线读圣经"><a class="header" href="#在线读圣经">在线读圣经</a></h3>
+          <p>按卷逐章打开经文，梳理救赎历史。</p>
+        </a>
+        <a href="static/audio-stories.html" class="entry reveal reveal-delay-2">
+          <div class="icon">🎧</div>
+          <h3 id="有声频道"><a class="header" href="#有声频道">有声频道</a></h3>
+          <p>圣经人物故事与灵性分享，随时收听。</p>
+        </a>
+        <a href="static/notes.html" class="entry reveal reveal-delay-3">
+          <div class="icon">✍️</div>
+          <h3 id="读者笔记"><a class="header" href="#读者笔记">读者笔记</a></h3>
+          <p>生命的光照与回响，彼此勉励同奔天路。</p>
+        </a>
       </div>
-<pre><code>  &lt;div class=&quot;notes-cards&quot;&gt;
-    &lt;a href=&quot;static/grace_article.html&quot; class=&quot;note-card reveal reveal-delay-1&quot;&gt;
-      &lt;div class=&quot;note-card-banner grace&quot;&gt;
-        &lt;span class=&quot;banner-symbol&quot;&gt;Jonah&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;note-card-body&quot;&gt;
-        &lt;span class=&quot;note-tag&quot;&gt;恩典 · 约拿书&lt;/span&gt;
-        &lt;h3&gt;约拿的故事&lt;/h3&gt;
-        &lt;p&gt;从逃离到顺服，从愤怒到仰望。约拿的经历让我们看见：神的恩典越过我们的悖逆，直达尼尼微。&lt;/p&gt;
-        &lt;div class=&quot;note-card-footer&quot;&gt;
-          &lt;span class=&quot;note-meta&quot;&gt;约拿书 1-4 章&lt;/span&gt;
-          &lt;span class=&quot;note-read&quot;&gt;阅读全文 →&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/a&gt;
-
-    &lt;a href=&quot;static/pride_article.html&quot; class=&quot;note-card reveal reveal-delay-2&quot;&gt;
-      &lt;div class=&quot;note-card-banner pride&quot;&gt;
-        &lt;span class=&quot;banner-symbol&quot;&gt;Haman&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;note-card-body&quot;&gt;
-        &lt;span class=&quot;note-tag&quot;&gt;骄傲 · 以斯帖记&lt;/span&gt;
-        &lt;h3&gt;哈曼最大的敌人不是末底改&lt;/h3&gt;
-        &lt;p&gt;哈曼的灭亡并非始于末底改的不跪不拜，而是始于他自己心中膨胀的骄傲。骄傲，才是真正的绞刑架。&lt;/p&gt;
-        &lt;div class=&quot;note-card-footer&quot;&gt;
-          &lt;span class=&quot;note-meta&quot;&gt;以斯帖记 3-7 章&lt;/span&gt;
-          &lt;span class=&quot;note-read&quot;&gt;阅读全文 →&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/a&gt;
-
-    &lt;a href=&quot;static/enoch_article.html&quot; class=&quot;note-card reveal reveal-delay-3&quot;&gt;
-      &lt;div class=&quot;note-card-banner walk&quot;&gt;
-        &lt;span class=&quot;banner-symbol&quot;&gt;Enoch&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;note-card-body&quot;&gt;
-        &lt;span class=&quot;note-tag&quot;&gt;同行 · 创世记&lt;/span&gt;
-        &lt;h3&gt;以诺与神同行三百年&lt;/h3&gt;
-        &lt;p&gt;没有神迹，没有伟绩，没有战场。一个普通人的人生，却收获了神最大的喜悦——与神同行的生命。&lt;/p&gt;
-        &lt;div class=&quot;note-card-footer&quot;&gt;
-          &lt;span class=&quot;note-meta&quot;&gt;创世记 5:21-24&lt;/span&gt;
-          &lt;span class=&quot;note-read&quot;&gt;阅读全文 →&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/a&gt;
-
-    &lt;a href=&quot;static/jacob_article.html&quot; class=&quot;note-card reveal reveal-delay-4&quot;&gt;
-      &lt;div class=&quot;note-card-banner life&quot;&gt;
-        &lt;span class=&quot;banner-symbol&quot;&gt;Jacob&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;note-card-body&quot;&gt;
-        &lt;span class=&quot;note-tag&quot;&gt;生命 · 创世记&lt;/span&gt;
-        &lt;h3&gt;雅各的瘸腿&lt;/h3&gt;
-        &lt;p&gt;为什么神赐福，却留下软弱？毗努伊勒的那一夜，他失去了腿上的力量，却遇见了真正的生命。&lt;/p&gt;
-        &lt;div class=&quot;note-card-footer&quot;&gt;
-          &lt;span class=&quot;note-meta&quot;&gt;创世记 32:22-32&lt;/span&gt;
-          &lt;span class=&quot;note-read&quot;&gt;阅读全文 →&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/a&gt;
-
-    &lt;a href=&quot;static/samson_article.html&quot; class=&quot;note-card reveal reveal-delay-5&quot;&gt;
-      &lt;div class=&quot;note-card-banner repent&quot;&gt;
-        &lt;span class=&quot;banner-symbol&quot;&gt;Samson&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;note-card-body&quot;&gt;
-        &lt;span class=&quot;note-tag&quot;&gt;悔改 · 士师记&lt;/span&gt;
-        &lt;h3&gt;参孙最大的敌人不是大利拉&lt;/h3&gt;
-        &lt;p&gt;罪不是突然把人拖垮的。一次次妥协，里面的警觉慢慢迟钝。直到有一天，才发现主已经离开了。&lt;/p&gt;
-        &lt;div class=&quot;note-card-footer&quot;&gt;
-          &lt;span class=&quot;note-meta&quot;&gt;士师记 13-16 章&lt;/span&gt;
-          &lt;span class=&quot;note-read&quot;&gt;阅读全文 →&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/a&gt;
-  &lt;/div&gt;
-
-  &lt;div class=&quot;notes-cta reveal reveal-delay-3&quot;&gt;
-    &lt;a href=&quot;static/notes.html&quot; class=&quot;btn btn-gold&quot;&gt;查看全部笔记 →&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-</section>
-<!-- 页脚 -->
+    </div>
+  </section>
+<section class="invite-bar">
+    <p>愿我们在主爱中，彼此照亮，同奔天路</p>
+    <a href="http://42.194.137.245/static/join-us.html" class="btn btn-gold">报名加入 →</a>
+  </section>
 <footer class="footer">
     <div class="footer-content">
       <div>
-        <div class="footer-brand">光与盐 · 圣经学习平台</div>
-        <p class="footer-desc">
-          在神的话语中寻见光，在真理的道上同行。
-          愿这里的每一篇文字，都成为你亲近神的脚注。
-        </p>
+        <div class="footer-brand">北京青年团契</div>
+        <p class="footer-desc">扎根真理、践行大爱、同奔天路。</p>
       </div>
       <div class="footer-links">
         <a href="index.html">首页</a>
-        <a href="index.html#features">学习板块</a>
-        <a href="static/notes.html">读者笔记</a>
-        <a href="static/audio-stories.html">有声频道</a>
+        <a href="index.html#about">关于我们</a>
+        <a href="static/revelation-game.html">启示录闯关</a>
         <a href="static/bible-online.html">读圣经</a>
         <a href="http://42.194.137.245/static/join-us.html">加入我们</a>
       </div>
       <div class="footer-links">
+        <a href="static/notes.html">读者笔记</a>
+        <a href="static/audio-stories.html">有声频道</a>
         <a href="static/grace_article.html">约拿的故事</a>
-        <a href="static/pride_article.html">哈曼最大的敌人</a>
         <a href="static/enoch_article.html">以诺与神同行</a>
-        <a href="static/jacob_article.html">雅各的瘸腿</a>
-        <a href="static/samson_article.html">参孙与大利拉</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 光与盐圣经学习平台 · 你的话是我脚前的灯，路上的光。</p>
+      <p>© 2026 北京青年团契 · 扎根真理、践行大爱、同奔天路</p>
     </div>
   </footer>
+<script src="static/js/site-nav.js"></script>
 <script>
-    // 导航栏滚动效果
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
-    // 移动端菜单
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navLinks.classList.toggle('open');
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navLinks.classList.remove('open');
-      });
-    });
-
-    // 滚动入场动画
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
@@ -858,7 +576,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>有声频道 · 光与盐圣经学习平台</title>
+  <title>有声频道 · 北京青年团契</title>
   <meta name="description" content="有声频道：圣经人物故事与灵性分享，在网页中安静收听。" />
   <meta name="robots" content="noarchive" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1401,22 +1119,7 @@
 </style>
 </head>
 <body>
-  <nav class="navbar" id="navbar">
-    <a href="static/../index.html" class="nav-logo">
-      <span class="logo-icon">✦</span>
-      <span>光与盐</span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="static/../index.html">首页</a></li>
-      <li><a href="static/../index.html#features">学习板块</a></li>
-      <li><a href="static/notes.html">读者笔记</a></li>
-      <li><a href="static/audio-stories.html" class="active">有声频道</a></li>
-      <li><a href="static/bible-online.html">读圣经</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="菜单">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+  <div id="site-nav"></div>
 <header class="page-hero">
     <div class="page-hero-content">
       <nav class="breadcrumb">
@@ -1527,8 +1230,8 @@
 <footer class="footer">
     <div class="footer-content">
       <div>
-        <div class="footer-brand">光与盐 · 圣经学习平台</div>
-        <p class="footer-desc">在神的话语中寻见光，在真理的道上同行。</p>
+        <div class="footer-brand">北京青年团契</div>
+        <p class="footer-desc">扎根真理、践行大爱、同奔天路。</p>
       </div>
       <div class="footer-links">
         <a href="static/../index.html">首页</a>
@@ -1538,7 +1241,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 光与盐圣经学习平台 · 你的话是我脚前的灯，路上的光。</p>
+      <p>© 2026 北京青年团契 · 扎根真理、践行大爱、同奔天路</p>
     </div>
   </footer>
 <div class="now-playing" id="nowPlaying" aria-live="polite">
@@ -1838,23 +1541,6 @@
     const hash = (location.hash || "").replace("#", "");
     setModule(hash === "soul" ? "soul" : "stories");
 
-    const navbar = document.getElementById("navbar");
-    window.addEventListener("scroll", () => {
-      navbar.classList.toggle("scrolled", window.scrollY > 40);
-    });
-    const navToggle = document.getElementById("navToggle");
-    const navLinks = document.getElementById("navLinks");
-    navToggle.addEventListener("click", () => {
-      navToggle.classList.toggle("active");
-      navLinks.classList.toggle("open");
-    });
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navToggle.classList.remove("active");
-        navLinks.classList.remove("open");
-      });
-    });
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -1862,6 +1548,7 @@
     }, { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
   </script>
+<script src="js/site-nav.js"></script>
 </body>
 </html>
 <div style="break-before: page; page-break-before: always;"></div><!DOCTYPE html>
@@ -1869,7 +1556,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>读者笔记 · 光与盐圣经学习平台</title>
+  <title>读者笔记 · 北京青年团契</title>
   <meta name="description" content="读者笔记——记录神话语在生命中的光照与回响，在恩典与真理中彼此勉励。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -2347,22 +2034,7 @@
 </head>
 <body>
 <!-- 导航栏 -->
-<nav class="navbar" id="navbar">
-    <a href="static/../index.html" class="nav-logo">
-      <span class="logo-icon">✦</span>
-      <span>光与盐</span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="static/../index.html">首页</a></li>
-      <li><a href="static/../index.html#features">学习板块</a></li>
-      <li><a href="static/notes.html" class="active">读者笔记</a></li>
-      <li><a href="static/audio-stories.html">有声频道</a></li>
-      <li><a href="static/bible-online.html">读圣经</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="菜单">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+<div id="site-nav"></div>
 <!-- 页面头部 -->
 <header class="page-hero">
     <div class="page-hero-content">
@@ -2372,7 +2044,7 @@
         <span>读者笔记</span>
       </nav>
       <span class="page-hero-eyebrow">Reader's Notes</span>
-      <h1 id="读者笔记"><a class="header" href="#读者笔记">读者<span class="accent">笔记</span></a></h1>
+      <h1 id="读者笔记-1"><a class="header" href="#读者笔记-1">读者<span class="accent">笔记</span></a></h1>
       <p class="page-hero-desc">
         圣经不只是一本供我们阅读的书，更是一面映照生命的镜子。<br />
         这里收录读者在神话语光照下的领受、省思与见证，<br />
@@ -2583,15 +2255,17 @@
 <footer class="footer">
     <div class="footer-content">
       <div>
-        <div class="footer-brand">光与盐 · 圣经学习平台</div>
+        <div class="footer-brand">北京青年团契</div>
         <p class="footer-desc">
-          在神的话语中寻见光，在真理的道上同行。
-          愿这里的每一篇文字，都成为你亲近神的脚注。
+          扎根真理、践行大爱、同奔天路。
+          愿这里成为你在北京遇见属灵家人的地方。
         </p>
       </div>
       <div class="footer-links">
         <a href="static/../index.html">首页</a>
-        <a href="static/../index.html#features">学习板块</a>
+        <a href="static/../index.html#about">关于我们</a>
+        <a href="static/revelation-game.html">启示录闯关</a>
+        <a href="http://42.194.137.245/static/join-us.html">加入我们</a>
         <a href="static/notes.html">读者笔记</a>
         <a href="static/audio-stories.html">有声频道</a>
         <a href="static/bible-online.html">读圣经</a>
@@ -2605,31 +2279,11 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 光与盐圣经学习平台 · 你的话是我脚前的灯，路上的光。</p>
+      <p>© 2026 北京青年团契 · 扎根真理、践行大爱、同奔天路</p>
     </div>
   </footer>
+<script src="js/site-nav.js"></script>
 <script>
-    // 导航栏滚动效果
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
-    // 移动端菜单
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navLinks.classList.toggle('open');
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navLinks.classList.remove('open');
-      });
-    });
-
-    // 滚动入场动画
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -5913,11 +5567,13 @@ text-transform: uppercase;
 </body>
 </html>
 <div style="break-before: page; page-break-before: always;"></div><!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-nav-offset="1">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>手机版圣经在线阅读_信仰助手</title>
+    <title>在线读圣经 · 北京青年团契</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -5969,76 +5625,38 @@ text-transform: uppercase;
         border-right: 6px solid transparent;
         border-bottom: 6px solid #8b7355;
     }
-
-    /* ========== 顶部站点导航 ========== */
-    .header-bar {
+    .page-subhead {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        background: linear-gradient(135deg, #0d1b2a 0%, #1b3358 55%, #234070 100%);
-        padding: 12px 15px;
-        position: sticky;
-        top: 0;
-        z-index: 101;
-        border-bottom: 1px solid rgba(244, 213, 141, 0.2);
-    }
-    .site-home {
+        background: linear-gradient(135deg, #1b3358, #234070);
         color: #f4d58d;
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 600;
-        white-space: nowrap;
-        padding: 6px 10px;
-        border-radius: 999px;
-        border: 1px solid rgba(244, 213, 141, 0.35);
-        background: rgba(244, 213, 141, 0.08);
-    }
-    .site-home:hover, .site-home:active {
-        background: rgba(244, 213, 141, 0.18);
-        color: #ffe6a8;
-    }
-    .header-title {
-        font-size: 15px;
-        color: #fffdf8;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex: 1;
-        justify-content: center;
-        min-width: 0;
-    }
-    .header-title::before {
-        content: '✦';
+        padding: 10px 15px;
         font-size: 14px;
-        color: #f4d58d;
+        font-weight: 600;
+        letter-spacing: 0.06em;
     }
-    .header-actions {
-        display: flex;
+    .page-subhead .subhead-title {
+        flex: 1;
+        text-align: center;
+    }
+    .page-subhead .join-entry {
+        display: inline-flex;
         align-items: center;
-        gap: 8px;
-        flex-shrink: 0;
-    }
-    .join-btn {
+        padding: 6px 12px;
+        border-radius: 999px;
         background: linear-gradient(135deg, #e8b84b, #d4a017);
         color: #0d1b2a;
-        border: none;
-        padding: 7px 12px;
-        border-radius: 999px;
+        text-decoration: none;
         font-size: 12px;
         font-weight: 700;
-        cursor: pointer;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        transition: all 0.3s;
+        letter-spacing: 0;
         white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(212, 160, 23, 0.28);
     }
-    .join-btn:hover, .join-btn:active {
-        transform: scale(1.02);
-        box-shadow: 0 4px 14px rgba(212, 160, 23, 0.35);
+    .page-subhead .join-entry:active {
+        transform: scale(0.98);
     }
 
     /* ========== 首页标签导航 ========== */
@@ -6047,7 +5665,7 @@ text-transform: uppercase;
         background-color: #f5f0e8;
         border-bottom: 1px solid #8b7355;
         position: sticky;
-        top: 44px;
+        top: 0;
         z-index: 100;
     }
     .nav-tab {
@@ -6167,16 +5785,14 @@ text-transform: uppercase;
 &lt;/style&gt;
 </code></pre>
 </head>
-<body>
+<body data-nav-offset="1">
+<div id="site-nav"></div>
 <!-- ==================== 第1页：书卷目录 ==================== -->
 <div id="page-home" class="page active">
-    <!-- 顶部导航栏：可回到站点主页 -->
-    <div class="header-bar">
-        <a class="site-home" href="static/../index.html">← 光与盐</a>
-        <div class="header-title">在线读圣经</div>
-        <div class="header-actions">
-            <a href="http://42.194.137.245/static/join-us.html" class="join-btn">加入我们</a>
-        </div>
+    <div class="page-subhead">
+        <span style="width:72px"></span>
+        <span class="subhead-title">在线读圣经</span>
+        <a class="join-entry" href="http://42.194.137.245/static/join-us.html">加入我们</a>
     </div>
     <div class="nav-tabs">
         <div class="nav-tab active" onclick="switchTab('old')">旧约目录</div>
@@ -6192,9 +5808,9 @@ text-transform: uppercase;
 <!-- ==================== 第2页：章节目录 ==================== -->
 <div id="page-chapters" class="page">
     <div class="top-bar">
-        <a class="back-home" href="static/../index.html">网站首页</a>
-        <span class="page-title active" id="chapter-page-title">创世记 目录</span>
         <a class="back-home" onclick="goCatalog()" style="cursor:pointer">返回目录</a>
+        <span class="page-title active" id="chapter-page-title">创世记 目录</span>
+        <a class="back-home" href="http://42.194.137.245/static/join-us.html">加入我们</a>
     </div>
     <div class="content">
         <div class="chapter-grid" id="chapter-grid"></div>
@@ -6203,9 +5819,9 @@ text-transform: uppercase;
 <!-- ==================== 第3页：经文阅读 ==================== -->
 <div id="page-read" class="page">
     <div class="top-bar">
-        <a class="back-home" href="static/../index.html">网站首页</a>
-        <span class="page-title active" id="read-page-title">创世记 第1章</span>
         <a class="back-home" onclick="goCatalog()" style="cursor:pointer">返回目录</a>
+        <span class="page-title active" id="read-page-title">创世记 第1章</span>
+        <a class="back-home" href="http://42.194.137.245/static/join-us.html">加入我们</a>
     </div>
     <div class="verse-list" id="verse-list"></div>
     <div class="page-nav">
@@ -6315,6 +5931,35 @@ text-transform: uppercase;
                 <div class="book-name">${book.name}</div>
             </div>`;
         });
+
+        // 支持 ?book=revelation&chapter=1&verse=3 深链（闯关对照读经）
+        try {
+            const params = new URLSearchParams(location.search);
+            const bookEn = (params.get('book') || '').toLowerCase();
+            const chapter = parseInt(params.get('chapter') || '0', 10);
+            if (!bookEn || !chapter) return;
+            let testament = null, index = -1;
+            ['old', 'new'].forEach((t) => {
+                const i = bibleBooks[t].findIndex((b) => b.en === bookEn);
+                if (i >= 0) { testament = t; index = i; }
+            });
+            if (testament == null) return;
+            switchTab(testament);
+            openChapters(testament, index);
+            if (chapter >= 1 && chapter <= currentBook.chapters) {
+                openReader(chapter);
+                const verse = parseInt(params.get('verse') || '0', 10);
+                if (verse > 0) {
+                    setTimeout(() => {
+                        const el = document.querySelector('#verse-list .verse-item:nth-child(' + verse + ')');
+                        if (el) {
+                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            el.style.outline = '2px solid #d4a017';
+                        }
+                    }, 200);
+                }
+            }
+        } catch (e) { /* ignore */ }
     }
 
     // ==================== 首页标签切换 ====================
@@ -6405,9 +6050,1100 @@ text-transform: uppercase;
     // ==================== 启动 ====================
 </script>
 <script src="bible_full.js"></script>
+<script src="js/site-nav.js"></script>
 <script>
     initHome();
 </script>
+</body>
+</html>
+<div style="break-before: page; page-break-before: always;"></div><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>趣味•启示录 · 北京青年团契</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+html[data-nav-offset="1"] body.site-nav-offset .topbar{margin-top:0;}
+body.site-nav-offset #snowWrap,body.site-nav-offset #mountainWrap{top:68px;}
+:root{--skin-name:"团契夜空";}
+body[data-skin="0"]{--bg1:#0d1b2a;--bg2:#1b3358;--bg3:#0a1220;--panel:#faf6ee;--panel-border:#c9b886;--ink:#2a2018;--accent:#b8860b;--accent2:#d4a017;--chip:#234070;--chip-hover:#1b3358;--chip-ink:#fff;--answer:#234070;--answer-hover:#1b3358;--answer-ink:#fff;--btn-ghost:#f0e9da;--btn-ghost-ink:#5c4f3e;--shadow:rgba(13,27,42,.35);--snow:1;}
+body[data-skin="1"]{--bg1:#f7d9b0;--bg2:#f6a96b;--bg3:#f4e3c7;--panel:#fff8ec;--panel-border:#e8b877;--ink:#5a3a20;--accent:#d9642a;--accent2:#c98a2e;--chip:#d9642a;--chip-hover:#b54f1e;--chip-ink:#fff;--answer:#b5762f;--answer-hover:#94602a;--answer-ink:#fff;--btn-ghost:#fbe8cd;--btn-ghost-ink:#7a5533;--shadow:rgba(120,70,20,.25);--snow:0;}
+body[data-skin="2"]{--bg1:#eef3f8;--bg2:#cfe0ef;--bg3:#dbe7f2;--panel:#fdfdfd;--panel-border:#7ba3c9;--ink:#1f3a5f;--accent:#24507d;--accent2:#5a88b8;--chip:#24507d;--chip-hover:#1b3d61;--chip-ink:#fff;--answer:#3d6a9e;--answer-hover:#2f547f;--answer-ink:#fff;--btn-ghost:#e8f0f8;--btn-ghost-ink:#34567f;--shadow:rgba(30,60,100,.22);--snow:0;}
+body[data-skin="3"]{--bg1:#dcecd9;--bg2:#9fc7a4;--bg3:#b8dab8;--panel:#fbfdf8;--panel-border:#6fa876;--ink:#1f4026;--accent:#2e7d4f;--accent2:#7a9c3a;--chip:#2e7d4f;--chip-hover:#246640;--chip-ink:#fff;--answer:#3f8f5a;--answer-hover:#327447;--answer-ink:#fff;--btn-ghost:#eaf5ea;--btn-ghost-ink:#2f5c3a;--shadow:rgba(30,90,50,.22);--snow:0;}
+body[data-skin="4"]{--bg1:#0d1b2a;--bg2:#234070;--bg3:#0a1220;--panel:#fffdf8;--panel-border:#e8b84b;--ink:#2a2018;--accent:#d4a017;--accent2:#f4d58d;--chip:#1b3358;--chip-hover:#13243a;--chip-ink:#fff;--answer:#1b3358;--answer-hover:#0d1b2a;--answer-ink:#fff;--btn-ghost:#f0e9da;--btn-ghost-ink:#5c4f3e;--shadow:rgba(13,27,42,.4);--snow:1;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{font-family:"Noto Serif SC","Noto Sans SC","Kaiti SC","KaiTi","Songti SC",serif;background:linear-gradient(180deg,var(--bg1),var(--bg2) 45%,var(--bg3));background-attachment:fixed;color:var(--ink);min-height:100vh;overflow-x:hidden;transition:background 1s ease;}
+.site-home{position:relative;z-index:3;display:inline-flex;align-items:center;gap:6px;margin:8px 18px 0;padding:6px 12px;border-radius:999px;border:1px solid rgba(244,213,141,.35);color:#f4d58d;background:rgba(13,27,42,.35);backdrop-filter:blur(6px);text-decoration:none;font-size:.86rem;letter-spacing:1px;transition:.2s;}
+.site-home:hover{background:rgba(212,160,23,.18);transform:translateY(-1px);}
+#snowWrap{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+.snow{position:absolute;top:-30px;color:#fff;opacity:.85;text-shadow:0 0 4px rgba(120,160,200,.8);animation:fall linear infinite;}
+@keyframes fall{0%{transform:translateY(-5vh) rotate(0);opacity:.9;}100%{transform:translateY(108vh) rotate(360deg);opacity:.2;}}
+#mountainWrap{position:fixed;left:0;right:0;bottom:0;z-index:1;pointer-events:none;line-height:0;opacity:.5;}
+#mountainWrap svg{display:block;width:100%;height:auto;}
+<p>/* 启动页 */
+#splashScreen{position:fixed;top:68px;left:0;right:0;bottom:0;z-index:900;background:linear-gradient(135deg,#0d1b2a 0%,#1b3358 40%,#13243a 70%,#0d1b2a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+#splashScreen::before{content:&quot;&quot;;position:absolute;inset:0;background:radial-gradient(ellipse at 20% 30%,rgba(212,160,23,.16) 0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(36,64,112,.25) 0%,transparent 50%);}
+#splashScreen::after{content:&quot;&quot;;position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:50px 50px;}
+.splash-particles{position:absolute;inset:0;overflow:hidden;}
+.splash-particle{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(212,160,23,.6);box-shadow:0 0 10px rgba(212,160,23,.8);animation:floatUp linear infinite;}
+@keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{transform:translateY(-10vh) scale(1);opacity:0;}}
+.splash-content{position:relative;z-index:2;text-align:center;padding:20px;}
+.splash-title{font-size:3.2rem;letter-spacing:12px;color:#f7f2e6;text-shadow:0 0 30px rgba(212,160,23,.5),0 2px 10px rgba(0,0,0,.5);margin-bottom:8px;animation:titleGlow 3s ease-in-out infinite;}
+@keyframes titleGlow{0%,100%{text-shadow:0 0 30px rgba(212,160,23,.5),0 2px 10px rgba(0,0,0,.5);}50%{text-shadow:0 0 50px rgba(212,160,23,.8),0 0 80px rgba(184,38,38,.3),0 2px 10px rgba(0,0,0,.5);}}
+.splash-subtitle{font-size:1.1rem;letter-spacing:6px;color:rgba(247,242,230,.7);margin-bottom:40px;}
+.splash-divider{width:200px;height:2px;margin:0 auto 40px;background:linear-gradient(90deg,transparent,#d4a017,transparent);}
+.splash-quote{font-size:1rem;color:rgba(247,242,230,.5);font-style:italic;margin-bottom:50px;letter-spacing:2px;max-width:500px;line-height:1.8;}
+.splash-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.splash-btn{padding:16px 48px;font-size:1.2rem;letter-spacing:4px;border:none;cursor:pointer;font-family:inherit;border-radius:50px;transition:all .3s;position:relative;overflow:hidden;}
+.splash-btn.primary{background:linear-gradient(135deg,#b8860b,#d4a017);color:#0d1b2a;box-shadow:0 6px 30px rgba(212,160,23,.4);}
+.splash-btn.primary:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(212,160,23,.55);}
+.splash-btn.secondary{background:transparent;color:#d4a017;border:2px solid rgba(212,160,23,.5);}
+.splash-btn.secondary:hover{background:rgba(212,160,23,.1);border-color:#d4a017;transform:translateY(-2px);}
+.splash-footer{position:absolute;bottom:30px;left:0;right:0;text-align:center;color:rgba(247,242,230,.3);font-size:.85rem;letter-spacing:2px;}
+.splash-player-name{color:#d4a017;font-size:.95rem;margin-bottom:20px;background:rgba(255,255,255,.05);padding:8px 20px;border-radius:20px;display:inline-block;border:1px solid rgba(212,160,23,.3);}</p>
+<p>/* 注册/密码弹窗 */
+.register-modal,.password-modal{position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.7);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:20px;}
+.register-box,.password-box{background:linear-gradient(135deg,#0d1b2a,#1b3358);border:2px solid rgba(212,160,23,.4);border-radius:20px;padding:40px;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.register-box h2,.password-box h2{color:#f7f2e6;font-size:1.8rem;letter-spacing:4px;margin-bottom:8px;}
+.register-box p,.password-box p{color:rgba(247,242,230,.6);margin-bottom:20px;font-size:.95rem;}
+.register-box input,.password-box input{width:100%;padding:14px 18px;font-size:1.1rem;background:rgba(255,255,255,.08);border:2px solid rgba(212,160,23,.3);border-radius:12px;color:#f7f2e6;font-family:inherit;outline:none;transition:.3s;text-align:center;letter-spacing:2px;}
+.register-box input:focus,.password-box input:focus{border-color:#d4a017;box-shadow:0 0 20px rgba(212,160,23,.2);}
+.register-box input::placeholder,.password-box input::placeholder{color:rgba(247,242,230,.3);}
+.register-box .btn-register,.password-box .btn-confirm{margin-top:20px;width:100%;padding:14px;background:linear-gradient(135deg,#b8860b,#d4a017);color:#0d1b2a;border:none;border-radius:12px;font-size:1.1rem;cursor:pointer;font-family:inherit;letter-spacing:4px;transition:.3s;}
+.register-box .btn-register:hover,.password-box .btn-confirm:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,.4);}
+.password-box .btn-cancel{margin-top:10px;width:100%;padding:10px;background:transparent;color:rgba(247,242,230,.5);border:1px solid rgba(247,242,230,.2);border-radius:12px;font-size:.95rem;cursor:pointer;font-family:inherit;transition:.3s;}
+.password-box .btn-cancel:hover{color:#f7f2e6;border-color:rgba(247,242,230,.4);}
+.pwd-hint{margin-top:14px;font-size:.8rem;color:rgba(247,242,230,.4);}
+.pwd-error{color:#ff6b6b;font-size:.9rem;margin-top:10px;min-height:20px;}</p>
+<p>.topbar{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;}
+.topbar .brand{color:#fff;font-size:1.15rem;letter-spacing:3px;text-shadow:0 1px 6px rgba(0,0,0,.5);cursor:pointer;}
+.topbar .brand span{color:var(--accent2,#f0c060);}
+.topbar .tb-right{display:flex;gap:10px;align-items:center;}
+.topbar .player-tag{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:20px;padding:6px 14px;font-size:.9rem;backdrop-filter:blur(4px);}
+.topbar .join-entry{background:linear-gradient(135deg,#b8860b,#d4a017);color:#0d1b2a;border:none;border-radius:999px;padding:7px 14px;font-size:.88rem;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:1px;box-shadow:0 4px 14px rgba(212,160,23,.35);transition:.2s;}
+.topbar .join-entry:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(212,160,23,.45);}
+.icon-btn{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer;font-size:.95rem;font-family:inherit;transition:.2s;backdrop-filter:blur(4px);}
+.icon-btn:hover{background:rgba(255,255,255,.3);transform:translateY(-1px);}</p>
+<p>.container{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:10px 16px 60px;}
+.panel{background:var(--panel);border:2px solid var(--panel-border);border-radius:16px;box-shadow:0 10px 34px var(--shadow);padding:26px 26px 22px;}
+.panel + .panel{margin-top:18px;}
+.hero{text-align:center;margin:6px 0 16px;}
+.hero h1{font-size:2.3rem;letter-spacing:8px;color:var(--accent);}
+.hero .sub{font-size:1.05rem;color:var(--ink);opacity:.8;margin-top:4px;}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:6px;}
+.menu-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:14px;padding:20px 10px;font-size:1.15rem;cursor:pointer;font-family:inherit;letter-spacing:2px;box-shadow:0 6px 16px var(--shadow);transition:.25s;position:relative;overflow:hidden;}
+.menu-btn small{display:block;font-size:.8rem;opacity:.85;margin-top:6px;letter-spacing:0;}
+.menu-btn:hover{transform:translateY(-3px);box-shadow:0 10px 22px var(--shadow);}
+.menu-btn.secondary{background:var(--btn-ghost);color:var(--btn-ghost-ink);box-shadow:0 4px 10px var(--shadow);}</p>
+<p>/* 章节选择 */
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:16px;}
+.chapter-card{background:var(--btn-ghost);border:2px solid var(--panel-border);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;transition:.25s;position:relative;}
+.chapter-card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 6px 18px var(--shadow);}
+.chapter-card.locked{opacity:.5;cursor:not-allowed;}
+.chapter-card .ch-num{font-size:1.8rem;font-weight:bold;color:var(--accent);margin-bottom:4px;}
+.chapter-card .ch-name{font-size:.9rem;color:var(--ink);margin-bottom:6px;min-height:2.4em;line-height:1.2;}
+.chapter-card .ch-info{font-size:.75rem;color:var(--ink);opacity:.6;}
+.chapter-card .ch-stars{font-size:.85rem;margin-top:4px;letter-spacing:1px;}
+.chapter-card.completed{border-color:var(--accent2);}
+.chapter-card.completed::after{content:&quot;✓&quot;;position:absolute;top:8px;right:10px;color:var(--accent2);font-weight:bold;font-size:1.2rem;}</p>
+<p>/* 小关卡选择 */
+.level-select-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0;}
+.level-select-btn{width:42px;height:42px;border-radius:50%;background:var(--btn-ghost);border:2px solid var(--panel-border);color:var(--btn-ghost-ink);display:flex;align-items:center;justify-content:center;font-size:.95rem;cursor:pointer;transition:.2s;font-family:inherit;}
+.level-select-btn:hover{border-color:var(--accent);transform:scale(1.1);}
+.level-select-btn.current{background:var(--accent);color:#fff;border-color:var(--accent);transform:scale(1.15);box-shadow:0 0 0 4px rgba(184,38,38,.15);}
+.level-select-btn.done{background:var(--accent2);color:#fff;border-color:var(--accent2);}
+.level-select-btn.locked{opacity:.4;cursor:not-allowed;}</p>
+<p>.status-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;}
+.status-bar .stat{font-size:.98rem;color:var(--ink);cursor:pointer;}
+.status-bar .stat:hover{color:var(--accent);}
+.status-bar .stat b{color:var(--accent);}
+.grade-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:22px;padding:5px 14px;font-weight:bold;font-size:1rem;box-shadow:0 4px 12px var(--shadow);}
+.grade-badge .g-stars{letter-spacing:2px;font-size:.95rem;}
+.grade-badge .g-letter{background:rgba(255,255,255,.25);border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;}
+.timer-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#00ff88;border-radius:22px;padding:5px 16px;font-weight:bold;font-size:1.1rem;font-family:&quot;Courier New&quot;,monospace;box-shadow:0 4px 12px rgba(0,0,0,.3);border:1px solid rgba(0,255,136,.3);}
+.timer-badge.warning{color:#ffaa00;border-color:rgba(255,170,0,.5);animation:timerPulse 1s infinite;}
+.timer-badge.danger{color:#ff4444;border-color:rgba(255,68,68,.5);animation:timerPulse .5s infinite;}
+@keyframes timerPulse{0%,100%{opacity:1;}50%{opacity:.6;}}</p>
+<p>.progress-indic{display:flex;justify-content:center;gap:10px;margin-top:14px;font-size:.95rem;color:var(--ink);opacity:.85;flex-wrap:wrap;}
+.progress-indic .pi{background:var(--btn-ghost);border:1px solid var(--panel-border);border-radius:16px;padding:5px 14px;}
+.progress-indic .pi b{color:var(--accent);}</p>
+<p>.original-sentence{background:var(--btn-ghost);border:1px dashed var(--panel-border);border-radius:12px;padding:16px;font-size:1.35rem;line-height:1.9;text-align:center;min-height:88px;margin-bottom:16px;cursor:pointer;transition:.3s;position:relative;user-select:none;}
+.original-sentence:hover{border-color:var(--accent);box-shadow:inset 0 0 0 2px rgba(184,38,38,.08);}
+.original-sentence .hint-tip{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);font-size:.72rem;color:var(--accent);opacity:.85;background:var(--panel);padding:1px 8px;border-radius:8px;white-space:nowrap;box-shadow:0 2px 6px var(--shadow);}
+.original-sentence.blurred{color:transparent;text-shadow:none;background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,.04) 6px,rgba(0,0,0,.04) 12px);}
+.original-sentence .w{transition:.25s;}
+.original-sentence .w.err-strike{position:relative;color:#ff3b30;background:rgba(255,59,48,.14);border-radius:4px;}
+.original-sentence .w.err-strike::after{content:&quot;&quot;;position:absolute;left:-2px;right:-2px;top:54%;height:3px;background:#ff3b30;border-radius:2px;transform:rotate(-2deg);box-shadow:0 0 8px rgba(255,59,48,.6);}</p>
+<p>.word-blocks{display:flex;flex-wrap:wrap;gap:10px;min-height:64px;margin-bottom:16px;align-items:center;justify-content:center;position:relative;}
+.block{padding:10px 18px;background:var(--chip);color:var(--chip-ink);border-radius:10px;cursor:pointer;font-size:1.1rem;transition:all .18s;box-shadow:0 3px 8px var(--shadow);user-select:none;letter-spacing:1px;}
+.block:hover{transform:scale(1.05);filter:brightness(1.08);}
+.block.used{opacity:.28;transform:scale(.94);pointer-events:none;filter:grayscale(.8);}
+.block.placed{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 0 16px var(--accent),0 0 6px var(--accent);animation:placedIn .35s ease-out;}
+@keyframes placedIn{0%{transform:scale(.6);opacity:.3;}70%{transform:scale(1.08);}100%{transform:scale(1);opacity:1;}}
+.block.err-flash{border:3px solid #ff3b30;background:#ffecec;color:#ff3b30;box-shadow:0 0 0 4px rgba(255,59,48,.25),0 0 20px rgba(255,59,48,.45);animation:errShake .5s;border-radius:50% 48%;}
+@keyframes errShake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}</p>
+<p>.fx-plus{position:absolute;z-index:9;display:flex;align-items:center;justify-content:center;width:56px;height:56px;border:3px solid #ff3b30;border-radius:50%;color:#ff3b30;font-size:1.05rem;font-weight:bold;background:rgba(255,255,255,.92);box-shadow:0 0 20px rgba(255,59,48,.55);animation:fxPlus 1s ease-out forwards;pointer-events:none;}
+@keyframes fxPlus{0%{transform:translateY(0) scale(.3);opacity:0;}18%{transform:translateY(-12px) scale(1.15);opacity:1;}100%{transform:translateY(-58px) scale(1);opacity:0;}}
+.fx-minus{position:absolute;z-index:9;color:#ff3b30;font-weight:bold;font-size:1.3rem;text-shadow:0 0 8px rgba(255,59,48,.55);animation:fxMinus .95s ease-out forwards;pointer-events:none;line-height:1;}
+@keyframes fxMinus{0%{transform:translateY(0) rotate(-3deg);opacity:1;}100%{transform:translateY(-64px) rotate(-6deg);opacity:0;}}</p>
+<p>.answer-area{min-height:76px;border:2px dashed var(--panel-border);border-radius:12px;padding:14px;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;align-items:center;justify-content:center;background:rgba(255,255,255,.35);}
+.answer-area .block{cursor:default;background:var(--answer);color:var(--answer-ink);}
+.answer-area .block.placed{cursor:default;background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 0 16px var(--accent),0 0 6px var(--accent);}
+.answer-area.placeholder::before{content:&quot;点击下方词块，按正确顺序拼成词句&quot;;color:var(--ink);opacity:.4;font-size:1rem;}</p>
+<p>.btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.btn{background:var(--btn-ghost);color:var(--btn-ghost-ink);border:1px solid var(--panel-border);border-radius:10px;padding:10px 18px;font-size:1rem;cursor:pointer;font-family:inherit;transition:.2s;}
+.btn:hover{filter:brightness(.96);transform:translateY(-1px);}
+.btn.primary{background:var(--accent);color:#fff;border-color:transparent;}
+.btn.gold{background:var(--accent2);color:#fff;border-color:transparent;}
+.btn.reading{background:#ff4444;color:#fff;border-color:transparent;animation:readingPulse 1.5s infinite;}
+@keyframes readingPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,.4);}50%{box-shadow:0 0 0 8px rgba(255,68,68,0);}}
+.btn:active{transform:scale(.97);}
+.tip-text{margin-top:14px;text-align:center;min-height:24px;color:var(--ink);opacity:.85;font-size:.95rem;}
+.star-line{text-align:center;margin-top:8px;font-size:1.3rem;letter-spacing:4px;}</p>
+<p>.steps{display:flex;align-items:center;justify-content:center;gap:4px;margin:14px 0 6px;flex-wrap:wrap;}
+.step{width:30px;height:30px;border-radius:50%;background:var(--btn-ghost);border:2px solid var(--panel-border);color:var(--btn-ghost-ink);display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:.3s;cursor:pointer;}
+.step:hover{border-color:var(--accent);}
+.step.done{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+.step.current{background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(1.15);box-shadow:0 0 0 4px rgba(184,38,38,.15);}
+.medal{text-align:center;margin-top:16px;font-size:1.2rem;color:var(--accent);}</p>
+<p>.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1200;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
+.overlay.show{display:flex;}
+.modal{background:var(--panel);border:2px solid var(--panel-border);border-radius:16px;max-width:760px;width:100%;max-height:86vh;overflow:auto;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.modal h2{text-align:center;color:var(--accent);margin-bottom:16px;letter-spacing:3px;}
+.modal .close{float:right;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink);line-height:1;}</p>
+<p>.skin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;}
+.skin-item{border:2px solid var(--panel-border);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;transition:.2s;background:var(--btn-ghost);}
+.skin-item:hover{transform:translateY(-2px);}
+.skin-item.active{border-color:var(--accent);box-shadow:0 0 0 3px rgba(184,38,38,.2);}
+.skin-item .swatch{width:100%;height:54px;border-radius:8px;margin-bottom:8px;border:1px solid rgba(0,0,0,.12);}
+.skin-item .n{font-size:.9rem;}</p>
+<p>.timer-settings{display:flex;gap:10px;justify-content:center;margin:16px 0;flex-wrap:wrap;}
+.timer-opt{padding:12px 24px;border:2px solid var(--panel-border);border-radius:12px;cursor:pointer;transition:.2s;background:var(--btn-ghost);font-size:1rem;}
+.timer-opt:hover{border-color:var(--accent);}
+.timer-opt.active{background:var(--accent);color:#fff;border-color:var(--accent);}</p>
+<p>.rank-list{display:flex;flex-direction:column;gap:8px;}
+.rank-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--btn-ghost);border-radius:12px;border:1px solid var(--panel-border);}
+.rank-item .rank-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.1rem;flex-shrink:0;}
+.rank-item:nth-child(1) .rank-num{background:linear-gradient(135deg,#ffd700,#ffaa00);color:#fff;}
+.rank-item:nth-child(2) .rank-num{background:linear-gradient(135deg,#c0c0c0,#a0a0a0);color:#fff;}
+.rank-item:nth-child(3) .rank-num{background:linear-gradient(135deg,#cd7f32,#a0522d);color:#fff;}
+.rank-item .rank-name{flex:1;font-size:1.05rem;font-weight:bold;}
+.rank-item .rank-score{font-size:1rem;color:var(--accent);font-weight:bold;}
+.rank-item .rank-detail{font-size:.8rem;opacity:.6;}
+.rank-empty{text-align:center;padding:40px;color:var(--ink);opacity:.5;}</p>
+<p>.music-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.music-row label{font-size:.95rem;}
+input[type=range]{flex:1;min-width:120px;accent-color:var(--accent);}
+.track-list{display:flex;flex-direction:column;gap:8px;}
+.track-item{display:flex;align-items:center;gap:10px;background:var(--btn-ghost);border:1px solid var(--panel-border);border-radius:10px;padding:8px 12px;flex-wrap:wrap;}
+.track-item.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(184,38,38,.15);}
+.track-item .nm{flex:1;min-width:120px;}
+.track-item .tag{font-size:.72rem;background:var(--accent);color:#fff;padding:2px 8px;border-radius:10px;}
+.track-item button{background:var(--btn-ghost);border:1px solid var(--panel-border);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:.85rem;font-family:inherit;}
+.track-item button.play-now{background:var(--accent);color:#fff;border-color:transparent;}
+.upload-hint{font-size:.8rem;color:var(--ink);opacity:.7;margin-top:6px;}</p>
+<p>.admin-field{margin-bottom:12px;}
+.admin-field label{display:block;font-size:.9rem;margin-bottom:4px;color:var(--ink);opacity:.9;}
+.admin-field input[type=text],.admin-field textarea,.admin-field select{width:100%;padding:9px 12px;border:1px solid var(--panel-border);border-radius:8px;font-size:1rem;font-family:inherit;background:#fff;color:var(--ink);}
+.admin-field textarea{min-height:60px;line-height:1.7;}
+.chapter-editor{border:2px solid var(--accent);border-radius:14px;padding:16px;margin-bottom:16px;background:rgba(184,38,38,.03);}
+.chapter-editor .ce-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+.chapter-editor .ce-title{font-weight:bold;color:var(--accent);font-size:1.1rem;}
+.level-editor{border:1px solid var(--panel-border);border-radius:12px;padding:14px;margin-bottom:14px;background:var(--btn-ghost);}
+.level-editor .le-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+.level-editor .le-head .lt{font-weight:bold;color:var(--accent);}
+.export-box{background:var(--btn-ghost);border:1px solid var(--panel-border);border-radius:12px;padding:16px;margin-top:10px;text-align:center;}</p>
+<p>#toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);background:rgba(20,20,30,.92);color:#fff;padding:12px 22px;border-radius:10px;font-size:.95rem;z-index:99;opacity:0;pointer-events:none;transition:.3s;max-width:80vw;text-align:center;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}</p>
+<p>.chapter-nav{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.chapter-nav button{background:var(--btn-ghost);border:1px solid var(--panel-border);border-radius:8px;padding:6px 14px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.2s;}
+.chapter-nav button:hover{border-color:var(--accent);color:var(--accent);}
+.chapter-nav .ch-label{font-weight:bold;color:var(--accent);font-size:1rem;min-width:120px;text-align:center;}</p>
+<p>@media(max-width:560px){
+.splash-title{font-size:2rem;letter-spacing:6px;}
+.hero h1{font-size:1.7rem;letter-spacing:4px;}
+.original-sentence{font-size:1.15rem;}
+.container{padding:6px 10px 50px;}
+.panel{padding:18px 14px;}
+.splash-btn{padding:14px 32px;font-size:1rem;}
+.chapter-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;}
+.chapter-card{padding:12px 8px;}
+.chapter-card .ch-num{font-size:1.4rem;}
+}
+</style></p>
+</head>
+<body data-skin="0" data-nav-offset="1">
+<div id="site-nav"></div>
+<div id="splashScreen">
+  <div class="splash-particles" id="splashParticles"></div>
+  <div class="splash-content">
+    <div class="splash-title">趣味•启示录</div>
+    <div class="splash-subtitle">背 诵 闯 关</div>
+    <div class="splash-divider"></div>
+    <div class="splash-quote">"念这书上预言的和那些听见又遵守其中所记载的，都是有福的，因为日期近了。"</div>
+    <div class="splash-player-name" id="splashPlayerName" style="display:none;"></div>
+    <div class="splash-buttons">
+      <button class="splash-btn primary" id="splashStart">▶ 开始游戏</button>
+      <button class="splash-btn secondary" id="splashRank">🏆 排行榜</button>
+      <a class="splash-btn secondary" href="http://42.194.137.245/static/join-us.html" style="text-decoration:none;display:inline-flex;align-items:center;">加入我们</a>
+    </div>
+  </div>
+  <div class="splash-footer">北京青年团契 · 趣味•启示录 · 22章404关</div>
+</div>
+<!-- 新手引导 -->
+<div class="overlay" id="guideOverlay">
+  <div class="modal" style="max-width:480px;">
+    <h2 id="新手引导"><a class="header" href="#新手引导">新手引导</a></h2>
+    <div id="guideBody" style="line-height:1.9;font-size:1.02rem;"></div>
+    <div class="btn-row" style="margin-top:16px;">
+      <button class="btn" id="guideSkip">跳过</button>
+      <button class="btn primary" id="guideNext">下一步</button>
+    </div>
+  </div>
+</div>
+<div class="register-modal" id="registerModal" style="display:none;">
+  <div class="register-box">
+    <h2 id="欢迎来到背诵闯关"><a class="header" href="#欢迎来到背诵闯关">欢迎来到背诵闯关</a></h2>
+    <p>请输入你的名字，记录你的闯关成绩</p>
+    <input type="text" id="registerInput" placeholder="输入名字（文字/数字均可）" maxlength="20">
+    <button class="btn-register" id="btnRegister">确 定</button>
+  </div>
+</div>
+<div class="password-modal" id="passwordModal" style="display:none;">
+  <div class="password-box">
+    <h2 id="-内容管理"><a class="header" href="#-内容管理">🔒 内容管理</a></h2>
+    <p>请输入管理密码</p>
+    <input type="password" id="passwordInput" placeholder="请输入密码" maxlength="20">
+    <div class="pwd-error" id="pwdError"></div>
+    <button class="btn-confirm" id="btnPwdConfirm">确 定</button>
+    <button class="btn-cancel" id="btnPwdCancel">取消</button>
+    <div class="pwd-hint">默认密码：admin888（可在后台修改）</div>
+  </div>
+</div>
+<div id="snowWrap"></div>
+<div id="mountainWrap"></div>
+<div class="topbar">
+  <div class="brand" id="brandTitle" onclick="switchView('menu')">趣味•启示录 <span>背诵闯关</span></div>
+  <div class="tb-right">
+    <a class="join-entry" href="http://42.194.137.245/static/join-us.html">加入我们</a>
+    <span class="player-tag" id="playerTag">玩家：未登录</span>
+    <button class="icon-btn" id="btnMenu">☰ 菜单</button>
+  </div>
+</div>
+<div class="container">
+  <!-- 主菜单 -->
+  <div id="viewMenu" class="panel">
+    <div class="hero">
+      <h1 id="menuTitle">趣味•启示录</h1>
+      <div class="sub" id="menuAuthor"></div>
+    </div>
+    <div class="menu">
+      <button class="menu-btn" id="btnContinue">▶ 继续闯关<small id="continueHint"></small></button>
+      <button class="menu-btn" id="btnSelectChapter">📖 选择章节<small>22章 · 章内按节解锁</small></button>
+      <button class="menu-btn secondary" id="btnHowTo">📖 玩法说明</button>
+      <button class="menu-btn secondary" id="btnRank">🏆 排行榜</button>
+      <button class="menu-btn secondary" id="btnSettings">⚙️ 设置<small>皮肤 / 音乐 / 倒计时</small></button>
+      <a class="menu-btn secondary" href="http://42.194.137.245/static/join-us.html" style="text-decoration:none;text-align:center;">🤝 加入我们<small>报名查经与团契活动</small></a>
+    </div>
+    <div class="medal" id="medalMain"></div>
+  </div>
+<!-- 章节选择 -->
+<div id="viewChapter" class="panel" style="display:none">
+    <h2 style="text-align:center;color:var(--accent);margin-bottom:8px;">📖 选择章节</h2>
+    <p style="text-align:center;color:var(--ink);opacity:.7;margin-bottom:16px;font-size:.95rem;">共22章 · 404节；章节可任选，章内须按经文顺序解锁</p>
+    <div class="chapter-grid" id="chapterGrid"></div>
+    <div class="btn-row" style="margin-top:20px;"><button class="btn" id="btnChapterBack">← 返回菜单</button></div>
+  </div>
+<!-- 小关卡选择 -->
+<div id="viewLevelSelect" class="panel" style="display:none">
+    <h2 style="text-align:center;color:var(--accent);margin-bottom:8px;" id="levelSelectTitle">第1章</h2>
+    <p style="text-align:center;color:var(--ink);opacity:.7;margin-bottom:16px;font-size:.95rem;">按经文号闯关；未解锁关卡需先完成上一节</p>
+    <div class="level-select-row" id="levelSelectRow"></div>
+    <div class="btn-row" style="margin-top:20px;">
+      <button class="btn" id="btnLevelSelectBack">← 返回章节</button>
+      <button class="btn primary" id="btnStartFromLevel">开始本关</button>
+    </div>
+  </div>
+<!-- 游戏页 -->
+<div id="viewGame" class="panel" style="display:none">
+    <div class="status-bar">
+      <div class="stat" id="chapterStat" title="点击选择章节">第 <b id="chapterText">1</b> 章 第 <b id="levelText">1</b> 关</div>
+      <div class="timer-badge" id="timerBadge" style="display:none;">⏱ <span id="timerText">02:00</span></div>
+      <div class="grade-badge" id="gradeBadge"><span class="g-stars" id="gradeStars">☆☆☆</span><span class="g-letter" id="gradeLetter">S</span></div>
+      <div class="stat">错误 <b id="errText">0</b> 次</div>
+    </div>
+    <div class="chapter-nav">
+      <button id="btnPrevChapter">◀ 上一章</button>
+      <span class="ch-label" id="chapterNameLabel">第1章</span>
+      <button id="btnNextChapter">下一章 ▶</button>
+    </div>
+    <div class="level-select-row" id="gameLevelRow"></div>
+    <div class="original-sentence" id="showSentence"></div>
+    <div class="answer-area" id="answerBox"></div>
+    <div class="word-blocks" id="pool"></div>
+    <div class="btn-row">
+      <button class="btn gold" id="btnRead">🔊 朗读</button>
+      <button class="btn" id="btnReset">🔄 重排本关</button>
+      <a class="btn" id="btnBible" href="static/bible-online.html" target="_blank" rel="noopener">对照读经</a>
+      <button class="btn" id="btnBack">← 返回菜单</button>
+    </div>
+    <div class="tip-text" id="tip"></div>
+    <div class="star-line" id="starLine"></div>
+    <div class="progress-indic" id="progressIndic">
+      <span class="pi">错误 <b id="errText2">0</b> 次</span>
+      <span class="pi">词块 <b id="chunkDone">0</b> / <span id="chunkTotal">0</span></span>
+    </div>
+  </div>
+<!-- 设置页 -->
+<div id="viewSettings" class="panel" style="display:none">
+    <h2 style="text-align:center;color:var(--accent);margin-bottom:16px;">外观与背景音乐</h2>
+    <div class="skin-grid" id="skinGrid"></div>
+    <hr style="border:none;border-top:1px dashed var(--panel-border);margin:20px 0;">
+    <h3 style="margin-bottom:10px;color:var(--accent);">背景音乐</h3>
+    <div class="music-row"><label>▶/⏸</label><button class="btn primary" id="btnMusicToggle">播放</button><label>音量</label><input type="range" id="volRange" min="0" max="100" value="60"><span id="volText">60</span></div>
+    <div class="music-row"><label>选择曲目：</label><select id="trackSelect" style="flex:1;min-width:150px;padding:8px;border-radius:8px;border:1px solid var(--panel-border);font-family:inherit;"></select></div>
+    <div class="track-list" id="trackList"></div>
+    <div class="upload-hint">曲目可到「内容管理 → 音乐管理」中上传本地音频或添加音乐链接。</div>
+    <hr style="border:none;border-top:1px dashed var(--panel-border);margin:20px 0;">
+    <h3 style="margin-bottom:10px;color:var(--accent);">⏱ 倒计时（进阶，默认关闭）</h3>
+    <p style="text-align:center;color:var(--ink);opacity:.75;margin-bottom:12px;font-size:.92rem;">时间到未完成则本关失败；背经建议保持关闭</p>
+    <div class="timer-settings">
+      <div class="timer-opt active" data-time="0">关闭</div>
+      <div class="timer-opt" data-time="60">1 分钟</div>
+      <div class="timer-opt" data-time="120">2 分钟</div>
+      <div class="timer-opt" data-time="180">3 分钟</div>
+    </div>
+    <div class="tip-text" id="timerTip">当前设置：倒计时已关闭</div>
+    <div class="btn-row" style="margin-top:18px;">
+      <button class="btn" id="btnExport">📤 导出分享</button>
+      <button class="btn" id="btnSettingsBack">← 返回</button>
+    </div>
+  </div>
+<!-- 倒计时设置（兼容旧入口，默认隐藏） -->
+<div id="viewTimer" class="panel" style="display:none">
+    <h2 style="text-align:center;color:var(--accent);margin-bottom:16px;">⏱ 倒计时设置</h2>
+    <div class="btn-row" style="margin-top:20px;"><button class="btn primary" id="btnTimerBack">← 返回菜单</button></div>
+  </div>
+<!-- 排行榜 -->
+<div id="viewRank" class="panel" style="display:none">
+    <h2 style="text-align:center;color:var(--accent);margin-bottom:16px;">🏆 闯关排行榜</h2>
+    <div class="rank-list" id="rankList"></div>
+    <div class="btn-row" style="margin-top:20px;">
+      <button class="btn" id="btnRankBack">← 返回菜单</button>
+      <button class="btn" id="btnClearRank">🗑 清空排行榜</button>
+    </div>
+  </div>
+<!-- 玩法说明 -->
+<div id="viewHowTo" class="panel" style="display:none">
+    <h2 style="text-align:center;color:var(--accent);margin-bottom:14px;">玩法说明</h2>
+    <div style="line-height:2;font-size:1.02rem;">
+      <p><b>1. 内容</b>：启示录 22 章、共 404 节，一节一关；经文与站内「读圣经」同源。</p>
+      <p><b>2. 解锁</b>：章节可任选；<b>章内须按经文顺序</b>通关（完成上一节才开下一节）。</p>
+      <p><b>3. 顺序点选</b>：词块打乱后，按正确顺序逐个点击；点对前进（+100），点错不前进。</p>
+      <p><b>4. 记忆模式</b>：单击原文隐藏；再单击显示 5 秒后自动隐藏。</p>
+      <p><b>5. 朗读 / 对照</b>：可朗读本关；也可打开「对照读经」查看启示录全文。</p>
+      <p><b>6. 倒计时</b>：默认关闭；可在「设置」中开启进阶限时。</p>
+      <p><b>7. 星级</b>：0错=S，1错=A，2错=B，其余=C。</p>
+      <p><b>8. 进度与排行</b>：本机自动保存；通关成绩记入排行榜。</p>
+    </div>
+    <div class="btn-row" style="margin-top:16px;"><button class="btn" id="btnHowToBack">← 返回</button></div>
+  </div>
+<!-- 内容管理 -->
+<div id="viewAdmin" class="panel" style="display:none">
+    <h2 style="text-align:center;color:var(--accent);margin-bottom:14px;">内容管理</h2>
+    <div class="btn-row" style="margin-bottom:16px;">
+      <button class="btn primary" id="adminTabGame">✍️ 游戏文字</button>
+      <button class="btn" id="adminTabMusic">🎵 音乐管理</button>
+    </div>
+    <div id="adminGame">
+      <div class="admin-field"><label>游戏标题</label><input type="text" id="fTitle"></div>
+      <div class="admin-field"><label>副标题 / 作者</label><input type="text" id="fAuthor"></div>
+      <div class="admin-field"><label>左上角标题</label><input type="text" id="fBrandTitle"></div>
+      <div class="admin-field"><label>左上角副标题</label><input type="text" id="fBrandSub"></div>
+      <div id="chapterList"></div>
+      <div class="btn-row">
+        <button class="btn gold" id="btnAddChapter">＋ 新增章节</button>
+        <button class="btn primary" id="btnSaveContent">💾 保存修改</button>
+        <button class="btn" id="btnResetContent">♻️ 恢复默认</button>
+        <button class="btn" id="btnAdminBack">← 返回</button>
+      </div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--panel-border);">
+        <div class="admin-field"><label>🔑 修改管理密码</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input type="password" id="newPwdInput" placeholder="输入新密码" style="flex:1;min-width:150px;">
+            <button class="btn primary" id="btnChangePwd">修改密码</button>
+          </div>
+          <div style="font-size:.8rem;opacity:.6;margin-top:4px;">默认密码：admin888，修改后请牢记</div>
+        </div>
+      </div>
+    </div>
+    <div id="adminMusic" style="display:none">
+      <div class="admin-field"><label>上传本地音频（mp3 / m4a / wav）</label><input type="file" id="fileMusic" accept="audio/*" multiple></div>
+      <div class="admin-field"><label>或添加音乐链接</label><input type="text" id="musicUrlInput" placeholder="https://example.com/music.mp3"><div class="btn-row" style="margin-top:8px;"><button class="btn" id="btnAddUrl">＋ 添加链接</button></div></div>
+      <div class="track-list" id="adminTrackList"></div>
+      <div class="upload-hint">💡 链接型音乐会随导出文件分享；本地上传的音乐会嵌入导出文件。</div>
+      <div class="btn-row" style="margin-top:14px;"><button class="btn" id="btnMusicBack">← 返回</button></div>
+    </div>
+  </div>
+<!-- 导出分享 -->
+<div id="viewExport" class="panel" style="display:none">
+    <h2 style="text-align:center;color:var(--accent);margin-bottom:14px;">导出分享</h2>
+    <div style="line-height:2;">
+      <p>把<b>当前内容</b>（标题、22章关卡、文字、音乐）打包成<b>独立的新 HTML 文件</b>。</p>
+      <p>把导出的文件发给朋友，对方用浏览器打开即可玩到你修改后的版本。</p>
+    </div>
+    <div class="export-box">
+      <button class="btn primary" id="btnDoExport">📦 打包并下载当前版本</button>
+      <div class="tip-text" id="exportTip"></div>
+    </div>
+    <div class="btn-row" style="margin-top:14px;"><button class="btn" id="btnExportBack">← 返回</button></div>
+  </div>
+</div>
+<div class="overlay" id="modalOverlay"><div class="modal"><button class="close" id="modalClose">×</button><h2 id="modalTitle"></h2><div id="modalBody"></div></div></div>
+<div id="toast"></div>
+<p><template id="export-body-template" style="display:none;"></template></p>
+<script>
+window.EXPORT_DATA = null;
+</script>
+<script src="js/revelation-levels.js"></script>
+<script id="app-script">
+(function(){
+"use strict";
+var EXPORT_DATA = window.EXPORT_DATA || null;
+
+/* ========== 默认内容（由 bible_full.js 生成） ========== */
+function getDefaultContent(){
+  if(window.REVELATION_LEVELS){
+    return JSON.parse(JSON.stringify(window.REVELATION_LEVELS));
+  }
+  return {
+    _gen:"fallback",_v:5,
+    title:"趣味•启示录",author:"北京青年团契",brandTitle:"趣味•启示录",brandSub:"背诵闯关",
+    chapters:[]
+  };
+}
+var DEFAULT_CONTENT = getDefaultContent();
+
+/* ========== 存储 ========== */
+var SAVE_KEY="qiyishilu_save_v5";
+var MUSIC_KEY="qiyishilu_music_v5";
+var PLAYER_KEY="qiyishilu_player_v5";
+var RANK_KEY="qiyishilu_rank_v5";
+var TIMER_KEY="qiyishilu_timer_v5";
+var GUIDE_KEY="qiyishilu_guide_v5";
+var ADMIN_PWD_KEY="qiyishilu_admin_pwd_v1";
+var DEFAULT_PWD="admin888";
+
+function loadSave(){try{var s=localStorage.getItem(SAVE_KEY);return s?JSON.parse(s):{};}catch(e){return{};}}
+function storeSave(s){try{localStorage.setItem(SAVE_KEY,JSON.stringify(s));}catch(e){}}
+var save=loadSave();
+function loadPlayer(){try{return localStorage.getItem(PLAYER_KEY)||"";}catch(e){return"";}}
+function storePlayer(name){try{localStorage.setItem(PLAYER_KEY,name);}catch(e){}}
+var playerName=loadPlayer();
+function loadRank(){try{var s=localStorage.getItem(RANK_KEY);return s?JSON.parse(s):[];}catch(e){return[];}}
+function storeRank(r){try{localStorage.setItem(RANK_KEY,JSON.stringify(r));}catch(e){}}
+var rankList=loadRank();
+function loadTimer(){try{var s=localStorage.getItem(TIMER_KEY);if(s===null||s==="")return 0;return parseInt(s,10)||0;}catch(e){return 0;}}
+function storeTimer(t){try{localStorage.setItem(TIMER_KEY,String(t));}catch(e){}}
+var timerDuration=loadTimer();
+function loadAdminPwd(){try{return localStorage.getItem(ADMIN_PWD_KEY)||DEFAULT_PWD;}catch(e){return DEFAULT_PWD;}}
+function storeAdminPwd(p){try{localStorage.setItem(ADMIN_PWD_KEY,p);}catch(e){}}
+function guideDone(){try{return localStorage.getItem(GUIDE_KEY)==="1";}catch(e){return false;}}
+function setGuideDone(){try{localStorage.setItem(GUIDE_KEY,"1");}catch(e){}}
+
+/* ========== IndexedDB 音乐 ========== */
+var db=null;
+function openDB(){return new Promise(function(res){if(db){res(db);return;}var req=indexedDB.open("qysMusic5",1);req.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains("files"))d.createObjectStore("files");};req.onsuccess=function(e){db=e.target.result;res(db);};req.onerror=function(){res(null);};});}
+function dbPutFile(id,blob){return openDB().then(function(d){if(!d)return Promise.reject("no-db");return new Promise(function(res,rej){var t=d.transaction("files","readwrite").objectStore("files").put(blob,id);t.onsuccess=function(){res();};t.onerror=function(){rej();};});});}
+function dbGetFile(id){return openDB().then(function(d){if(!d)return Promise.resolve(null);return new Promise(function(res){var t=d.transaction("files","readonly").objectStore("files").get(id);t.onsuccess=function(){res(t.result||null);};t.onerror=function(){res(null);};});});}
+function dbDelFile(id){return openDB().then(function(d){if(!d)return Promise.resolve();return new Promise(function(res){var t=d.transaction("files","readwrite").objectStore("files").delete(id);t.onsuccess=function(){res();};t.onerror=function(){res();};});});}
+function builtinTrack(){return{id:"builtin",name:"内置 · 古风旋律（竹笛）",type:"builtin"};}
+function loadMusicList(){try{var s=localStorage.getItem(MUSIC_KEY);return s?JSON.parse(s):[builtinTrack()];}catch(e){return[builtinTrack()];}}
+function storeMusicList(list){try{localStorage.setItem(MUSIC_KEY,JSON.stringify(list));}catch(e){}}
+var musicList=EXPORT_DATA&&EXPORT_DATA.music?EXPORT_DATA.music.concat([builtinTrack()]):loadMusicList();
+
+/* ========== 全局状态 ========== */
+function resolveContent(){
+  if(EXPORT_DATA&&EXPORT_DATA.content) return EXPORT_DATA.content;
+  if(save.content && save.content._gen==="custom") return save.content;
+  return getDefaultContent();
+}
+var content = resolveContent();
+if(!content.chapters) content.chapters=[];
+while(content.chapters.length<22){content.chapters.push({name:"第"+(content.chapters.length+1)+"章",levels:[]});}
+
+var curChapter=0, curLevel=0, selectedLevel=0;
+var combo=0, errCount=0, answer=[], pool=[];
+var memoryHidden=false, memTimer=null;
+var currentSkin=save.skin!=null?save.skin:0;
+var volume=save.vol!=null?save.vol:60;
+var musicOn=save.musicOn!=null?save.musicOn:false;
+var curTrack=save.curTrack||"builtin";
+var audioEl=null, audioCtx=null, builtinNode=null;
+var isReading=false;
+var timerInterval=null, timerLeft=0, timerRunning=false;
+
+var $=function(id){return document.getElementById(id);};
+var views={menu:$("viewMenu"),chapter:$("viewChapter"),levelSelect:$("viewLevelSelect"),game:$("viewGame"),settings:$("viewSettings"),timer:$("viewTimer"),rank:$("viewRank"),howto:$("viewHowTo"),admin:$("viewAdmin"),export:$("viewExport")};
+
+/* ========== 工具 ========== */
+function toast(msg){var t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove("show");},2400);}
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function switchView(name){for(var k in views)views[k].style.display=(k===name)?"block":"none";if(name==="menu")renderMenu();if(name==="chapter")renderChapterGrid();if(name==="game")startLevel(curChapter,curLevel);if(name==="settings")renderSettings();if(name==="timer")renderTimerSettings();if(name==="rank")renderRank();if(name==="admin")renderAdmin();window.scrollTo(0,0);}
+function showModal(title,html){$("modalTitle").textContent=title;$("modalBody").innerHTML=html;$("modalOverlay").classList.add("show");}
+function hideModal(){$("modalOverlay").classList.remove("show");}
+function getTotalLevels(){var n=0;for(var i=0;i<content.chapters.length;i++)n+=content.chapters[i].levels.length;return n;}
+function getChapterProgress(chIdx){var ch=content.chapters[chIdx];if(!ch||!ch.levels.length)return{done:0,total:0};var best=save.best||[];var done=0;for(var i=0;i<ch.levels.length;i++){var key=chIdx+"_"+i;if(best[key]!=null)done++;}return{done:done,total:ch.levels.length};}
+
+/* ========== 启动页 ========== */
+function initSplashParticles(){var wrap=$("splashParticles");if(!wrap)return;for(var i=0;i<30;i++){var p=document.createElement("div");p.className="splash-particle";p.style.left=Math.random()*100+"%";p.style.animationDuration=(6+Math.random()*10)+"s";p.style.animationDelay=(Math.random()*8)+"s";p.style.width=p.style.height=(2+Math.random()*4)+"px";wrap.appendChild(p);}}
+function showSplash(){var s=$("splashScreen");if(s)s.style.display="flex";if(playerName){var pn=$("splashPlayerName");if(pn){pn.style.display="inline-block";pn.textContent="👤 "+playerName;}}}
+function hideSplash(fromRank){var s=$("splashScreen");if(s)s.style.display="none";if(!fromRank)setTimeout(maybeShowGuide,300);}
+
+/* ========== 注册 ========== */
+function showRegister(){$("registerModal").style.display="flex";setTimeout(function(){$("registerInput").focus();},300);}
+function hideRegister(){$("registerModal").style.display="none";}
+function doRegister(){var name=$("registerInput").value.trim();if(!name){toast("请输入名字");return;}playerName=name;storePlayer(name);updatePlayerTag();hideRegister();hideSplash();switchView("menu");toast("欢迎你，"+name+"！");}
+function updatePlayerTag(){var tag=$("playerTag");if(tag)tag.textContent="玩家："+(playerName||"未登录");var pn=$("splashPlayerName");if(pn){if(playerName){pn.style.display="inline-block";pn.textContent="👤 "+playerName;}else{pn.style.display="none";}}}
+
+/* ========== 密码 ========== */
+function showPasswordModal(){$("passwordModal").style.display="flex";$("passwordInput").value="";$("pwdError").textContent="";setTimeout(function(){$("passwordInput").focus();},300);}
+function hidePasswordModal(){$("passwordModal").style.display="none";}
+function verifyPassword(){var input=$("passwordInput").value.trim();var correct=loadAdminPwd();if(input===correct){hidePasswordModal();switchView("admin");}else{$("pwdError").textContent="❌ 密码错误，请重试";$("passwordInput").value="";$("passwordInput").focus();}}
+
+/* ========== 皮肤 ========== */
+var SKINS=[{name:"团契夜空",sw:"linear-gradient(135deg,#0d1b2a,#1b3358)"},{name:"晨曦暖阳",sw:"linear-gradient(135deg,#f7d9b0,#f6a96b)"},{name:"青花瓷韵",sw:"linear-gradient(135deg,#eef3f8,#7ba3c9)"},{name:"竹林翠影",sw:"linear-gradient(135deg,#dcecd9,#6fa876)"},{name:"金辉夜幕",sw:"linear-gradient(135deg,#0d1b2a,#d4a017)"}];
+function applySkin(n){currentSkin=n;document.body.setAttribute("data-skin",String(n));save.skin=n;storeSave(save);if(n===0||n===4)startSnow();else stopSnow();}
+function startSnow(){var w=$("snowWrap");if(w.dataset.on==="1")return;w.dataset.on="1";w.innerHTML="";for(var i=0;i<40;i++){var s=document.createElement("div");s.className="snow";s.textContent="❄";s.style.left=Math.random()*100+"%";s.style.fontSize=(8+Math.random()*14)+"px";s.style.animationDuration=(6+Math.random()*9)+"s";s.style.animationDelay=(Math.random()*6)+"s";w.appendChild(s);}}
+function stopSnow(){var w=$("snowWrap");w.dataset.on="0";w.innerHTML="";}
+function renderSettings(){var g=$("skinGrid");g.innerHTML="";SKINS.forEach(function(s,i){var d=document.createElement("div");d.className="skin-item"+(i===currentSkin?" active":"");d.innerHTML='<div class="swatch" style="background:'+s.sw+'"></div><div class="n">'+s.name+'</div>';d.onclick=function(){applySkin(i);renderSettings();};g.appendChild(d);});$("volRange").value=volume;$("volText").textContent=volume;renderTrackSelect();renderTrackList();$("btnMusicToggle").textContent=musicOn?"暂停":"播放";}
+
+/* ========== 音乐 ========== */
+function ensureAudio(){if(!audioEl){audioEl=new Audio();audioEl.loop=true;}return audioEl;}
+function stopBuiltin(){if(builtinNode){try{builtinNode.stop();}catch(e){}builtinNode=null;}}
+function playBuiltin(){stopBuiltin();if(audioEl){try{audioEl.pause();audioEl.src="";}catch(e){}}try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();var ctx=audioCtx;if(ctx.state==="suspended")ctx.resume();var master=ctx.createGain();master.gain.value=volume/100*0.5;master.connect(ctx.destination);var noteFreq=function(semi){return 440*Math.pow(2,(semi-9)/12);};var base=[0,2,4,7,9,-2,0,2,4,7,9,12];var seq=[];for(var i=0;i<16;i++)seq.push(base[i%base.length]);var osc=ctx.createOscillator();osc.type="sine";var gain=ctx.createGain();gain.gain.value=0;osc.connect(gain);gain.connect(master);osc.start();var t=ctx.currentTime+0.05;var step=0.36;seq.forEach(function(semi,k){osc.frequency.setValueAtTime(noteFreq(semi),t+k*step);gain.gain.setValueAtTime(0.0001,t+k*step);gain.gain.linearRampToValueAtTime(0.6,t+k*step+0.03);gain.gain.exponentialRampToValueAtTime(0.001,t+k*step+step*0.9);});builtinNode={stop:function(){try{osc.stop();osc.disconnect();gain.disconnect();}catch(e){}}};}catch(e){}}
+function playTrack(id){curTrack=id;save.curTrack=id;storeSave(save);var track=musicList.find(function(t){return t.id===id;});stopBuiltin();if(!track){musicOn=false;return;}if(track.type==="builtin"){musicOn=true;playBuiltin();}else if(track.type==="embedded"){ensureAudio();audioEl.src=track.dataUrl;audioEl.volume=volume/100;audioEl.play().then(function(){musicOn=true;}).catch(function(){toast("无法播放该音频");musicOn=false;});}else{ensureAudio();if(track.type==="url"){audioEl.src=track.url;}else{dbGetFile(track.id).then(function(blob){if(blob){var u=URL.createObjectURL(blob);audioEl.src=u;}else{toast("音频文件读取失败");return;}});}audioEl.volume=volume/100;audioEl.play().then(function(){musicOn=true;}).catch(function(){toast("无法播放该音频");musicOn=false;});}}
+function toggleMusic(){if(!musicOn){musicOn=true;playTrack(curTrack);}else{musicOn=false;stopBuiltin();if(audioEl){try{audioEl.pause();}catch(e){}}}save.musicOn=musicOn;storeSave(save);var b=$("btnMusicToggle");if(b)b.textContent=musicOn?"暂停":"播放";}
+function setVolume(v){volume=v;save.vol=v;storeSave(save);$("volText").textContent=v;if(audioEl)audioEl.volume=v/100;}
+function renderTrackSelect(){var sel=$("trackSelect");sel.innerHTML="";musicList.forEach(function(t,i){var o=document.createElement("option");o.value=String(i);o.textContent=t.name+(t.id===curTrack?"（当前）":"");sel.appendChild(o);});sel.value=String(Math.max(0,musicList.findIndex(function(t){return t.id===curTrack;})));}
+function renderTrackList(){var box=$("trackList");box.innerHTML="";if(!musicList.length){box.innerHTML='<div class="tip-text">暂无曲目</div>';return;}musicList.forEach(function(t,i){var d=document.createElement("div");d.className="track-item"+(t.id===curTrack?" active":"");var tag=t.type==="builtin"?'<span class="tag">内置</span>':(t.type==="url"?'<span class="tag">链接</span>':(t.type==="embedded"?'<span class="tag">嵌入</span>':'<span class="tag">上传</span>'));var sizeTxt=t.size?(" · "+(t.size/1024/1024).toFixed(1)+"MB"):"";d.innerHTML='<span class="nm">'+esc(t.name)+'</span>'+tag+'<span style="font-size:.75rem;opacity:.7">'+sizeTxt+'</span><button class="play-now" data-idx="'+i+'">播放</button>';d.querySelector("button").onclick=function(){playTrack(t.id);renderTrackList();};box.appendChild(d);});}
+
+/* ========== 山峦 ========== */
+function renderMountains(){var wrap=$("mountainWrap");if(!wrap||wrap.dataset.on==="1")return;wrap.dataset.on="1";wrap.innerHTML='<svg viewBox="0 0 1440 260" preserveAspectRatio="none" style="width:100%;height:180px;"><path d="M0,260 L0,150 L180,60 L330,150 L470,40 L640,170 L800,70 L960,160 L1120,50 L1290,150 L1440,90 L1440,260 Z" fill="rgba(20,40,70,0.35)"/><path d="M0,260 L0,190 L220,120 L400,210 L560,100 L760,220 L940,130 L1120,215 L1300,120 L1440,190 L1440,260 Z" fill="rgba(15,30,55,0.45)"/></svg>';}
+function renderBrand(){var b=$("brandTitle");if(!b)return;b.innerHTML=(content.brandTitle||content.title||"")+' <span>'+(content.brandSub||"背诵闯关")+'</span>';}
+
+/* ========== 倒计时 ========== */
+function renderTimerSettings(){var opts=document.querySelectorAll(".timer-opt");opts.forEach(function(o){var t=parseInt(o.dataset.time,10);o.classList.toggle("active",t===timerDuration);});var tip=$("timerTip");if(timerDuration===0)tip.textContent="当前设置：倒计时已关闭";else tip.textContent="当前设置：每关 "+(timerDuration/60)+" 分钟";}
+function setTimer(duration){timerDuration=duration;storeTimer(duration);renderTimerSettings();if(duration===0)toast("倒计时已关闭");else toast("倒计时已设置为 "+(duration/60)+" 分钟");}
+function startTimer(){stopTimer();if(timerDuration<=0){$("timerBadge").style.display="none";return;}timerLeft=timerDuration;timerRunning=true;$("timerBadge").style.display="inline-flex";updateTimerDisplay();timerInterval=setInterval(function(){timerLeft--;updateTimerDisplay();if(timerLeft<=0){stopTimer();onTimeUp();}},1000);}
+function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}timerRunning=false;}
+function updateTimerDisplay(){var m=Math.floor(timerLeft/60);var s=timerLeft%60;$("timerText").textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;var badge=$("timerBadge");badge.classList.remove("warning","danger");if(timerLeft<=10)badge.classList.add("danger");else if(timerLeft<=30)badge.classList.add("warning");}
+function onTimeUp(){toast("⏰ 时间到！本关失败");showModal("⏰ 时间到！",'<p style="text-align:center;font-size:1.1rem;line-height:2;">第 '+(curChapter+1)+' 章 第 '+(curLevel+1)+' 关倒计时结束<br>不要灰心，再试一次吧！</p><div class="btn-row" style="margin-top:14px;"><button class="btn primary" id="mRetry">🔄 重试本关</button><button class="btn" id="mBackMenu">返回菜单</button></div>');$("mRetry").onclick=function(){hideModal();startLevel(curChapter,curLevel);};$("mBackMenu").onclick=function(){hideModal();switchView("menu");};}
+
+/* ========== 排行榜 ========== */
+function renderRank(){var box=$("rankList");box.innerHTML="";if(!rankList.length){box.innerHTML='<div class="rank-empty">暂无记录，快去闯关吧！</div>';return;}var sorted=rankList.slice().sort(function(a,b){if(b.score!==a.score)return b.score-a.score;return a.totalErr-b.totalErr;});sorted.forEach(function(r,i){var d=document.createElement("div");d.className="rank-item";d.innerHTML='<div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+esc(r.name)+'</div><div class="rank-score">'+r.score+' 分</div><div class="rank-detail">'+r.chapters+'章 · '+r.totalErr+'错 · '+r.date+'</div>';box.appendChild(d);});}
+function addToRank(score,totalErr){if(!playerName)playerName="匿名玩家";var entry={name:playerName,score:score,totalErr:totalErr,chapters:content.chapters.length,date:new Date().toLocaleDateString("zh-CN")};rankList.push(entry);if(rankList.length>50)rankList=rankList.slice(-50);storeRank(rankList);}
+
+/* ========== 主菜单 ========== */
+function renderMenu(){renderBrand();$("menuTitle").textContent=content.title;$("menuAuthor").textContent=content.author||"北京青年团契";var total=getTotalLevels();var done=0;var best=save.best||[];for(var key in best)done++;var lastRef=verseLabel(save.lastChapter||0,save.lastLevel||0);if(save.lastChapter!=null&&save.lastLevel!=null){$("continueHint").textContent="上次："+lastRef;}else if(done>0){$("continueHint").textContent="已完成 "+done+" / "+total+" 关";}else{$("continueHint").textContent="从启1:1开始";}var allDone=done>=total&&total>0;$("medalMain").innerHTML=allDone?'🏆 已点亮「全文背诵勋章」':'';}
+
+function verseLabel(chIdx,lvIdx){
+  var ch=content.chapters[chIdx];
+  if(ch&&ch.levels[lvIdx]&&ch.levels[lvIdx].tr) return ch.levels[lvIdx].tr;
+  return "启"+(chIdx+1)+":"+(lvIdx+1);
+}
+function isLevelUnlocked(chIdx,lvIdx){
+  if(lvIdx<=0) return true;
+  var best=save.best||{};
+  return best[chIdx+"_"+(lvIdx-1)]!=null;
+}
+function firstUnlockedIncomplete(chIdx){
+  var ch=content.chapters[chIdx];if(!ch)return 0;
+  var best=save.best||{};
+  for(var i=0;i<ch.levels.length;i++){
+    if(!isLevelUnlocked(chIdx,i)) return Math.max(0,i-1);
+    if(best[chIdx+"_"+i]==null) return i;
+  }
+  return Math.max(0,ch.levels.length-1);
+}
+function syncBibleLink(chIdx,lvIdx){
+  var a=$("btnBible");if(!a)return;
+  a.href="bible-online.html?book=revelation&chapter="+(chIdx+1)+"&verse="+(lvIdx+1);
+  a.title="对照读经 · "+verseLabel(chIdx,lvIdx);
+}
+
+/* ========== 章节选择 ========== */
+function renderChapterGrid(){var grid=$("chapterGrid");grid.innerHTML="";content.chapters.forEach(function(ch,i){var prog=getChapterProgress(i);var card=document.createElement("div");card.className="chapter-card";if(prog.total===0)card.classList.add("locked");if(prog.done===prog.total&&prog.total>0)card.classList.add("completed");var stars="";if(prog.total>0){var best=save.best||[];var avgErr=0;for(var j=0;j<ch.levels.length;j++){var key=i+"_"+j;avgErr+=(best[key]!=null?best[key]:0);}avgErr=Math.round(avgErr/ch.levels.length);if(avgErr===0)stars="⭐⭐⭐";else if(avgErr===1)stars="⭐⭐";else if(avgErr<=2)stars="⭐";else stars="☆☆☆";}card.innerHTML='<div class="ch-num">'+(i+1)+'</div><div class="ch-name">'+esc(ch.name.replace(/^第\d+\章\s*/,""))+'</div><div class="ch-info">'+(prog.total>0?prog.done+"/"+prog.total+" 节":"暂无关卡")+'</div><div class="ch-stars">'+stars+'</div>';card.onclick=function(){if(prog.total===0){toast("此章节暂无关卡");return;}selectedLevel=firstUnlockedIncomplete(i);renderLevelSelect(i);switchView("levelSelect");};grid.appendChild(card);});}
+
+/* ========== 小关卡选择 ========== */
+function renderLevelSelect(chIdx){curChapter=chIdx;var ch=content.chapters[chIdx];$("levelSelectTitle").textContent=ch.name;var row=$("levelSelectRow");row.innerHTML="";var best=save.best||[];ch.levels.forEach(function(lv,i){var btn=document.createElement("button");btn.className="level-select-btn";var key=chIdx+"_"+i;var unlocked=isLevelUnlocked(chIdx,i);if(!unlocked)btn.classList.add("locked");if(best[key]!=null)btn.classList.add("done");if(i===selectedLevel)btn.classList.add("current");var ref=(lv.tr||"").replace(/^启/,"");btn.textContent=ref||String(i+1);btn.title=(unlocked?"":"🔒 ")+(lv.tr||("第"+(i+1)+"关"));btn.onclick=function(){if(!isLevelUnlocked(chIdx,i)){toast("请先完成 "+verseLabel(chIdx,i-1));return;}selectedLevel=i;renderLevelSelect(chIdx);};row.appendChild(btn);});}
+
+/* ========== 游戏逻辑 ========== */
+function gradeOf(e){return e===0?"S":(e===1?"A":(e<=2?"B":"C"));}
+function starsOf(e){return e===0?"⭐⭐⭐":(e===1?"⭐⭐":(e<=2?"⭐":"☆☆☆"));}
+
+function startLevel(chIdx,lvIdx){
+  var ch=content.chapters[chIdx];
+  if(!ch||!ch.levels.length){toast("此章节暂无关卡");switchView("chapter");return;}
+  if(lvIdx>=ch.levels.length)lvIdx=0;
+  if(!isLevelUnlocked(chIdx,lvIdx)){
+    toast("请先完成 "+verseLabel(chIdx,lvIdx-1));
+    lvIdx=firstUnlockedIncomplete(chIdx);
+  }
+  curChapter=chIdx;curLevel=lvIdx;
+  save.lastChapter=chIdx;save.lastLevel=lvIdx;storeSave(save);
+  combo=0;errCount=0;answer=[];
+  $("chapterText").textContent=chIdx+1;
+  $("levelText").textContent=verseLabel(chIdx,lvIdx).replace(/^启\d+:/,"");
+  $("chapterNameLabel").textContent=ch.name+" · "+verseLabel(chIdx,lvIdx);
+  syncBibleLink(chIdx,lvIdx);
+  $("errText").textContent="0";if($("errText2"))$("errText2").textContent="0";
+  $("starLine").textContent=starsOf(0)+"　评级 "+gradeOf(0);
+  if($("gradeStars"))$("gradeStars").textContent=starsOf(0);
+  if($("gradeLetter"))$("gradeLetter").textContent=gradeOf(0);
+  var line=ch.levels[lvIdx];
+  if($("chunkTotal"))$("chunkTotal").textContent=line.words.length;
+  if($("chunkDone"))$("chunkDone").textContent="0";
+  var sen=$("showSentence");
+  sen.innerHTML=line.words.map(function(w){return '<span class="w">'+esc(w)+'</span>';}).join('')+'<span class="hint-tip">单击隐藏原文 · 再单击显示5秒</span>';
+  memoryHidden=false;sen.classList.remove("blurred");
+  renderGameLevelRow();
+  pool=shuffle(line.words.slice());
+  renderPool();renderAnswer();
+  $("tip").textContent="";
+  resetReadButton();
+  startTimer();
+}
+
+function renderGameLevelRow(){
+  var row=$("gameLevelRow");row.innerHTML="";
+  var ch=content.chapters[curChapter];
+  var best=save.best||[];
+  ch.levels.forEach(function(lv,i){
+    var btn=document.createElement("button");
+    btn.className="level-select-btn";
+    var key=curChapter+"_"+i;
+    var unlocked=isLevelUnlocked(curChapter,i);
+    if(!unlocked)btn.classList.add("locked");
+    if(best[key]!=null)btn.classList.add("done");
+    if(i===curLevel)btn.classList.add("current");
+    btn.textContent=(lv.tr||"").replace(/^启\d+:/,"")||String(i+1);
+    btn.title=(unlocked?"":"🔒 ")+(lv.tr||("第"+(i+1)+"关"));
+    btn.onclick=function(){startLevel(curChapter,i);};
+    row.appendChild(btn);
+  });
+}
+
+function renderPool(){var box=$("pool");box.innerHTML="";pool.forEach(function(w,i){var d=document.createElement("div");d.className="block";d.textContent=w;d.onclick=function(){pick(i);};box.appendChild(d);});}
+function renderAnswer(){var box=$("answerBox");box.innerHTML="";answer.forEach(function(w,i){var d=document.createElement("div");d.className="block placed";d.textContent=w;box.appendChild(d);});box.classList.toggle("placeholder",answer.length===0);}
+function fxScore(anchorEl,good){var poolBox=$("pool");if(!poolBox||!anchorEl)return;var pr=poolBox.getBoundingClientRect();var ar=anchorEl.getBoundingClientRect();if(good){var el=document.createElement("div");el.className="fx-plus";el.textContent="+100";el.style.left=(ar.left-pr.left+ar.width/2-28)+"px";el.style.top=(ar.top-pr.top-10)+"px";poolBox.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},1000);}else{for(var k=0;k<4;k++){var m=document.createElement("div");m.className="fx-minus";m.textContent="-30";m.style.left=(ar.left-pr.left+ar.width/2-20+(k%2?14:-14))+"px";m.style.top=(ar.top-pr.top-6)+"px";m.style.animationDelay=(k*0.12)+"s";poolBox.appendChild(m);(function(mm){setTimeout(function(){if(mm.parentNode)mm.parentNode.removeChild(mm);},1100+k*120);})(m);}}}
+function strikeWord(w){var sen=$("showSentence");var spans=sen.querySelectorAll(".w");for(var i=0;i<spans.length;i++){if(spans[i].textContent===w&&!spans[i].classList.contains("err-strike")){spans[i].classList.add("err-strike");return;}}}
+function flashErr(el){if(!el)return;el.classList.add("err-flash");setTimeout(function(){el.classList.remove("err-flash");},560);}
+
+function pick(idx){
+  if(!timerRunning&&timerDuration>0)return;
+  var line=content.chapters[curChapter].levels[curLevel];
+  var w=pool[idx];
+  var target=line.words[answer.length];
+  var el=$("pool").children[idx];
+  if(w===target){
+    answer.push(w);pool.splice(idx,1);
+    fxScore(el,true);
+    renderPool();renderAnswer();
+    combo++;syncGradeUI();syncChunkProgress();
+    if(answer.length>=line.words.length){
+      toast("✅ 本关完成！");
+      stopTimer();
+      setTimeout(function(){completeLevel();},950);
+    }
+  }else{
+    errCount++;combo=0;
+    syncGradeUI();
+    fxScore(el,false);
+    flashErr(el);
+    strikeWord(w);
+    toast("❌ 顺序不对，再想想～（错误 "+errCount+" 次）");
+  }
+}
+function syncGradeUI(){$("errText").textContent=errCount;if($("errText2"))$("errText2").textContent=errCount;$("starLine").textContent=starsOf(errCount)+"　评级 "+gradeOf(errCount);if($("gradeStars"))$("gradeStars").textContent=starsOf(errCount);if($("gradeLetter"))$("gradeLetter").textContent=gradeOf(errCount);}
+function syncChunkProgress(){if($("chunkDone"))$("chunkDone").textContent=answer.length;}
+
+function completeLevel(){
+  var e=errCount;
+  var best=save.best||[];
+  var key=curChapter+"_"+curLevel;
+  if(best[key]==null||e<best[key])best[key]=e;
+  save.best=best;storeSave(save);
+  syncGradeUI();
+  var ch=content.chapters[curChapter];
+  if(curLevel+1>=ch.levels.length){
+    /* 本章完成，检查是否全部完成 */
+    var total=getTotalLevels();
+    var doneCount=0;
+    for(var k in best)doneCount++;
+    if(doneCount>=total&&total>0){
+      save.finished=true;storeSave(save);
+      var totalErr=0;
+      for(var k2 in best)totalErr+=(best[k2]||0);
+      var score=Math.max(0,1000-totalErr*20);
+      addToRank(score,totalErr);
+      showModal("🎉 全部通关！",'<p style="text-align:center;font-size:1.2rem;line-height:2;">你已背完全部 '+total+' 关！<br>🏆 点亮「全文背诵勋章」<br>📊 成绩已记入排行榜</p><div class="btn-row" style="margin-top:14px;"><button class="btn primary" id="mRank">查看排行榜</button><button class="btn" id="mFinish">回到菜单</button></div>');
+      $("mRank").onclick=function(){hideModal();switchView("rank");};
+      $("mFinish").onclick=function(){hideModal();switchView("menu");};
+      return;
+    }
+    /* 进入下一章 */
+    var nextCh=curChapter+1;
+    while(nextCh<content.chapters.length&&content.chapters[nextCh].levels.length===0)nextCh++;
+    if(nextCh<content.chapters.length){
+      toast("📖 "+verseLabel(curChapter,curLevel)+" 完成！进入下一章");
+      setTimeout(function(){startLevel(nextCh,0);},700);
+    }else{
+      showModal("🎉 本章完成！",'<p style="text-align:center;font-size:1.1rem;line-height:2;">第 '+(curChapter+1)+' 章全部完成！</p><div class="btn-row" style="margin-top:14px;"><a class="btn gold" href="static/bible-online.html?book=revelation&chapter='+(curChapter+1)+'" target="_blank" rel="noopener">对照读经</a><button class="btn primary" id="mCh">选择章节</button><button class="btn" id="mMenu">回到菜单</button></div>');
+      $("mCh").onclick=function(){hideModal();switchView("chapter");};
+      $("mMenu").onclick=function(){hideModal();switchView("menu");};
+    }
+  }else{
+    toast("✅ "+verseLabel(curChapter,curLevel)+" 完成");
+    setTimeout(function(){startLevel(curChapter,curLevel+1);},700);
+  }
+}
+
+function toggleMemory(){var sen=$("showSentence");if(!memoryHidden){memoryHidden=true;sen.classList.add("blurred");toast("原文已隐藏，凭记忆拼吧！");}else{memoryHidden=false;sen.classList.remove("blurred");toast("原文显示 5 秒…");clearTimeout(memTimer);memTimer=setTimeout(function(){if(!memoryHidden){memoryHidden=true;sen.classList.add("blurred");}},5000);}}
+function readSentence(){try{if(!("speechSynthesis" in window)){toast("当前浏览器不支持朗读");return;}if(isReading){speechSynthesis.cancel();isReading=false;resetReadButton();toast("已停止朗读");return;}var line=content.chapters[curChapter].levels[curLevel];speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(line.raw.replace(/[，。；、：]/g,"，"));u.lang="zh-CN";u.rate=0.95;u.onend=function(){isReading=false;resetReadButton();};u.onerror=function(){isReading=false;resetReadButton();};speechSynthesis.speak(u);isReading=true;var btn=$("btnRead");btn.textContent="⏹ 停止朗读";btn.classList.add("reading");toast("🔊 正在朗读…再点一次停止");}catch(e){toast("朗读失败");isReading=false;resetReadButton();}}
+function resetReadButton(){var btn=$("btnRead");if(btn){btn.textContent="🔊 朗读";btn.classList.remove("reading");}}
+function resetLevel(){startLevel(curChapter,curLevel);}
+
+/* ========== 内容管理 ========== */
+function renderAdmin(){
+  $("fTitle").value=content.title;
+  $("fAuthor").value=content.author;
+  $("fBrandTitle").value=content.brandTitle||"";
+  $("fBrandSub").value=content.brandSub||"";
+  renderChapterList();
+  renderAdminTracks();
+}
+function renderChapterList(){
+  var box=$("chapterList");box.innerHTML="";
+  content.chapters.forEach(function(ch,ci){
+    var cd=document.createElement("div");cd.className="chapter-editor";
+    cd.innerHTML='<div class="ce-head"><span class="ce-title">📖 第 '+(ci+1)+' 章</span>'
+      +'<span><button class="btn" data-act="addLv" data-ci="'+ci+'">＋ 添加小关</button> '
+      +'<button class="btn" data-act="delCh" data-ci="'+ci+'">删除本章</button></span></div>'
+      +'<div class="admin-field"><label>章节名称</label><input type="text" class="f-chname" data-ci="'+ci+'" value="'+esc(ch.name)+'"></div>'
+      +'<div class="level-list" data-ci="'+ci+'"></div>';
+    box.appendChild(cd);
+    var ll=cd.querySelector(".level-list");
+    ch.levels.forEach(function(lv,li){
+      ll.appendChild(createLevelEditor(lv,ci,li));
+    });
+  });
+}
+function createLevelEditor(lv,ci,li){
+  var d=document.createElement("div");d.className="level-editor";
+  d.innerHTML='<div class="le-head"><span class="lt">第 '+(li+1)+' 小关</span>'
+    +'<span><button class="btn" data-act="up" data-ci="'+ci+'" data-li="'+li+'">↑</button> '
+    +'<button class="btn" data-act="down" data-ci="'+ci+'" data-li="'+li+'">↓</button> '
+    +'<button class="btn" data-act="delLv" data-ci="'+ci+'" data-li="'+li+'">删除</button></span></div>'
+    +'<div class="admin-field"><label>原文</label><input type="text" class="f-raw" value="'+esc(lv.raw)+'"></div>'
+    +'<div class="admin-field"><label>译文（可选）</label><input type="text" class="f-tr" value="'+esc(lv.tr||"")+'"></div>'
+    +'<div class="admin-field"><label>词块（每行一个）</label><textarea class="f-words">'+esc((lv.words||[]).join("\n"))+'</textarea></div>';
+  return d;
+}
+function collectContent(){
+  var chapters=[];
+  var chEditors=document.querySelectorAll("#chapterList .chapter-editor");
+  chEditors.forEach(function(ce){
+    var chName=ce.querySelector(".f-chname");
+    var levels=[];
+    var lvEditors=ce.querySelectorAll(".level-editor");
+    lvEditors.forEach(function(le){
+      var raw=le.querySelector(".f-raw");
+      var tr=le.querySelector(".f-tr");
+      var tw=le.querySelector(".f-words");
+      if(raw&&tw){
+        var words=tw.value.split("\n").map(function(x){return x.trim();}).filter(Boolean);
+        if(words.length){levels.push({raw:raw.value.trim(),tr:(tr?tr.value.trim():""),words:words});}
+      }
+    });
+    chapters.push({name:chName?chName.value.trim():"未命名章节",levels:levels});
+  });
+  return chapters;
+}
+function saveContent(){
+  var chapters=collectContent();
+  content.title=$("fTitle").value.trim()||"趣味•启示录";
+  content.author=$("fAuthor").value.trim()||"北京青年团契";
+  content.brandTitle=$("fBrandTitle").value.trim()||content.title;
+  content.brandSub=$("fBrandSub").value.trim()||"背诵闯关";
+  content.chapters=chapters;
+  content._gen="custom";
+  content._v=5;
+  while(content.chapters.length<22)content.chapters.push({name:"第"+(content.chapters.length+1)+"章",levels:[]});
+  save.content=content;storeSave(save);
+  renderBrand();
+  toast("✅ 内容已保存（自定义 · "+chapters.filter(function(c){return c.levels.length>0;}).length+" 章有关卡）");
+}
+function resetContent(){
+  content=getDefaultContent();
+  delete save.content;
+  storeSave(save);
+  renderAdmin();
+  renderMenu();
+  toast("已恢复默认内容（bible_full · 404 关）");
+}
+
+function renderAdminTracks(){var box=$("adminTrackList");box.innerHTML="";musicList.forEach(function(t,i){var d=document.createElement("div");d.className="track-item"+(t.id===curTrack?" active":"");var tag=t.type==="builtin"?'<span class="tag">内置</span>':(t.type==="url"?'<span class="tag">链接</span>':(t.type==="embedded"?'<span class="tag">嵌入</span>':'<span class="tag">上传</span>'));d.innerHTML='<span class="nm">'+esc(t.name)+'</span>'+tag+'<button class="btn" data-i="'+i+'" data-act="del">删除</button><button class="btn" data-i="'+i+'" data-act="setdefault">设为当前</button>';box.appendChild(d);});}
+function addUrlTrack(){var url=$("musicUrlInput").value.trim();if(!url){toast("请粘贴音乐链接");return;}var id="url_"+Date.now();var name=url.split("/").pop().split("?")[0].slice(-30)||"链接音乐";musicList.push({id:id,name:name,type:"url",url:url});storeMusicList(musicList);renderAdminTracks();$("musicUrlInput").value="";toast("已添加链接曲目");}
+function onFileMusic(files){if(!files||!files.length)return;Array.prototype.forEach.call(files,function(f){if(!/audio\//.test(f.type)){toast("不是音频文件："+f.name);return;}var id="file_"+Date.now()+"_"+Math.floor(Math.random()*9999);dbPutFile(id,f).then(function(){var ext=f.name.split(".").pop();musicList.push({id:id,name:f.name,type:"file",size:f.size,ext:ext});storeMusicList(musicList);renderAdminTracks();toast("已上传："+f.name);}).catch(function(){toast("保存失败（浏览器不支持）");});});}
+
+/* ========== 导出 ========== */
+function doExport(){
+  $("exportTip").textContent="⏳ 正在打包，请稍候…";
+  var exportContent = save.content ? save.content : content;
+  var payload={title:exportContent.title,author:exportContent.author,brandTitle:exportContent.brandTitle||exportContent.title,brandSub:exportContent.brandSub||"背诵闯关",chapters:exportContent.chapters};
+  var exportMusic=[];
+  var fileTracks=musicList.filter(function(t){return t.type==="file";});
+  var urlTracks=musicList.filter(function(t){return t.type==="url"||t.type==="embedded";});
+  urlTracks.forEach(function(t){exportMusic.push({id:t.id,name:t.name,type:t.type==="embedded"?"embedded":"url",url:t.url||t.dataUrl});});
+  var promises=fileTracks.map(function(t){return dbGetFile(t.id).then(function(blob){if(!blob)return null;return new Promise(function(resolve){var reader=new FileReader();reader.onload=function(){resolve({id:t.id,name:t.name,type:"embedded",dataUrl:reader.result});};reader.onerror=function(){resolve(null);};reader.readAsDataURL(blob);});});});
+  Promise.all(promises).then(function(results){
+    results.forEach(function(r){if(r)exportMusic.push(r);});
+    var data={content:payload,music:exportMusic};
+    var json=JSON.stringify(data);
+    var cssText=document.querySelector("style").textContent;
+    var scriptText=document.getElementById("app-script").textContent;
+    /* 构建导出的body */
+    var bodyHtml=document.querySelector(".container").parentElement.innerHTML;
+    /* 去掉启动页和弹窗，用简化版 */
+    var html='<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>'+esc(payload.title)+' 背诵闯关（分享版）</title>\n<style>'+cssText+'</style>\n</head>\n<body data-skin="0">\n'
+      +'<div id="splashScreen"><div class="splash-particles" id="splashParticles"></div><div class="splash-content"><div class="splash-title">'+esc(payload.title)+'</div><div class="splash-subtitle">背 诵 闯 关</div><div class="splash-divider"></div><div class="splash-quote">"念这书上预言的和那些听见又遵守其中所记载的，都是有福的，因为日期近了。"</div><div class="splash-player-name" id="splashPlayerName" style="display:none;"></div><div class="splash-buttons"><button class="splash-btn primary" id="splashStart">▶ 开始游戏</button><button class="splash-btn secondary" id="splashRank">🏆 排行榜</button></div></div><div class="splash-footer">北京青年团契 · 趣味•启示录</div></div>\n'
+      +'<div class="register-modal" id="registerModal" style="display:none;"><div class="register-box"><h2 id="欢迎来到背诵闯关-1"><a class="header" href="#欢迎来到背诵闯关-1">欢迎来到背诵闯关</a></h2><p>请输入你的名字</p><input type="text" id="registerInput" placeholder="输入名字" maxlength="20"><button class="btn-register" id="btnRegister">确 定</button></div></div>\n'
+      +'<div class="password-modal" id="passwordModal" style="display:none;"><div class="password-box"><h2 id="-内容管理-1"><a class="header" href="#-内容管理-1">🔒 内容管理</a></h2><p>请输入管理密码</p><input type="password" id="passwordInput" placeholder="请输入密码"><div class="pwd-error" id="pwdError"></div><button class="btn-confirm" id="btnPwdConfirm">确 定</button><button class="btn-cancel" id="btnPwdCancel">取消</button><div class="pwd-hint">默认密码：admin888</div></div></div>\n'
+      +'<div id="snowWrap"></div><div id="mountainWrap"></div>\n'
+      +document.querySelector(".container").outerHTML+'\n'
+      +'<div class="overlay" id="modalOverlay"><div class="modal"><button class="close" id="modalClose">×</button><h2 id="modalTitle"></h2><div id="modalBody"></div></div></div>\n'
+      +'<div id="toast"></div>\n'
+      +'<script>\nwindow.EXPORT_DATA = '+json+';\n<\/script>\n'
+      +'<script id="app-script">\n'+scriptText+'\n<\/script>\n</body>\n</html>';
+    var blob=new Blob([html],{type:"text/html;charset=utf-8"});
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download=(payload.title||"趣味启示录")+"_分享版.html";
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+    $("exportTip").textContent="✅ 已生成下载！22章关卡和音乐已全部嵌入。";
+  }).catch(function(){
+    $("exportTip").textContent="⚠️ 部分音频嵌入失败，但文件已生成";
+  });
+}
+
+/* ========== 事件绑定 ========== */
+function bindEvents(){
+  /* 启动页 */
+  $("splashStart").onclick=function(){if(!playerName){showRegister();}else{hideSplash(false);switchView("menu");}};
+  $("splashRank").onclick=function(){hideSplash(true);switchView("rank");};
+  $("btnRegister").onclick=doRegister;
+  $("registerInput").addEventListener("keydown",function(e){if(e.key==="Enter")doRegister();});
+
+  /* 密码 */
+  $("btnPwdConfirm").onclick=verifyPassword;
+  $("btnPwdCancel").onclick=hidePasswordModal;
+  $("passwordInput").addEventListener("keydown",function(e){if(e.key==="Enter")verifyPassword();});
+
+  /* 主菜单 */
+  $("btnContinue").onclick=function(){
+    var ch=save.lastChapter!=null?save.lastChapter:0;
+    var lv=save.lastLevel!=null?save.lastLevel:0;
+    if(content.chapters[ch]&&content.chapters[ch].levels.length>0){startLevel(ch,lv);switchView("game");}
+    else{switchView("chapter");}
+  };
+  $("btnSelectChapter").onclick=function(){switchView("chapter");};
+  $("btnSettings").onclick=function(){switchView("settings");renderTimerSettings();};
+  $("btnRank").onclick=function(){switchView("rank");};
+  $("btnHowTo").onclick=function(){switchView("howto");};
+  if($("btnExport")) $("btnExport").onclick=function(){switchView("export");};
+  $("btnMenu").onclick=function(){switchView("menu");};
+
+  /* 长按标题 2 秒进入内容管理（D5） */
+  (function(){
+    var pressTimer=null;
+    var brand=$("brandTitle");
+    if(!brand) return;
+    function clearPress(){if(pressTimer){clearTimeout(pressTimer);pressTimer=null;}}
+    brand.addEventListener("mousedown",function(){clearPress();pressTimer=setTimeout(function(){showPasswordModal();},2000);});
+    brand.addEventListener("mouseup",clearPress);
+    brand.addEventListener("mouseleave",clearPress);
+    brand.addEventListener("touchstart",function(e){clearPress();pressTimer=setTimeout(function(){showPasswordModal();},2000);},{passive:true});
+    brand.addEventListener("touchend",clearPress);
+    brand.addEventListener("touchcancel",clearPress);
+  })();
+
+  /* 新手引导 */
+  $("guideSkip").onclick=function(){setGuideDone();$("guideOverlay").classList.remove("show");};
+  $("guideNext").onclick=function(){advanceGuide();};
+
+  /* 章节选择 */
+  $("btnChapterBack").onclick=function(){switchView("menu");};
+  $("btnLevelSelectBack").onclick=function(){switchView("chapter");};
+  $("btnStartFromLevel").onclick=function(){startLevel(curChapter,selectedLevel);switchView("game");};
+
+  /* 游戏内章节导航 */
+  $("chapterStat").onclick=function(){switchView("chapter");};
+  $("btnPrevChapter").onclick=function(){
+    var prev=curChapter-1;
+    while(prev>=0&&content.chapters[prev].levels.length===0)prev--;
+    if(prev>=0){startLevel(prev,0);}else{toast("已经是第一章了");}
+  };
+  $("btnNextChapter").onclick=function(){
+    var next=curChapter+1;
+    while(next<content.chapters.length&&content.chapters[next].levels.length===0)next++;
+    if(next<content.chapters.length){startLevel(next,0);}else{toast("已经是最后一章了");}
+  };
+
+  /* 倒计时 */
+  document.querySelectorAll(".timer-opt").forEach(function(o){o.onclick=function(){setTimer(parseInt(this.dataset.time,10));};});
+  $("btnTimerBack").onclick=function(){switchView("menu");};
+
+  /* 排行榜 */
+  $("btnRankBack").onclick=function(){switchView("menu");};
+  $("btnClearRank").onclick=function(){if(confirm("确定清空排行榜？")){rankList=[];storeRank(rankList);renderRank();toast("排行榜已清空");}};
+
+  /* 游戏 */
+  $("showSentence").onclick=toggleMemory;
+  $("btnRead").onclick=readSentence;
+  $("btnReset").onclick=resetLevel;
+  $("btnBack").onclick=function(){stopTimer();stopReading();switchView("menu");};
+
+  /* 设置 */
+  $("btnSettingsBack").onclick=function(){switchView("menu");};
+  $("btnMusicToggle").onclick=toggleMusic;
+  $("volRange").oninput=function(){setVolume(parseInt(this.value,10));};
+  $("trackSelect").onchange=function(){var i=parseInt(this.value,10);var t=musicList[i];if(t)playTrack(t.id);renderSettings();};
+
+  /* 玩法 */
+  $("btnHowToBack").onclick=function(){switchView("menu");};
+
+  /* 后台 */
+  $("adminTabGame").onclick=function(){$("adminGame").style.display="block";$("adminMusic").style.display="none";$("adminTabGame").classList.add("primary");$("adminTabMusic").classList.remove("primary");};
+  $("adminTabMusic").onclick=function(){$("adminGame").style.display="none";$("adminMusic").style.display="block";$("adminTabMusic").classList.add("primary");$("adminTabGame").classList.remove("primary");};
+  $("btnAddChapter").onclick=function(){
+    /* 找到第一个空章节或新增 */
+    var emptyIdx=content.chapters.findIndex(function(c){return c.levels.length===0;});
+    if(emptyIdx>=0){toast("第 "+(emptyIdx+1)+" 章是空的，可以直接在下方添加小关");}
+    else{content.chapters.push({name:"第"+(content.chapters.length+1)+"章 新章节",levels:[]});}
+    renderChapterList();
+    toast("已添加章节，记得填写后保存");
+  };
+  $("btnSaveContent").onclick=saveContent;
+  $("btnResetContent").onclick=function(){if(confirm("恢复默认内容？你的修改将被覆盖。"))resetContent();};
+  $("btnAdminBack").onclick=function(){switchView("menu");};
+  $("btnChangePwd").onclick=function(){var newPwd=$("newPwdInput").value.trim();if(!newPwd){toast("请输入新密码");return;}if(newPwd.length<4){toast("密码至少4位");return;}storeAdminPwd(newPwd);$("newPwdInput").value="";toast("✅ 管理密码已修改为："+newPwd);};
+  $("btnMusicBack").onclick=function(){switchView("menu");};
+  $("btnAddUrl").onclick=addUrlTrack;
+  $("fileMusic").onchange=function(){onFileMusic(this.files);this.value="";};
+
+  /* 章节/关卡编辑事件委托 */
+  $("chapterList").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    var act=b.dataset.act;
+    var ci=parseInt(b.dataset.ci,10);
+    var li=b.dataset.li!=null?parseInt(b.dataset.li,10):-1;
+    if(act==="addLv"){
+      content.chapters[ci].levels.push({raw:"",tr:"",words:[""]});
+      renderChapterList();
+      toast("已在第 "+(ci+1)+" 章添加小关");
+    }else if(act==="delCh"){
+      if(confirm("确定删除第 "+(ci+1)+" 章？")){content.chapters[ci].levels=[];content.chapters[ci].name="第"+(ci+1)+"章";renderChapterList();}
+    }else if(act==="delLv"){
+      content.chapters[ci].levels.splice(li,1);
+      renderChapterList();
+    }else if(act==="up"&&li>0){
+      var t=content.chapters[ci].levels[li-1];content.chapters[ci].levels[li-1]=content.chapters[ci].levels[li];content.chapters[ci].levels[li]=t;
+      renderChapterList();
+    }else if(act==="down"&&li<content.chapters[ci].levels.length-1){
+      var u=content.chapters[ci].levels[li+1];content.chapters[ci].levels[li+1]=content.chapters[ci].levels[li];content.chapters[ci].levels[li]=u;
+      renderChapterList();
+    }
+  });
+
+  /* 后台音乐列表 */
+  $("adminTrackList").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    var i=parseInt(b.dataset.i,10),t=musicList[i];if(!t)return;
+    if(b.dataset.act==="del"){
+      if(t.id===curTrack){stopBuiltin();if(audioEl){try{audioEl.pause();}catch(x){}}musicOn=false;}
+      if(t.type==="file")dbDelFile(t.id);
+      musicList.splice(i,1);
+      storeMusicList(musicList);renderAdminTracks();renderSettings();
+      toast("已删除："+t.name);
+    }else if(b.dataset.act==="setdefault"){playTrack(t.id);renderAdminTracks();renderSettings();}
+  });
+
+  /* 导出 */
+  $("btnDoExport").onclick=doExport;
+  $("btnExportBack").onclick=function(){switchView("menu");};
+
+  /* 弹层 */
+  $("modalClose").onclick=hideModal;
+  $("modalOverlay").onclick=function(e){if(e.target===this)hideModal();};
+}
+
+function stopReading(){if(isReading&&"speechSynthesis" in window){speechSynthesis.cancel();}isReading=false;resetReadButton();}
+
+/* ========== 新手引导 ========== */
+var guideStep=0;
+var GUIDE_STEPS=[
+  {title:"① 点选词块",html:"每关会把经文拆成词块并打乱。<b>按正确顺序点击</b>，点对才前进；点错不扣关，但会计入错误次数。"},
+  {title:"② 记忆模式",html:"点击上方原文区域可<b>隐藏原文</b>凭记忆拼；再点一次会短暂显示 5 秒。也可使用朗读、对照读经。"},
+  {title:"③ 开始启1:1",html:"章节可任选，但<b>章内须按经文顺序</b>解锁。现在就从 <b>启1:1</b> 开始吧！"}
+];
+function showGuide(){
+  guideStep=0;
+  renderGuideStep();
+  $("guideOverlay").classList.add("show");
+}
+function renderGuideStep(){
+  var s=GUIDE_STEPS[guideStep];
+  $("guideBody").innerHTML="<p style=\"font-weight:bold;color:var(--accent);margin-bottom:8px;\">"+s.title+"</p><p>"+s.html+"</p>";
+  $("guideNext").textContent=guideStep>=GUIDE_STEPS.length-1?"开始闯关":"下一步";
+}
+function advanceGuide(){
+  if(guideStep>=GUIDE_STEPS.length-1){
+    setGuideDone();
+    $("guideOverlay").classList.remove("show");
+    startLevel(0,0);
+    switchView("game");
+    return;
+  }
+  guideStep++;
+  renderGuideStep();
+}
+function maybeShowGuide(){
+  if(!guideDone()) showGuide();
+}
+
+/* ========== 初始化 ========== */
+function init(){
+  initSplashParticles();
+  bindEvents();
+  applySkin(currentSkin);
+  renderMountains();
+  updatePlayerTag();
+  renderTimerSettings();
+  if(musicOn)playTrack(curTrack);
+  showSplash();
+}
+document.addEventListener("DOMContentLoaded",init);
+})();
+</script>
+<script src="js/site-nav.js"></script>
 </body>
 </html>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="加入我们"><a class="header" href="#加入我们">加入我们</a></h1>
