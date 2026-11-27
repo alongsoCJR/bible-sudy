@@ -6210,7 +6210,12 @@ body{font-family:"Noto Serif SC","Noto Sans SC","Kaiti SC","KaiTi","Songti SC",s
 .step:hover{border-color:var(--accent);}
 .step.done{background:var(--accent2);border-color:var(--accent2);color:#fff;}
 .step.current{background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(1.15);box-shadow:0 0 0 4px rgba(184,38,38,.15);}
-.medal{text-align:center;margin-top:16px;font-size:1.2rem;color:var(--accent);}</p>
+.medal{text-align:center;margin-top:16px;font-size:1.05rem;color:var(--accent);line-height:1.8;}
+.medal .medal-chip{display:inline-block;background:rgba(184,38,38,.08);border:1px solid rgba(184,38,38,.25);border-radius:999px;padding:2px 12px;margin:3px 4px;font-size:.92rem;}
+.mode-badge{display:none;text-align:center;margin:0 0 10px;padding:6px 12px;border-radius:10px;background:rgba(184,38,38,.1);color:var(--accent);font-size:.9rem;font-weight:bold;}
+.mode-badge.show{display:block;}
+.chapter-card.perfect{box-shadow:0 0 0 2px rgba(212,160,23,.55);}
+.chapter-card .ch-perfect{font-size:.75rem;color:#b8860b;margin-top:2px;}</p>
 <p>.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1200;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
 .overlay.show{display:flex;}
 .modal{background:var(--panel);border:2px solid var(--panel-border);border-radius:16px;max-width:760px;width:100%;max-height:86vh;overflow:auto;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.4);}
@@ -6328,7 +6333,7 @@ input[type=range]{flex:1;min-width:120px;accent-color:var(--accent);}
 <div id="snowWrap"></div>
 <div id="mountainWrap"></div>
 <div class="topbar">
-  <div class="brand" id="brandTitle" onclick="switchView('menu')">趣味•启示录 <span>背诵闯关</span></div>
+  <div class="brand" id="brandTitle" title="单击回菜单；按住 2 秒或 Ctrl/⌘+单击 进入内容管理">趣味•启示录 <span>背诵闯关</span></div>
   <div class="tb-right">
     <a class="join-entry" href="http://42.194.137.245/static/join-us.html">加入我们</a>
     <span class="player-tag" id="playerTag">玩家：未登录</span>
@@ -6345,6 +6350,7 @@ input[type=range]{flex:1;min-width:120px;accent-color:var(--accent);}
     <div class="menu">
       <button class="menu-btn" id="btnContinue">▶ 继续闯关<small id="continueHint"></small></button>
       <button class="menu-btn" id="btnSelectChapter">📖 选择章节<small>22章 · 章内按节解锁</small></button>
+      <button class="menu-btn secondary" id="btnFlash">🃏 闪卡复习<small id="flashHint">已通关随机抽练</small></button>
       <button class="menu-btn secondary" id="btnHowTo">📖 玩法说明</button>
       <button class="menu-btn secondary" id="btnRank">🏆 排行榜</button>
       <button class="menu-btn secondary" id="btnSettings">⚙️ 设置<small>皮肤 / 音乐 / 倒计时</small></button>
@@ -6371,13 +6377,14 @@ input[type=range]{flex:1;min-width:120px;accent-color:var(--accent);}
   </div>
 <!-- 游戏页 -->
 <div id="viewGame" class="panel" style="display:none">
+    <div class="mode-badge" id="modeBadge"></div>
     <div class="status-bar">
       <div class="stat" id="chapterStat" title="点击选择章节">第 <b id="chapterText">1</b> 章 第 <b id="levelText">1</b> 关</div>
       <div class="timer-badge" id="timerBadge" style="display:none;">⏱ <span id="timerText">02:00</span></div>
       <div class="grade-badge" id="gradeBadge"><span class="g-stars" id="gradeStars">☆☆☆</span><span class="g-letter" id="gradeLetter">S</span></div>
       <div class="stat">错误 <b id="errText">0</b> 次</div>
     </div>
-    <div class="chapter-nav">
+    <div class="chapter-nav" id="chapterNav">
       <button id="btnPrevChapter">◀ 上一章</button>
       <span class="ch-label" id="chapterNameLabel">第1章</span>
       <button id="btnNextChapter">下一章 ▶</button>
@@ -6405,10 +6412,16 @@ input[type=range]{flex:1;min-width:120px;accent-color:var(--accent);}
     <div class="skin-grid" id="skinGrid"></div>
     <hr style="border:none;border-top:1px dashed var(--panel-border);margin:20px 0;">
     <h3 style="margin-bottom:10px;color:var(--accent);">背景音乐</h3>
+    <p style="font-size:.88rem;opacity:.75;margin:-4px 0 12px;">内置多种风格（趣味闯关 / 像素冒险 / 古风静心 / 温柔钢琴 / 敬拜安静），也可在内容管理中上传本地曲目。</p>
     <div class="music-row"><label>▶/⏸</label><button class="btn primary" id="btnMusicToggle">播放</button><label>音量</label><input type="range" id="volRange" min="0" max="100" value="60"><span id="volText">60</span></div>
     <div class="music-row"><label>选择曲目：</label><select id="trackSelect" style="flex:1;min-width:150px;padding:8px;border-radius:8px;border:1px solid var(--panel-border);font-family:inherit;"></select></div>
     <div class="track-list" id="trackList"></div>
     <div class="upload-hint">曲目可到「内容管理 → 音乐管理」中上传本地音频或添加音乐链接。</div>
+    <hr style="border:none;border-top:1px dashed var(--panel-border);margin:20px 0;">
+    <h3 style="margin-bottom:10px;color:var(--accent);">🔊 朗读音色</h3>
+    <p style="font-size:.88rem;opacity:.75;margin:-4px 0 12px;">使用本机/浏览器中文语音。Edge 或新版 Chrome 的「Neural / 在线」音色通常更自然；也可在下方切换试听。</p>
+    <div class="music-row"><label>音色</label><select id="ttsVoiceSelect" style="flex:1;min-width:160px;padding:8px;border-radius:8px;border:1px solid var(--panel-border);font-family:inherit;"></select></div>
+    <div class="music-row"><label>语速</label><input type="range" id="ttsRate" min="60" max="120" value="88"><span id="ttsRateText">0.88</span><button class="btn" id="btnTtsPreview" type="button">试听</button></div>
     <hr style="border:none;border-top:1px dashed var(--panel-border);margin:20px 0;">
     <h3 style="margin-bottom:10px;color:var(--accent);">⏱ 倒计时（进阶，默认关闭）</h3>
     <p style="text-align:center;color:var(--ink);opacity:.75;margin-bottom:12px;font-size:.92rem;">时间到未完成则本关失败；背经建议保持关闭</p>
@@ -6445,11 +6458,13 @@ input[type=range]{flex:1;min-width:120px;accent-color:var(--accent);}
       <p><b>1. 内容</b>：启示录 22 章、共 404 节，一节一关；经文与站内「读圣经」同源。</p>
       <p><b>2. 解锁</b>：章节可任选；<b>章内须按经文顺序</b>通关（完成上一节才开下一节）。</p>
       <p><b>3. 顺序点选</b>：词块打乱后，按正确顺序逐个点击；点对前进（+100），点错不前进。</p>
-      <p><b>4. 记忆模式</b>：单击原文隐藏；再单击显示 5 秒后自动隐藏。</p>
-      <p><b>5. 朗读 / 对照</b>：可朗读本关；也可打开「对照读经」查看启示录全文。</p>
-      <p><b>6. 倒计时</b>：默认关闭；可在「设置」中开启进阶限时。</p>
-      <p><b>7. 星级</b>：0错=S，1错=A，2错=B，其余=C。</p>
-      <p><b>8. 进度与排行</b>：本机自动保存；通关成绩记入排行榜。</p>
+      <p><b>4. 记忆模式</b>：进入关卡原文自动隐藏；单击显示 3 秒后自动隐藏；显示中再单击立即隐藏。</p>
+      <p><b>5. 朗读 / 对照</b>：可朗读本关（设置里可换中文音色与语速）；也可打开「对照读经」。</p>
+      <p><b>6. 背景音乐</b>：在「设置」中开关与选曲；内置趣味/像素/古风/钢琴/敬拜等多种风格，也可上传本地音频或添加链接。</p>
+      <p><b>7. 倒计时</b>：默认关闭；可在「设置」中开启进阶限时。</p>
+      <p><b>8. 星级</b>：0错=S，1错=A，2错=B，其余=C。一章全部 S 可点亮「完美章」勋章；连续 S 会有连击提示。</p>
+      <p><b>9. 闪卡复习</b>：从已通关节中随机抽 5–10 关速背，强制记忆模式。</p>
+      <p><b>10. 进度与排行</b>：本机自动保存；通关成绩记入排行榜。</p>
     </div>
     <div class="btn-row" style="margin-top:16px;"><button class="btn" id="btnHowToBack">← 返回</button></div>
   </div>
@@ -6562,10 +6577,22 @@ function openDB(){return new Promise(function(res){if(db){res(db);return;}var re
 function dbPutFile(id,blob){return openDB().then(function(d){if(!d)return Promise.reject("no-db");return new Promise(function(res,rej){var t=d.transaction("files","readwrite").objectStore("files").put(blob,id);t.onsuccess=function(){res();};t.onerror=function(){rej();};});});}
 function dbGetFile(id){return openDB().then(function(d){if(!d)return Promise.resolve(null);return new Promise(function(res){var t=d.transaction("files","readonly").objectStore("files").get(id);t.onsuccess=function(){res(t.result||null);};t.onerror=function(){res(null);};});});}
 function dbDelFile(id){return openDB().then(function(d){if(!d)return Promise.resolve();return new Promise(function(res){var t=d.transaction("files","readwrite").objectStore("files").delete(id);t.onsuccess=function(){res();};t.onerror=function(){res();};});});}
-function builtinTrack(){return{id:"builtin",name:"内置 · 古风旋律（竹笛）",type:"builtin"};}
-function loadMusicList(){try{var s=localStorage.getItem(MUSIC_KEY);return s?JSON.parse(s):[builtinTrack()];}catch(e){return[builtinTrack()];}}
-function storeMusicList(list){try{localStorage.setItem(MUSIC_KEY,JSON.stringify(list));}catch(e){}}
-var musicList=EXPORT_DATA&&EXPORT_DATA.music?EXPORT_DATA.music.concat([builtinTrack()]):loadMusicList();
+function builtinTracks(){
+  return [
+    {id:"builtin_fun",name:"内置 · 趣味闯关",type:"builtin",style:"fun"},
+    {id:"builtin_pixel",name:"内置 · 像素冒险",type:"builtin",style:"pixel"},
+    {id:"builtin_gu",name:"内置 · 古风静心",type:"builtin",style:"gu"},
+    {id:"builtin_piano",name:"内置 · 温柔钢琴",type:"builtin",style:"piano"},
+    {id:"builtin_ambient",name:"内置 · 敬拜安静",type:"builtin",style:"ambient"}
+  ];
+}
+function mergeMusicList(list){
+  var user=(list||[]).filter(function(t){return t&&t.type&&t.type!=="builtin"&&t.id!=="builtin";});
+  return builtinTracks().concat(user);
+}
+function loadMusicList(){try{var s=localStorage.getItem(MUSIC_KEY);return mergeMusicList(s?JSON.parse(s):[]);}catch(e){return builtinTracks();}}
+function storeMusicList(list){try{localStorage.setItem(MUSIC_KEY,JSON.stringify((list||[]).filter(function(t){return t.type!=="builtin";})));}catch(e){}}
+var musicList=EXPORT_DATA&&EXPORT_DATA.music?mergeMusicList(EXPORT_DATA.music):loadMusicList();
 
 /* ========== 全局状态 ========== */
 function resolveContent(){
@@ -6583,10 +6610,15 @@ var memoryHidden=false, memTimer=null;
 var currentSkin=save.skin!=null?save.skin:0;
 var volume=save.vol!=null?save.vol:60;
 var musicOn=save.musicOn!=null?save.musicOn:false;
-var curTrack=save.curTrack||"builtin";
+var curTrack=save.curTrack||"builtin_fun";
+if(curTrack==="builtin")curTrack="builtin_gu";
 var audioEl=null, audioCtx=null, builtinNode=null;
 var isReading=false;
 var timerInterval=null, timerLeft=0, timerRunning=false;
+/* playMode: normal | flash | daily */
+var playMode="normal";
+var flashQueue=[], flashIndex=0, flashStats={s:0,miss:0,totalErr:0};
+var sStreak=0, sStreakChapter=-1;
 
 var $=function(id){return document.getElementById(id);};
 var views={menu:$("viewMenu"),chapter:$("viewChapter"),levelSelect:$("viewLevelSelect"),game:$("viewGame"),settings:$("viewSettings"),timer:$("viewTimer"),rank:$("viewRank"),howto:$("viewHowTo"),admin:$("viewAdmin"),export:$("viewExport")};
@@ -6595,11 +6627,47 @@ var views={menu:$("viewMenu"),chapter:$("viewChapter"),levelSelect:$("viewLevelS
 function toast(msg){var t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove("show");},2400);}
 function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function switchView(name){for(var k in views)views[k].style.display=(k===name)?"block":"none";if(name==="menu")renderMenu();if(name==="chapter")renderChapterGrid();if(name==="game")startLevel(curChapter,curLevel);if(name==="settings")renderSettings();if(name==="timer")renderTimerSettings();if(name==="rank")renderRank();if(name==="admin")renderAdmin();window.scrollTo(0,0);}
+function switchView(name){
+  if(name==="menu"||name==="chapter"||name==="levelSelect"){
+    if(playMode!=="normal"){playMode="normal";flashQueue=[];flashIndex=0;}
+  }
+  for(var k in views)views[k].style.display=(k===name)?"block":"none";
+  if(name==="menu")renderMenu();
+  if(name==="chapter")renderChapterGrid();
+  /* game 由 startLevel / enterGame 负责，避免重复开局冲掉 flash/daily */
+  if(name==="settings")renderSettings();
+  if(name==="timer")renderTimerSettings();
+  if(name==="rank")renderRank();
+  if(name==="admin")renderAdmin();
+  window.scrollTo(0,0);
+}
+function enterGame(){
+  for(var k in views)views[k].style.display=(k==="game")?"block":"none";
+  window.scrollTo(0,0);
+}
 function showModal(title,html){$("modalTitle").textContent=title;$("modalBody").innerHTML=html;$("modalOverlay").classList.add("show");}
 function hideModal(){$("modalOverlay").classList.remove("show");}
 function getTotalLevels(){var n=0;for(var i=0;i<content.chapters.length;i++)n+=content.chapters[i].levels.length;return n;}
 function getChapterProgress(chIdx){var ch=content.chapters[chIdx];if(!ch||!ch.levels.length)return{done:0,total:0};var best=save.best||[];var done=0;for(var i=0;i<ch.levels.length;i++){var key=chIdx+"_"+i;if(best[key]!=null)done++;}return{done:done,total:ch.levels.length};}
+function todayKey(){var d=new Date();var m=d.getMonth()+1,day=d.getDate();return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(day<10?"0":"")+day;}
+function hashStr(s){var h=0;for(var i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return Math.abs(h);}
+function listAllLevels(){var all=[];content.chapters.forEach(function(ch,ci){ch.levels.forEach(function(_,li){all.push({ch:ci,lv:li});});});return all;}
+function listCompletedLevels(){var best=save.best||{},all=[];content.chapters.forEach(function(ch,ci){ch.levels.forEach(function(_,li){if(best[ci+"_"+li]!=null)all.push({ch:ci,lv:li});});});return all;}
+function pickDailyLevel(){var all=listAllLevels();if(!all.length)return null;return all[hashStr(todayKey())%all.length];}
+function isDailyDone(){return !!(save.daily&&save.daily[todayKey()]&&save.daily[todayKey()].done);}
+function countPerfectChapters(){var pc=save.perfectChapters||{},n=0;for(var k in pc){if(pc[k])n++;}return n;}
+function isChapterPerfect(chIdx){
+  var ch=content.chapters[chIdx];if(!ch||!ch.levels.length)return false;
+  var best=save.best||{};
+  for(var i=0;i<ch.levels.length;i++){if(best[chIdx+"_"+i]!==0)return false;}
+  return true;
+}
+function awardPerfectChapter(chIdx){
+  if(!isChapterPerfect(chIdx))return false;
+  if(!save.perfectChapters)save.perfectChapters={};
+  if(save.perfectChapters[chIdx])return false;
+  save.perfectChapters[chIdx]=true;storeSave(save);return true;
+}
 
 /* ========== 启动页 ========== */
 function initSplashParticles(){var wrap=$("splashParticles");if(!wrap)return;for(var i=0;i<30;i++){var p=document.createElement("div");p.className="splash-particle";p.style.left=Math.random()*100+"%";p.style.animationDuration=(6+Math.random()*10)+"s";p.style.animationDelay=(Math.random()*8)+"s";p.style.width=p.style.height=(2+Math.random()*4)+"px";wrap.appendChild(p);}}
@@ -6622,17 +6690,102 @@ var SKINS=[{name:"团契夜空",sw:"linear-gradient(135deg,#0d1b2a,#1b3358)"},{n
 function applySkin(n){currentSkin=n;document.body.setAttribute("data-skin",String(n));save.skin=n;storeSave(save);if(n===0||n===4)startSnow();else stopSnow();}
 function startSnow(){var w=$("snowWrap");if(w.dataset.on==="1")return;w.dataset.on="1";w.innerHTML="";for(var i=0;i<40;i++){var s=document.createElement("div");s.className="snow";s.textContent="❄";s.style.left=Math.random()*100+"%";s.style.fontSize=(8+Math.random()*14)+"px";s.style.animationDuration=(6+Math.random()*9)+"s";s.style.animationDelay=(Math.random()*6)+"s";w.appendChild(s);}}
 function stopSnow(){var w=$("snowWrap");w.dataset.on="0";w.innerHTML="";}
-function renderSettings(){var g=$("skinGrid");g.innerHTML="";SKINS.forEach(function(s,i){var d=document.createElement("div");d.className="skin-item"+(i===currentSkin?" active":"");d.innerHTML='<div class="swatch" style="background:'+s.sw+'"></div><div class="n">'+s.name+'</div>';d.onclick=function(){applySkin(i);renderSettings();};g.appendChild(d);});$("volRange").value=volume;$("volText").textContent=volume;renderTrackSelect();renderTrackList();$("btnMusicToggle").textContent=musicOn?"暂停":"播放";}
+function renderSettings(){var g=$("skinGrid");g.innerHTML="";SKINS.forEach(function(s,i){var d=document.createElement("div");d.className="skin-item"+(i===currentSkin?" active":"");d.innerHTML='<div class="swatch" style="background:'+s.sw+'"></div><div class="n">'+s.name+'</div>';d.onclick=function(){applySkin(i);renderSettings();};g.appendChild(d);});$("volRange").value=volume;$("volText").textContent=volume;renderTrackSelect();renderTrackList();$("btnMusicToggle").textContent=musicOn?"暂停":"播放";renderTtsSettings();}
 
 /* ========== 音乐 ========== */
+/* 内置曲目均由 Web Audio 实时合成，无需外链音频文件；可循环播放 */
+var BUILTIN_STYLES={
+  fun:{wave:"triangle",vol:0.42,step:0.22,seq:[0,4,7,12,7,4,0,4,2,5,9,14,9,5,2,5,0,4,7,12,16,12,7,4]},
+  pixel:{wave:"square",vol:0.22,step:0.16,seq:[0,0,7,7,9,9,7,5,4,4,2,2,0,0,0,0,7,7,5,5,4,4,2,2]},
+  gu:{wave:"sine",vol:0.48,step:0.36,seq:[0,2,4,7,9,-2,0,2,4,7,9,12,9,7,4,2]},
+  piano:{wave:"triangle",vol:0.36,step:0.4,seq:[0,4,7,4,2,5,9,5,0,4,7,12,9,7,4,0]},
+  ambient:{wave:"sine",vol:0.3,step:0.72,seq:[0,7,12,7,4,9,16,9,2,7,14,7],long:true}
+};
 function ensureAudio(){if(!audioEl){audioEl=new Audio();audioEl.loop=true;}return audioEl;}
 function stopBuiltin(){if(builtinNode){try{builtinNode.stop();}catch(e){}builtinNode=null;}}
-function playBuiltin(){stopBuiltin();if(audioEl){try{audioEl.pause();audioEl.src="";}catch(e){}}try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();var ctx=audioCtx;if(ctx.state==="suspended")ctx.resume();var master=ctx.createGain();master.gain.value=volume/100*0.5;master.connect(ctx.destination);var noteFreq=function(semi){return 440*Math.pow(2,(semi-9)/12);};var base=[0,2,4,7,9,-2,0,2,4,7,9,12];var seq=[];for(var i=0;i<16;i++)seq.push(base[i%base.length]);var osc=ctx.createOscillator();osc.type="sine";var gain=ctx.createGain();gain.gain.value=0;osc.connect(gain);gain.connect(master);osc.start();var t=ctx.currentTime+0.05;var step=0.36;seq.forEach(function(semi,k){osc.frequency.setValueAtTime(noteFreq(semi),t+k*step);gain.gain.setValueAtTime(0.0001,t+k*step);gain.gain.linearRampToValueAtTime(0.6,t+k*step+0.03);gain.gain.exponentialRampToValueAtTime(0.001,t+k*step+step*0.9);});builtinNode={stop:function(){try{osc.stop();osc.disconnect();gain.disconnect();}catch(e){}}};}catch(e){}}
-function playTrack(id){curTrack=id;save.curTrack=id;storeSave(save);var track=musicList.find(function(t){return t.id===id;});stopBuiltin();if(!track){musicOn=false;return;}if(track.type==="builtin"){musicOn=true;playBuiltin();}else if(track.type==="embedded"){ensureAudio();audioEl.src=track.dataUrl;audioEl.volume=volume/100;audioEl.play().then(function(){musicOn=true;}).catch(function(){toast("无法播放该音频");musicOn=false;});}else{ensureAudio();if(track.type==="url"){audioEl.src=track.url;}else{dbGetFile(track.id).then(function(blob){if(blob){var u=URL.createObjectURL(blob);audioEl.src=u;}else{toast("音频文件读取失败");return;}});}audioEl.volume=volume/100;audioEl.play().then(function(){musicOn=true;}).catch(function(){toast("无法播放该音频");musicOn=false;});}}
+function playBuiltin(styleKey){
+  stopBuiltin();
+  if(audioEl){try{audioEl.pause();audioEl.src="";}catch(e){}}
+  try{
+    if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    var ctx=audioCtx;
+    if(ctx.state==="suspended")ctx.resume();
+    var style=BUILTIN_STYLES[styleKey]||BUILTIN_STYLES.fun;
+    var master=ctx.createGain();
+    var volScale=style.vol||0.4;
+    master.gain.value=volume/100*volScale;
+    master.connect(ctx.destination);
+    var noteFreq=function(semi){return 440*Math.pow(2,(semi-9)/12);};
+    var cancelled=false,loopTimer=null,activeOsc=[];
+    function playOnce(){
+      if(cancelled)return;
+      activeOsc=[];
+      var t=ctx.currentTime+0.02;
+      var step=style.step,seq=style.seq;
+      var attack=style.long?0.1:0.02;
+      var hold=style.long?step*0.9:step*0.55;
+      seq.forEach(function(semi,k){
+        var osc=ctx.createOscillator();
+        osc.type=style.wave||"sine";
+        var g=ctx.createGain();
+        osc.connect(g);g.connect(master);
+        var t0=t+k*step;
+        osc.frequency.setValueAtTime(noteFreq(semi),t0);
+        g.gain.setValueAtTime(0.0001,t0);
+        g.gain.linearRampToValueAtTime(0.7,t0+attack);
+        g.gain.exponentialRampToValueAtTime(0.001,Math.max(t0+attack+0.01,t0+hold));
+        osc.start(t0);
+        osc.stop(t0+hold+0.08);
+        activeOsc.push(osc);
+      });
+      loopTimer=setTimeout(playOnce,seq.length*step*1000);
+    }
+    playOnce();
+    builtinNode={
+      master:master,
+      volScale:volScale,
+      stop:function(){
+        cancelled=true;
+        if(loopTimer)clearTimeout(loopTimer);
+        activeOsc.forEach(function(o){try{o.stop();}catch(e){}});
+        try{master.disconnect();}catch(e){}
+      }
+    };
+  }catch(e){toast("内置音乐播放失败");}
+}
+function playTrack(id){
+  curTrack=id;save.curTrack=id;storeSave(save);
+  var track=musicList.find(function(t){return t.id===id;});
+  stopBuiltin();
+  if(!track){musicOn=false;return;}
+  if(track.type==="builtin"){
+    musicOn=true;playBuiltin(track.style||"fun");
+  }else if(track.type==="embedded"){
+    ensureAudio();audioEl.src=track.dataUrl;audioEl.volume=volume/100;
+    audioEl.play().then(function(){musicOn=true;}).catch(function(){toast("无法播放该音频");musicOn=false;});
+  }else{
+    ensureAudio();
+    if(track.type==="url"){
+      audioEl.src=track.url;
+      audioEl.volume=volume/100;
+      audioEl.play().then(function(){musicOn=true;}).catch(function(){toast("无法播放该音频");musicOn=false;});
+    }else{
+      dbGetFile(track.id).then(function(blob){
+        if(blob){var u=URL.createObjectURL(blob);audioEl.src=u;audioEl.volume=volume/100;audioEl.play().then(function(){musicOn=true;}).catch(function(){toast("无法播放该音频");musicOn=false;});}
+        else{toast("音频文件读取失败");}
+      });
+    }
+  }
+}
 function toggleMusic(){if(!musicOn){musicOn=true;playTrack(curTrack);}else{musicOn=false;stopBuiltin();if(audioEl){try{audioEl.pause();}catch(e){}}}save.musicOn=musicOn;storeSave(save);var b=$("btnMusicToggle");if(b)b.textContent=musicOn?"暂停":"播放";}
-function setVolume(v){volume=v;save.vol=v;storeSave(save);$("volText").textContent=v;if(audioEl)audioEl.volume=v/100;}
+function setVolume(v){
+  volume=v;save.vol=v;storeSave(save);
+  $("volText").textContent=v;
+  if(audioEl)audioEl.volume=v/100;
+  if(builtinNode&&builtinNode.master)builtinNode.master.gain.value=v/100*(builtinNode.volScale||0.4);
+}
 function renderTrackSelect(){var sel=$("trackSelect");sel.innerHTML="";musicList.forEach(function(t,i){var o=document.createElement("option");o.value=String(i);o.textContent=t.name+(t.id===curTrack?"（当前）":"");sel.appendChild(o);});sel.value=String(Math.max(0,musicList.findIndex(function(t){return t.id===curTrack;})));}
-function renderTrackList(){var box=$("trackList");box.innerHTML="";if(!musicList.length){box.innerHTML='<div class="tip-text">暂无曲目</div>';return;}musicList.forEach(function(t,i){var d=document.createElement("div");d.className="track-item"+(t.id===curTrack?" active":"");var tag=t.type==="builtin"?'<span class="tag">内置</span>':(t.type==="url"?'<span class="tag">链接</span>':(t.type==="embedded"?'<span class="tag">嵌入</span>':'<span class="tag">上传</span>'));var sizeTxt=t.size?(" · "+(t.size/1024/1024).toFixed(1)+"MB"):"";d.innerHTML='<span class="nm">'+esc(t.name)+'</span>'+tag+'<span style="font-size:.75rem;opacity:.7">'+sizeTxt+'</span><button class="play-now" data-idx="'+i+'">播放</button>';d.querySelector("button").onclick=function(){playTrack(t.id);renderTrackList();};box.appendChild(d);});}
+function renderTrackList(){var box=$("trackList");box.innerHTML="";if(!musicList.length){box.innerHTML='<div class="tip-text">暂无曲目</div>';return;}musicList.forEach(function(t,i){var d=document.createElement("div");d.className="track-item"+(t.id===curTrack?" active":"");var tag=t.type==="builtin"?'<span class="tag">内置</span>':(t.type==="url"?'<span class="tag">链接</span>':(t.type==="embedded"?'<span class="tag">嵌入</span>':'<span class="tag">上传</span>'));var sizeTxt=t.size?(" · "+(t.size/1024/1024).toFixed(1)+"MB"):"";d.innerHTML='<span class="nm">'+esc(t.name)+'</span>'+tag+'<span style="font-size:.75rem;opacity:.7">'+sizeTxt+'</span><button class="play-now" data-idx="'+i+'">播放</button>';d.querySelector("button").onclick=function(){playTrack(t.id);renderTrackList();renderTrackSelect();};box.appendChild(d);});}
 
 /* ========== 山峦 ========== */
 function renderMountains(){var wrap=$("mountainWrap");if(!wrap||wrap.dataset.on==="1")return;wrap.dataset.on="1";wrap.innerHTML='<svg viewBox="0 0 1440 260" preserveAspectRatio="none" style="width:100%;height:180px;"><path d="M0,260 L0,150 L180,60 L330,150 L470,40 L640,170 L800,70 L960,160 L1120,50 L1290,150 L1440,90 L1440,260 Z" fill="rgba(20,40,70,0.35)"/><path d="M0,260 L0,190 L220,120 L400,210 L560,100 L760,220 L940,130 L1120,215 L1300,120 L1440,190 L1440,260 Z" fill="rgba(15,30,55,0.45)"/></svg>';}
@@ -6651,7 +6804,35 @@ function renderRank(){var box=$("rankList");box.innerHTML="";if(!rankList.length
 function addToRank(score,totalErr){if(!playerName)playerName="匿名玩家";var entry={name:playerName,score:score,totalErr:totalErr,chapters:content.chapters.length,date:new Date().toLocaleDateString("zh-CN")};rankList.push(entry);if(rankList.length>50)rankList=rankList.slice(-50);storeRank(rankList);}
 
 /* ========== 主菜单 ========== */
-function renderMenu(){renderBrand();$("menuTitle").textContent=content.title;$("menuAuthor").textContent=content.author||"北京青年团契";var total=getTotalLevels();var done=0;var best=save.best||[];for(var key in best)done++;var lastRef=verseLabel(save.lastChapter||0,save.lastLevel||0);if(save.lastChapter!=null&&save.lastLevel!=null){$("continueHint").textContent="上次："+lastRef;}else if(done>0){$("continueHint").textContent="已完成 "+done+" / "+total+" 关";}else{$("continueHint").textContent="从启1:1开始";}var allDone=done>=total&&total>0;$("medalMain").innerHTML=allDone?'🏆 已点亮「全文背诵勋章」':'';}
+function renderMenu(){
+  renderBrand();
+  $("menuTitle").textContent=content.title;
+  $("menuAuthor").textContent=content.author||"北京青年团契";
+  var total=getTotalLevels();
+  var done=0,best=save.best||[];
+  for(var key in best)done++;
+  var lastRef=verseLabel(save.lastChapter||0,save.lastLevel||0);
+  if(save.lastChapter!=null&&save.lastLevel!=null){$("continueHint").textContent="上次："+lastRef;}
+  else if(done>0){$("continueHint").textContent="已完成 "+done+" / "+total+" 关";}
+  else{$("continueHint").textContent="从启1:1开始";}
+  var flashHint=$("flashHint");
+  if(flashHint)flashHint.textContent=done>0?("可抽练 "+done+" 节"):"先通关至少 1 节";
+  var chips=[];
+  if(done>=total&&total>0)chips.push('<span class="medal-chip">🏆 全文背诵</span>');
+  var pc=countPerfectChapters();
+  if(pc>0)chips.push('<span class="medal-chip">✨ 完美章 × '+pc+'</span>');
+  $("medalMain").innerHTML=chips.join("");
+}
+function countDailyStreak(){
+  var daily=save.daily||{},n=0,d=new Date();
+  for(var i=0;i<366;i++){
+    var m=d.getMonth()+1,day=d.getDate();
+    var key=d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(day<10?"0":"")+day;
+    if(!(daily[key]&&daily[key].done))break;
+    n++;d.setDate(d.getDate()-1);
+  }
+  return n;
+}
 
 function verseLabel(chIdx,lvIdx){
   var ch=content.chapters[chIdx];
@@ -6679,7 +6860,28 @@ function syncBibleLink(chIdx,lvIdx){
 }
 
 /* ========== 章节选择 ========== */
-function renderChapterGrid(){var grid=$("chapterGrid");grid.innerHTML="";content.chapters.forEach(function(ch,i){var prog=getChapterProgress(i);var card=document.createElement("div");card.className="chapter-card";if(prog.total===0)card.classList.add("locked");if(prog.done===prog.total&&prog.total>0)card.classList.add("completed");var stars="";if(prog.total>0){var best=save.best||[];var avgErr=0;for(var j=0;j<ch.levels.length;j++){var key=i+"_"+j;avgErr+=(best[key]!=null?best[key]:0);}avgErr=Math.round(avgErr/ch.levels.length);if(avgErr===0)stars="⭐⭐⭐";else if(avgErr===1)stars="⭐⭐";else if(avgErr<=2)stars="⭐";else stars="☆☆☆";}card.innerHTML='<div class="ch-num">'+(i+1)+'</div><div class="ch-name">'+esc(ch.name.replace(/^第\d+\章\s*/,""))+'</div><div class="ch-info">'+(prog.total>0?prog.done+"/"+prog.total+" 节":"暂无关卡")+'</div><div class="ch-stars">'+stars+'</div>';card.onclick=function(){if(prog.total===0){toast("此章节暂无关卡");return;}selectedLevel=firstUnlockedIncomplete(i);renderLevelSelect(i);switchView("levelSelect");};grid.appendChild(card);});}
+function renderChapterGrid(){
+  var grid=$("chapterGrid");grid.innerHTML="";
+  content.chapters.forEach(function(ch,i){
+    var prog=getChapterProgress(i);
+    var card=document.createElement("div");
+    card.className="chapter-card";
+    if(prog.total===0)card.classList.add("locked");
+    if(prog.done===prog.total&&prog.total>0)card.classList.add("completed");
+    var perfect=!!(save.perfectChapters&&save.perfectChapters[i]);
+    if(perfect)card.classList.add("perfect");
+    var stars="";
+    if(prog.total>0){
+      var best=save.best||[];var avgErr=0;
+      for(var j=0;j<ch.levels.length;j++){var key=i+"_"+j;avgErr+=(best[key]!=null?best[key]:0);}
+      avgErr=Math.round(avgErr/ch.levels.length);
+      if(avgErr===0)stars="⭐⭐⭐";else if(avgErr===1)stars="⭐⭐";else if(avgErr<=2)stars="⭐";else stars="☆☆☆";
+    }
+    card.innerHTML='<div class="ch-num">'+(i+1)+'</div><div class="ch-name">'+esc(ch.name.replace(/^第\d+\章\s*/,""))+'</div><div class="ch-info">'+(prog.total>0?prog.done+"/"+prog.total+" 节":"暂无关卡")+'</div><div class="ch-stars">'+stars+'</div>'+(perfect?'<div class="ch-perfect">✨ 完美章</div>':'');
+    card.onclick=function(){if(prog.total===0){toast("此章节暂无关卡");return;}selectedLevel=firstUnlockedIncomplete(i);renderLevelSelect(i);switchView("levelSelect");};
+    grid.appendChild(card);
+  });
+}
 
 /* ========== 小关卡选择 ========== */
 function renderLevelSelect(chIdx){curChapter=chIdx;var ch=content.chapters[chIdx];$("levelSelectTitle").textContent=ch.name;var row=$("levelSelectRow");row.innerHTML="";var best=save.best||[];ch.levels.forEach(function(lv,i){var btn=document.createElement("button");btn.className="level-select-btn";var key=chIdx+"_"+i;var unlocked=isLevelUnlocked(chIdx,i);if(!unlocked)btn.classList.add("locked");if(best[key]!=null)btn.classList.add("done");if(i===selectedLevel)btn.classList.add("current");var ref=(lv.tr||"").replace(/^启/,"");btn.textContent=ref||String(i+1);btn.title=(unlocked?"":"🔒 ")+(lv.tr||("第"+(i+1)+"关"));btn.onclick=function(){if(!isLevelUnlocked(chIdx,i)){toast("请先完成 "+verseLabel(chIdx,i-1));return;}selectedLevel=i;renderLevelSelect(chIdx);};row.appendChild(btn);});}
@@ -6688,16 +6890,39 @@ function renderLevelSelect(chIdx){curChapter=chIdx;var ch=content.chapters[chIdx
 function gradeOf(e){return e===0?"S":(e===1?"A":(e<=2?"B":"C"));}
 function starsOf(e){return e===0?"⭐⭐⭐":(e===1?"⭐⭐":(e<=2?"⭐":"☆☆☆"));}
 
+function syncModeChrome(){
+  var special=playMode==="flash"||playMode==="daily";
+  var badge=$("modeBadge");
+  var nav=$("chapterNav");
+  var row=$("gameLevelRow");
+  if(nav)nav.style.display=special?"none":"";
+  if(row)row.style.display=special?"none":"";
+  if(!badge)return;
+  if(playMode==="flash"){
+    badge.classList.add("show");
+    badge.textContent="🃏 闪卡复习 "+(flashIndex+1)+" / "+flashQueue.length+" · 记忆模式";
+  }else if(playMode==="daily"){
+    badge.classList.add("show");
+    badge.textContent="📅 每日一节 · "+todayKey()+(isDailyDone()?"（已打卡，可再练）":"");
+  }else{
+    badge.classList.remove("show");
+    badge.textContent="";
+  }
+}
+
 function startLevel(chIdx,lvIdx){
   var ch=content.chapters[chIdx];
-  if(!ch||!ch.levels.length){toast("此章节暂无关卡");switchView("chapter");return;}
+  if(!ch||!ch.levels.length){toast("此章节暂无关卡");playMode="normal";switchView("chapter");return;}
   if(lvIdx>=ch.levels.length)lvIdx=0;
-  if(!isLevelUnlocked(chIdx,lvIdx)){
+  var skipUnlock=playMode==="flash"||playMode==="daily";
+  if(!skipUnlock&&!isLevelUnlocked(chIdx,lvIdx)){
     toast("请先完成 "+verseLabel(chIdx,lvIdx-1));
     lvIdx=firstUnlockedIncomplete(chIdx);
   }
   curChapter=chIdx;curLevel=lvIdx;
-  save.lastChapter=chIdx;save.lastLevel=lvIdx;storeSave(save);
+  if(playMode==="normal"){
+    save.lastChapter=chIdx;save.lastLevel=lvIdx;storeSave(save);
+  }
   combo=0;errCount=0;answer=[];
   $("chapterText").textContent=chIdx+1;
   $("levelText").textContent=verseLabel(chIdx,lvIdx).replace(/^启\d+:/,"");
@@ -6711,14 +6936,40 @@ function startLevel(chIdx,lvIdx){
   if($("chunkTotal"))$("chunkTotal").textContent=line.words.length;
   if($("chunkDone"))$("chunkDone").textContent="0";
   var sen=$("showSentence");
-  sen.innerHTML=line.words.map(function(w){return '<span class="w">'+esc(w)+'</span>';}).join('')+'<span class="hint-tip">单击隐藏原文 · 再单击显示5秒</span>';
-  memoryHidden=false;sen.classList.remove("blurred");
-  renderGameLevelRow();
+  sen.innerHTML=line.words.map(function(w){return '<span class="w">'+esc(w)+'</span>';}).join('')+'<span class="hint-tip">单击显示3秒 · 显示中再单击立即隐藏</span>';
+  clearTimeout(memTimer);memTimer=null;
+  memoryHidden=true;sen.classList.add("blurred");
+  syncModeChrome();
+  if(playMode==="normal")renderGameLevelRow();
   pool=shuffle(line.words.slice());
   renderPool();renderAnswer();
-  $("tip").textContent="";
+  $("tip").textContent=playMode==="flash"?"闪卡：凭记忆拼出本节":(playMode==="daily"?"今日打卡：完成即可点亮印章":"");
   resetReadButton();
   startTimer();
+}
+
+function startDailyChallenge(){
+  var pick=pickDailyLevel();
+  if(!pick){toast("暂无关卡");return;}
+  playMode="daily";
+  startLevel(pick.ch,pick.lv);
+  enterGame();
+  toast(isDailyDone()?"再练一遍今日经文："+verseLabel(pick.ch,pick.lv):"今日经文："+verseLabel(pick.ch,pick.lv));
+}
+
+function startFlashReview(){
+  var done=listCompletedLevels();
+  if(!done.length){toast("至少通关 1 节后再来闪卡复习");return;}
+  var n;
+  if(done.length<=5)n=done.length;
+  else n=Math.min(done.length,5+Math.floor(Math.random()*6));
+  flashQueue=shuffle(done).slice(0,n);
+  flashIndex=0;
+  flashStats={s:0,miss:0,totalErr:0};
+  playMode="flash";
+  startLevel(flashQueue[0].ch,flashQueue[0].lv);
+  enterGame();
+  toast("闪卡复习 "+n+" 关，加油！");
 }
 
 function renderGameLevelRow(){
@@ -6735,7 +6986,7 @@ function renderGameLevelRow(){
     if(i===curLevel)btn.classList.add("current");
     btn.textContent=(lv.tr||"").replace(/^启\d+:/,"")||String(i+1);
     btn.title=(unlocked?"":"🔒 ")+(lv.tr||("第"+(i+1)+"关"));
-    btn.onclick=function(){startLevel(curChapter,i);};
+    btn.onclick=function(){playMode="normal";startLevel(curChapter,i);};
     row.appendChild(btn);
   });
 }
@@ -6781,9 +7032,25 @@ function completeLevel(){
   if(best[key]==null||e<best[key])best[key]=e;
   save.best=best;storeSave(save);
   syncGradeUI();
+
+  if(playMode==="flash"){completeFlashLevel(e);return;}
+  if(playMode==="daily"){completeDailyLevel(e);return;}
+
+  /* P3：连续 S + 完美章 */
+  if(sStreakChapter!==curChapter){sStreak=0;sStreakChapter=curChapter;}
+  if(e===0){
+    sStreak++;
+    if(sStreak>=3)toast("🔥 连续 "+sStreak+" 关 S！");
+  }else{
+    sStreak=0;
+  }
+  var newlyPerfect=awardPerfectChapter(curChapter);
+  if(newlyPerfect&&curLevel+1<content.chapters[curChapter].levels.length){
+    toast("✨ 点亮「完美章」勋章！");
+  }
+
   var ch=content.chapters[curChapter];
   if(curLevel+1>=ch.levels.length){
-    /* 本章完成，检查是否全部完成 */
     var total=getTotalLevels();
     var doneCount=0;
     for(var k in best)doneCount++;
@@ -6793,16 +7060,23 @@ function completeLevel(){
       for(var k2 in best)totalErr+=(best[k2]||0);
       var score=Math.max(0,1000-totalErr*20);
       addToRank(score,totalErr);
-      showModal("🎉 全部通关！",'<p style="text-align:center;font-size:1.2rem;line-height:2;">你已背完全部 '+total+' 关！<br>🏆 点亮「全文背诵勋章」<br>📊 成绩已记入排行榜</p><div class="btn-row" style="margin-top:14px;"><button class="btn primary" id="mRank">查看排行榜</button><button class="btn" id="mFinish">回到菜单</button></div>');
+      var extra=newlyPerfect?"<br>✨ 同时点亮「完美章」勋章":"";
+      showModal("🎉 全部通关！",'<p style="text-align:center;font-size:1.2rem;line-height:2;">你已背完全部 '+total+' 关！<br>🏆 点亮「全文背诵勋章」'+extra+'<br>📊 成绩已记入排行榜</p><div class="btn-row" style="margin-top:14px;"><button class="btn primary" id="mRank">查看排行榜</button><button class="btn" id="mFinish">回到菜单</button></div>');
       $("mRank").onclick=function(){hideModal();switchView("rank");};
       $("mFinish").onclick=function(){hideModal();switchView("menu");};
       return;
     }
-    /* 进入下一章 */
     var nextCh=curChapter+1;
     while(nextCh<content.chapters.length&&content.chapters[nextCh].levels.length===0)nextCh++;
+    if(newlyPerfect){
+      showModal("✨ 完美章！",'<p style="text-align:center;font-size:1.15rem;line-height:2;">第 '+(curChapter+1)+' 章全部 S 级通关！<br>已点亮「完美章」勋章</p><div class="btn-row" style="margin-top:14px;">'+(nextCh<content.chapters.length?'<button class="btn primary" id="mNextCh">进入下一章</button>':'')+'<button class="btn" id="mMenu">回到菜单</button></div>');
+      if($("mNextCh"))$("mNextCh").onclick=function(){hideModal();sStreak=0;startLevel(nextCh,0);};
+      $("mMenu").onclick=function(){hideModal();switchView("menu");};
+      return;
+    }
     if(nextCh<content.chapters.length){
       toast("📖 "+verseLabel(curChapter,curLevel)+" 完成！进入下一章");
+      sStreak=0;
       setTimeout(function(){startLevel(nextCh,0);},700);
     }else{
       showModal("🎉 本章完成！",'<p style="text-align:center;font-size:1.1rem;line-height:2;">第 '+(curChapter+1)+' 章全部完成！</p><div class="btn-row" style="margin-top:14px;"><a class="btn gold" href="static/bible-online.html?book=revelation&chapter='+(curChapter+1)+'" target="_blank" rel="noopener">对照读经</a><button class="btn primary" id="mCh">选择章节</button><button class="btn" id="mMenu">回到菜单</button></div>');
@@ -6815,8 +7089,161 @@ function completeLevel(){
   }
 }
 
-function toggleMemory(){var sen=$("showSentence");if(!memoryHidden){memoryHidden=true;sen.classList.add("blurred");toast("原文已隐藏，凭记忆拼吧！");}else{memoryHidden=false;sen.classList.remove("blurred");toast("原文显示 5 秒…");clearTimeout(memTimer);memTimer=setTimeout(function(){if(!memoryHidden){memoryHidden=true;sen.classList.add("blurred");}},5000);}}
-function readSentence(){try{if(!("speechSynthesis" in window)){toast("当前浏览器不支持朗读");return;}if(isReading){speechSynthesis.cancel();isReading=false;resetReadButton();toast("已停止朗读");return;}var line=content.chapters[curChapter].levels[curLevel];speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(line.raw.replace(/[，。；、：]/g,"，"));u.lang="zh-CN";u.rate=0.95;u.onend=function(){isReading=false;resetReadButton();};u.onerror=function(){isReading=false;resetReadButton();};speechSynthesis.speak(u);isReading=true;var btn=$("btnRead");btn.textContent="⏹ 停止朗读";btn.classList.add("reading");toast("🔊 正在朗读…再点一次停止");}catch(e){toast("朗读失败");isReading=false;resetReadButton();}}
+function completeFlashLevel(e){
+  if(e===0)flashStats.s++;else flashStats.miss++;
+  flashStats.totalErr+=e;
+  flashIndex++;
+  if(flashIndex>=flashQueue.length){
+    playMode="normal";
+    showModal("🃏 闪卡复习完成",'<p style="text-align:center;font-size:1.1rem;line-height:2;">共复习 <b>'+flashQueue.length+'</b> 关<br>S 级 <b>'+flashStats.s+'</b> · 未满 S <b>'+flashStats.miss+'</b><br>累计错误 <b>'+flashStats.totalErr+'</b> 次</p><div class="btn-row" style="margin-top:14px;"><button class="btn primary" id="mFlashAgain">再来一组</button><button class="btn" id="mFlashMenu">回到菜单</button></div>');
+    $("mFlashAgain").onclick=function(){hideModal();startFlashReview();};
+    $("mFlashMenu").onclick=function(){hideModal();switchView("menu");};
+    return;
+  }
+  var next=flashQueue[flashIndex];
+  toast("闪卡 "+(flashIndex+1)+"/"+flashQueue.length+" · "+verseLabel(next.ch,next.lv));
+  setTimeout(function(){startLevel(next.ch,next.lv);},700);
+}
+
+function completeDailyLevel(e){
+  var key=todayKey();
+  if(!save.daily)save.daily={};
+  var first=!save.daily[key]||!save.daily[key].done;
+  save.daily[key]={done:true,ch:curChapter,lv:curLevel,err:e,at:Date.now()};
+  storeSave(save);
+  playMode="normal";
+  var streak=countDailyStreak();
+  showModal(first?"📅 今日印章已点亮":"✅ 今日再练完成",'<p style="text-align:center;font-size:1.1rem;line-height:2;">'+verseLabel(curChapter,curLevel)+'<br>评级 <b>'+gradeOf(e)+'</b> · 错误 '+e+' 次'+(streak>=2?'<br>🔥 连续打卡 '+streak+' 天':'')+(first?'<br>已点亮「今日印章」':'')+'</p><div class="btn-row" style="margin-top:14px;"><button class="btn primary" id="mDailyMenu">回到菜单</button><button class="btn" id="mDailyAgain">再练一次</button></div>');
+  $("mDailyMenu").onclick=function(){hideModal();switchView("menu");};
+  $("mDailyAgain").onclick=function(){hideModal();startDailyChallenge();};
+}
+
+function toggleMemory(){
+  var sen=$("showSentence");
+  clearTimeout(memTimer);memTimer=null;
+  if(!memoryHidden){
+    /* 显示中 → 立即隐藏 */
+    memoryHidden=true;
+    sen.classList.add("blurred");
+    toast("原文已隐藏，凭记忆拼吧！");
+  }else{
+    /* 隐藏中 → 显示 3 秒后自动隐藏 */
+    memoryHidden=false;
+    sen.classList.remove("blurred");
+    toast("原文显示 3 秒…");
+    memTimer=setTimeout(function(){
+      memoryHidden=true;
+      sen.classList.add("blurred");
+      memTimer=null;
+    },3000);
+  }
+}
+function scoreZhVoice(v){
+  var n=((v.name||"")+" "+(v.lang||"")).toLowerCase();
+  if(!/zh|cmn|chinese|中文|普通话|国语|國語/.test(n))return -1;
+  var s=10;
+  if(/zh-cn|zh_cn|cmn-hans|cmn_cn/.test(n))s+=15;
+  if(/neural|natural|online|自然/.test(n))s+=45;
+  if(/xiaoxiao|yunxi|yunyang|xiaoyi|xiaoxuan|tingting|meijia|sinji|xiaomeng|yaoyao|huihui/.test(n))s+=25;
+  if(/google.*普通话|microsoft.*chinese|microsoft.*zh/.test(n))s+=20;
+  if(v.localService)s+=3;
+  return s;
+}
+function listZhVoices(){
+  if(!("speechSynthesis" in window))return [];
+  return (speechSynthesis.getVoices()||[]).filter(function(v){return scoreZhVoice(v)>=0;})
+    .sort(function(a,b){return scoreZhVoice(b)-scoreZhVoice(a);});
+}
+function pickTtsVoice(){
+  var voices=listZhVoices();
+  if(!voices.length)return null;
+  var pref=save.ttsVoice;
+  if(pref){
+    for(var i=0;i<voices.length;i++){
+      if(voices[i].voiceURI===pref||voices[i].name===pref)return voices[i];
+    }
+  }
+  return voices[0];
+}
+function getTtsRate(){
+  var r=save.ttsRate!=null?Number(save.ttsRate):0.88;
+  if(!(r>=0.5&&r<=1.4))r=0.88;
+  return r;
+}
+function renderTtsSettings(){
+  var sel=$("ttsVoiceSelect"),rateEl=$("ttsRate"),rateTxt=$("ttsRateText");
+  if(!sel)return;
+  var voices=listZhVoices();
+  sel.innerHTML="";
+  if(!voices.length){
+    var o=document.createElement("option");
+    o.value="";o.textContent="未检测到中文语音（请用 Edge / Chrome，或安装系统中文语音包）";
+    sel.appendChild(o);
+  }else{
+    voices.forEach(function(v){
+      var o=document.createElement("option");
+      o.value=v.voiceURI||v.name;
+      var tag=/neural|natural|online/i.test(v.name)?" · 较自然":(v.localService?" · 本机":"");
+      o.textContent=v.name+tag;
+      sel.appendChild(o);
+    });
+    var cur=pickTtsVoice();
+    if(cur)sel.value=cur.voiceURI||cur.name;
+  }
+  var rate=Math.round(getTtsRate()*100);
+  if(rateEl)rateEl.value=String(rate);
+  if(rateTxt)rateTxt.textContent=(rate/100).toFixed(2);
+}
+var ttsGen=0;
+function speakText(text,onDone){
+  if(!("speechSynthesis" in window)){if(onDone)onDone(false);return;}
+  var myGen=++ttsGen;
+  speechSynthesis.cancel();
+  var cleaned=String(text||"").replace(/（[^）]*）/g,"").replace(/\([^)]*\)/g,"").replace(/\s+/g," ").trim();
+  if(!cleaned){if(onDone)onDone(false);return;}
+  var parts=cleaned.split(/([，。；、：！？,.!?;])/).reduce(function(acc,cur){
+    if(!cur)return acc;
+    if(/^[，。；、：！？,.!?;]$/.test(cur)){if(acc.length)acc[acc.length-1]+=cur;}
+    else acc.push(cur);
+    return acc;
+  },[]).filter(Boolean);
+  if(!parts.length)parts=[cleaned];
+  var voice=pickTtsVoice();
+  var rate=getTtsRate();
+  var idx=0;
+  function speakNext(){
+    if(myGen!==ttsGen)return;
+    if(idx>=parts.length){if(onDone)onDone(true);return;}
+    var u=new SpeechSynthesisUtterance(parts[idx++]);
+    u.lang="zh-CN";
+    u.rate=rate;
+    u.pitch=1;
+    if(voice)u.voice=voice;
+    u.onend=speakNext;
+    u.onerror=function(){if(myGen===ttsGen&&onDone)onDone(false);};
+    speechSynthesis.speak(u);
+  }
+  speakNext();
+}
+function readSentence(){
+  try{
+    if(!("speechSynthesis" in window)){toast("当前浏览器不支持朗读");return;}
+    if(isReading){ttsGen++;speechSynthesis.cancel();isReading=false;resetReadButton();toast("已停止朗读");return;}
+    var line=content.chapters[curChapter].levels[curLevel];
+    if(!line){toast("本关无经文");return;}
+    var voice=pickTtsVoice();
+    isReading=true;
+    var btn=$("btnRead");
+    btn.textContent="⏹ 停止朗读";btn.classList.add("reading");
+    toast(voice?"🔊 "+voice.name+" 朗读中…":"🔊 正在朗读…再点一次停止");
+    speakText(line.raw,function(){isReading=false;resetReadButton();});
+  }catch(e){toast("朗读失败");isReading=false;resetReadButton();}
+}
+function previewTtsVoice(){
+  if(!("speechSynthesis" in window)){toast("当前浏览器不支持朗读");return;}
+  speakText("耶稣基督的启示，就是神赐给他，叫他将必要快成的事指示他的众仆人。",function(){});
+  toast("试听中…");
+}
 function resetReadButton(){var btn=$("btnRead");if(btn){btn.textContent="🔊 朗读";btn.classList.remove("reading");}}
 function resetLevel(){startLevel(curChapter,curLevel);}
 
@@ -6899,7 +7326,7 @@ function resetContent(){
   toast("已恢复默认内容（bible_full · 404 关）");
 }
 
-function renderAdminTracks(){var box=$("adminTrackList");box.innerHTML="";musicList.forEach(function(t,i){var d=document.createElement("div");d.className="track-item"+(t.id===curTrack?" active":"");var tag=t.type==="builtin"?'<span class="tag">内置</span>':(t.type==="url"?'<span class="tag">链接</span>':(t.type==="embedded"?'<span class="tag">嵌入</span>':'<span class="tag">上传</span>'));d.innerHTML='<span class="nm">'+esc(t.name)+'</span>'+tag+'<button class="btn" data-i="'+i+'" data-act="del">删除</button><button class="btn" data-i="'+i+'" data-act="setdefault">设为当前</button>';box.appendChild(d);});}
+function renderAdminTracks(){var box=$("adminTrackList");box.innerHTML="";musicList.forEach(function(t,i){var d=document.createElement("div");d.className="track-item"+(t.id===curTrack?" active":"");var tag=t.type==="builtin"?'<span class="tag">内置</span>':(t.type==="url"?'<span class="tag">链接</span>':(t.type==="embedded"?'<span class="tag">嵌入</span>':'<span class="tag">上传</span>'));var delBtn=t.type==="builtin"?"":'<button class="btn" data-i="'+i+'" data-act="del">删除</button>';d.innerHTML='<span class="nm">'+esc(t.name)+'</span>'+tag+delBtn+'<button class="btn" data-i="'+i+'" data-act="setdefault">设为当前</button>';box.appendChild(d);});}
 function addUrlTrack(){var url=$("musicUrlInput").value.trim();if(!url){toast("请粘贴音乐链接");return;}var id="url_"+Date.now();var name=url.split("/").pop().split("?")[0].slice(-30)||"链接音乐";musicList.push({id:id,name:name,type:"url",url:url});storeMusicList(musicList);renderAdminTracks();$("musicUrlInput").value="";toast("已添加链接曲目");}
 function onFileMusic(files){if(!files||!files.length)return;Array.prototype.forEach.call(files,function(f){if(!/audio\//.test(f.type)){toast("不是音频文件："+f.name);return;}var id="file_"+Date.now()+"_"+Math.floor(Math.random()*9999);dbPutFile(id,f).then(function(){var ext=f.name.split(".").pop();musicList.push({id:id,name:f.name,type:"file",size:f.size,ext:ext});storeMusicList(musicList);renderAdminTracks();toast("已上传："+f.name);}).catch(function(){toast("保存失败（浏览器不支持）");});});}
 
@@ -6959,11 +7386,13 @@ function bindEvents(){
 
   /* 主菜单 */
   $("btnContinue").onclick=function(){
+    playMode="normal";
     var ch=save.lastChapter!=null?save.lastChapter:0;
     var lv=save.lastLevel!=null?save.lastLevel:0;
-    if(content.chapters[ch]&&content.chapters[ch].levels.length>0){startLevel(ch,lv);switchView("game");}
+    if(content.chapters[ch]&&content.chapters[ch].levels.length>0){startLevel(ch,lv);enterGame();}
     else{switchView("chapter");}
   };
+  $("btnFlash").onclick=function(){startFlashReview();};
   $("btnSelectChapter").onclick=function(){switchView("chapter");};
   $("btnSettings").onclick=function(){switchView("settings");renderTimerSettings();};
   $("btnRank").onclick=function(){switchView("rank");};
@@ -6971,18 +7400,46 @@ function bindEvents(){
   if($("btnExport")) $("btnExport").onclick=function(){switchView("export");};
   $("btnMenu").onclick=function(){switchView("menu");};
 
-  /* 长按标题 2 秒进入内容管理（D5） */
+  /* 内容管理入口：按住标题 2 秒，或 Ctrl/⌘ + 单击（电脑更稳） */
   (function(){
-    var pressTimer=null;
+    var pressTimer=null, hintTimer=null, openedByHold=false;
     var brand=$("brandTitle");
     if(!brand) return;
-    function clearPress(){if(pressTimer){clearTimeout(pressTimer);pressTimer=null;}}
-    brand.addEventListener("mousedown",function(){clearPress();pressTimer=setTimeout(function(){showPasswordModal();},2000);});
-    brand.addEventListener("mouseup",clearPress);
-    brand.addEventListener("mouseleave",clearPress);
-    brand.addEventListener("touchstart",function(e){clearPress();pressTimer=setTimeout(function(){showPasswordModal();},2000);},{passive:true});
-    brand.addEventListener("touchend",clearPress);
-    brand.addEventListener("touchcancel",clearPress);
+    function clearPress(){
+      if(pressTimer){clearTimeout(pressTimer);pressTimer=null;}
+      if(hintTimer){clearTimeout(hintTimer);hintTimer=null;}
+    }
+    function openAdmin(){
+      openedByHold=true;
+      clearPress();
+      showPasswordModal();
+      toast("请输入管理密码");
+    }
+    brand.addEventListener("pointerdown",function(e){
+      if(e.pointerType==="mouse"&&e.button!==0)return;
+      openedByHold=false;
+      clearPress();
+      hintTimer=setTimeout(function(){toast("继续按住…进入内容管理");},700);
+      pressTimer=setTimeout(openAdmin,2000);
+    });
+    brand.addEventListener("pointerup",clearPress);
+    brand.addEventListener("pointercancel",clearPress);
+    brand.addEventListener("click",function(e){
+      /* Ctrl / ⌘ + 单击：电脑一键进入 */
+      if(e.ctrlKey||e.metaKey){
+        e.preventDefault();
+        e.stopPropagation();
+        openAdmin();
+        return;
+      }
+      if(openedByHold){
+        e.preventDefault();
+        e.stopPropagation();
+        openedByHold=false;
+        return;
+      }
+      switchView("menu");
+    });
   })();
 
   /* 新手引导 */
@@ -6992,16 +7449,18 @@ function bindEvents(){
   /* 章节选择 */
   $("btnChapterBack").onclick=function(){switchView("menu");};
   $("btnLevelSelectBack").onclick=function(){switchView("chapter");};
-  $("btnStartFromLevel").onclick=function(){startLevel(curChapter,selectedLevel);switchView("game");};
+  $("btnStartFromLevel").onclick=function(){playMode="normal";startLevel(curChapter,selectedLevel);enterGame();};
 
   /* 游戏内章节导航 */
-  $("chapterStat").onclick=function(){switchView("chapter");};
+  $("chapterStat").onclick=function(){playMode="normal";switchView("chapter");};
   $("btnPrevChapter").onclick=function(){
+    playMode="normal";
     var prev=curChapter-1;
     while(prev>=0&&content.chapters[prev].levels.length===0)prev--;
     if(prev>=0){startLevel(prev,0);}else{toast("已经是第一章了");}
   };
   $("btnNextChapter").onclick=function(){
+    playMode="normal";
     var next=curChapter+1;
     while(next<content.chapters.length&&content.chapters[next].levels.length===0)next++;
     if(next<content.chapters.length){startLevel(next,0);}else{toast("已经是最后一章了");}
@@ -7019,13 +7478,19 @@ function bindEvents(){
   $("showSentence").onclick=toggleMemory;
   $("btnRead").onclick=readSentence;
   $("btnReset").onclick=resetLevel;
-  $("btnBack").onclick=function(){stopTimer();stopReading();switchView("menu");};
+  $("btnBack").onclick=function(){stopTimer();stopReading();playMode="normal";flashQueue=[];switchView("menu");};
 
   /* 设置 */
   $("btnSettingsBack").onclick=function(){switchView("menu");};
   $("btnMusicToggle").onclick=toggleMusic;
   $("volRange").oninput=function(){setVolume(parseInt(this.value,10));};
   $("trackSelect").onchange=function(){var i=parseInt(this.value,10);var t=musicList[i];if(t)playTrack(t.id);renderSettings();};
+  if($("ttsVoiceSelect"))$("ttsVoiceSelect").onchange=function(){save.ttsVoice=this.value;storeSave(save);toast("已切换朗读音色");};
+  if($("ttsRate"))$("ttsRate").oninput=function(){var v=parseInt(this.value,10)/100;save.ttsRate=v;storeSave(save);if($("ttsRateText"))$("ttsRateText").textContent=v.toFixed(2);};
+  if($("btnTtsPreview"))$("btnTtsPreview").onclick=previewTtsVoice;
+  if("speechSynthesis" in window){
+    speechSynthesis.onvoiceschanged=function(){if($("viewSettings")&&$("viewSettings").style.display!=="none")renderTtsSettings();};
+  }
 
   /* 玩法 */
   $("btnHowToBack").onclick=function(){switchView("menu");};
@@ -7078,6 +7543,7 @@ function bindEvents(){
     var b=e.target.closest("button");if(!b)return;
     var i=parseInt(b.dataset.i,10),t=musicList[i];if(!t)return;
     if(b.dataset.act==="del"){
+      if(t.type==="builtin"){toast("内置曲目不可删除");return;}
       if(t.id===curTrack){stopBuiltin();if(audioEl){try{audioEl.pause();}catch(x){}}musicOn=false;}
       if(t.type==="file")dbDelFile(t.id);
       musicList.splice(i,1);
@@ -7095,13 +7561,13 @@ function bindEvents(){
   $("modalOverlay").onclick=function(e){if(e.target===this)hideModal();};
 }
 
-function stopReading(){if(isReading&&"speechSynthesis" in window){speechSynthesis.cancel();}isReading=false;resetReadButton();}
+function stopReading(){ttsGen++;if("speechSynthesis" in window){try{speechSynthesis.cancel();}catch(e){}}isReading=false;resetReadButton();}
 
 /* ========== 新手引导 ========== */
 var guideStep=0;
 var GUIDE_STEPS=[
   {title:"① 点选词块",html:"每关会把经文拆成词块并打乱。<b>按正确顺序点击</b>，点对才前进；点错不扣关，但会计入错误次数。"},
-  {title:"② 记忆模式",html:"点击上方原文区域可<b>隐藏原文</b>凭记忆拼；再点一次会短暂显示 5 秒。也可使用朗读、对照读经。"},
+  {title:"② 记忆模式",html:"进入关卡原文<b>自动隐藏</b>；单击短暂显示 <b>3 秒</b>，显示中再点立即隐藏。也可使用朗读、对照读经。"},
   {title:"③ 开始启1:1",html:"章节可任选，但<b>章内须按经文顺序</b>解锁。现在就从 <b>启1:1</b> 开始吧！"}
 ];
 function showGuide(){
@@ -7118,8 +7584,9 @@ function advanceGuide(){
   if(guideStep>=GUIDE_STEPS.length-1){
     setGuideDone();
     $("guideOverlay").classList.remove("show");
+    playMode="normal";
     startLevel(0,0);
-    switchView("game");
+    enterGame();
     return;
   }
   guideStep++;
